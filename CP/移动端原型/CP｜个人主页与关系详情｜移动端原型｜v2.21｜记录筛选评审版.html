@@ -1,0 +1,1478 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>个人主页与亲密关系 v2.21 · 记录筛选评审版</title>
+  <style>
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    :root {
+      color-scheme: light;
+      --profile: #042522;
+      --profile-2: #073431;
+      --mint: #20ddb0;
+      --cp: #ed4b9d;
+      --cp-deep: #ae2868;
+      --cp-soft: #fff0f8;
+      --gold: #f1b62a;
+      --gold-deep: #93600b;
+      --gold-soft: #fff4cf;
+      --ink: #54273f;
+      --muted: #9d7489;
+      --line: #f1cada;
+      --white: #fff;
+      --danger: #b83550;
+      --shadow: 0 22px 70px rgba(20, 34, 32, .28);
+      --rel-main: #3a6fbd;
+      --rel-dark: #17385f;
+      --rel-soft: #edf4ff;
+    }
+    html { min-width: 320px; background: #e8e2e7; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--ink);
+      background: #e8e2e7;
+      font-family: Inter, ui-rounded, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+      letter-spacing: 0;
+    }
+    button { font: inherit; letter-spacing: 0; }
+    button:focus-visible { outline: 3px solid rgba(32, 221, 176, .35); outline-offset: 2px; }
+    .stage { min-height: 100vh; padding: 22px 12px; display: grid; place-items: start center; }
+    .phone {
+      position: relative;
+      width: min(100%, 414px);
+      height: min(896px, calc(100vh - 44px));
+      min-height: 640px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+    .screen { position: absolute; inset: 0; display: none; overflow: hidden; }
+    .screen.active { display: block; }
+    .status-bar { height: 26px; padding: 7px 18px 0; display: flex; justify-content: space-between; font-size: 11px; font-weight: 900; }
+    .icon-button { width: 40px; height: 40px; border: 0; display: inline-grid; place-items: center; color: inherit; background: transparent; cursor: pointer; }
+    .icon-button svg { width: 21px; height: 21px; }
+    .profile-screen { color: #fff; background: var(--profile); overflow-y: auto; }
+    .profile-hero { position: relative; height: 390px; overflow: hidden; background: #2c211b; }
+    .profile-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.1), rgba(4,37,34,.05) 50%, var(--profile) 100%); }
+    .profile-photo { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; display: block; transform: scale(1.08); }
+    .profile-top { position: absolute; z-index: 2; inset: 26px 8px auto; display: flex; justify-content: space-between; align-items: center; }
+    .profile-top-actions { display: flex; }
+    .profile-meta { position: absolute; z-index: 2; left: 20px; right: 20px; bottom: 24px; }
+    .profile-meta h1 { margin: 0; font-size: 26px; }
+    .profile-meta p { margin: 6px 0 0; color: rgba(255,255,255,.78); font-size: 12px; }
+    .badge-row { margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap; }
+    .badge { min-height: 24px; padding: 0 8px; border: 1px solid rgba(255,255,255,.28); border-radius: 12px; display: inline-flex; align-items: center; gap: 5px; background: rgba(0,0,0,.28); font-size: 10px; font-weight: 800; }
+    .profile-content { padding: 0 18px 40px; }
+    .dark-head { margin: 8px 0 11px; display: flex; justify-content: space-between; align-items: end; gap: 12px; }
+    .dark-head h2 { margin: 0; font-size: 21px; }
+    .dark-head p { margin: 3px 0 0; color: rgba(255,255,255,.55); font-size: 10px; }
+    .cp-entry {
+      position: relative;
+      width: 100%;
+      min-height: 164px;
+      padding: 16px;
+      overflow: hidden;
+      border: 1px solid #f1c25d;
+      border-radius: 7px;
+      color: #fff;
+      background-image: linear-gradient(90deg, rgba(127,16,74,.72), rgba(180,32,104,.2)), url("assets/cp-super-love-hero-v2.png");
+      background-size: cover;
+      background-position: center;
+      text-align: left;
+      cursor: pointer;
+      box-shadow: inset 0 0 0 2px rgba(255,229,146,.2), 0 10px 22px rgba(0,0,0,.18);
+    }
+    .entry-label { position: absolute; top: 12px; left: 12px; padding: 4px 8px; border-radius: 12px; color: #8b4d08; background: #ffeaa3; font-size: 10px; font-weight: 900; }
+    .entry-pair { margin-top: 38px; display: flex; align-items: center; gap: 12px; }
+    .avatar-pair { position: relative; width: 88px; height: 56px; flex: 0 0 auto; }
+    .avatar { width: 54px; height: 54px; object-fit: cover; border: 2px solid #fff; border-radius: 50%; background: #e4c3d3; box-shadow: 0 4px 12px rgba(0,0,0,.2); }
+    .avatar + .avatar { position: absolute; left: 34px; top: 2px; }
+    .entry-pair strong { display: block; font-size: 16px; }
+    .entry-pair small { display: block; margin-top: 5px; color: rgba(255,255,255,.82); font-size: 10px; }
+    .entry-exp { position: absolute; left: 16px; right: 16px; bottom: 14px; display: flex; justify-content: space-between; align-items: center; font-size: 11px; }
+    .entry-exp b { font-size: 15px; }
+    .relation-strip {
+      margin: 0 -18px;
+      padding: 0 18px 8px;
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 116px;
+      gap: 8px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+    .relation-strip::-webkit-scrollbar { display: none; }
+    .dynamic-slots { display: contents; }
+    .relation-entry {
+      position: relative;
+      width: 116px;
+      min-height: 146px;
+      padding: 12px 9px 10px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 7px;
+      color: #fff;
+      background: rgba(255,255,255,.07);
+      text-align: left;
+      cursor: pointer;
+      scroll-snap-align: start;
+      overflow: hidden;
+    }
+    .relation-entry.brother { background: linear-gradient(155deg, rgba(41,94,161,.65), rgba(7,41,60,.78)); }
+    .relation-entry.bestie { background: linear-gradient(155deg, rgba(184,48,99,.65), rgba(58,52,80,.8)); }
+    .relation-entry.close-friend { background: linear-gradient(155deg, rgba(49,144,123,.7), rgba(16,62,61,.9)); }
+    .relation-entry.empty, .relation-entry.paid-slot { border-style: dashed; text-align: center; color: rgba(255,255,255,.72); background: rgba(255,255,255,.055); }
+    .relation-entry.paid-slot { border-color: rgba(248,193,74,.55); color: #ffe3a0; background: linear-gradient(155deg,rgba(92,69,20,.42),rgba(31,52,47,.72)); }
+    .relation-entry.paid-slot.is-locked { opacity: .72; }
+    .relation-entry.pending { filter: saturate(.72); }
+    .slot-avatar {
+      width: 50px;
+      height: 50px;
+      margin: 0 auto;
+      border: 2px solid rgba(255,255,255,.88);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      color: #fff;
+      background: rgba(255,255,255,.16);
+      box-shadow: 0 0 0 4px rgba(255,255,255,.08);
+    }
+    .slot-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .slot-avatar svg { width: 22px; height: 22px; }
+    .paid-slot .slot-avatar { border-color: #e7bb56; color: #ffe092; background: rgba(230,179,67,.16); }
+    .slot-kicker { display: block; margin-top: 9px; color: rgba(255,255,255,.55); font-size: 8px; }
+    .paid-slot .slot-kicker { color: rgba(255,226,155,.7); }
+    .slot-price { display: inline-flex; margin-top: 6px; align-items: center; gap: 3px; color: #ffd978; font-size: 9px; font-weight: 900; }
+    .slot-price svg { width: 11px; height: 11px; }
+    .slot-status { display: inline-flex; min-height: 18px; margin-top: 6px; padding: 0 6px; border-radius: 9px; align-items: center; color: #ffe5a8; background: rgba(0,0,0,.2); font-size: 8px; font-weight: 900; }
+    .relation-symbol { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; background: rgba(255,255,255,.16); }
+    .relation-symbol svg { width: 23px; height: 23px; }
+    .rose-symbol { font-size: 25px; line-height: 1; filter: drop-shadow(0 3px 5px rgba(55,12,31,.28)); }
+    .fists { position: relative; width: 34px; height: 28px; }
+    .fists span { position: absolute; font-size: 20px; line-height: 1; }
+    .fists span:first-child { left: 0; top: 0; transform: rotate(28deg); }
+    .fists span:last-child { right: 0; bottom: 0; transform: rotate(-28deg) scaleX(-1); }
+    .relation-entry strong { display: block; margin-top: 10px; overflow-wrap: anywhere; font-size: 12px; }
+    .relation-entry small { display: block; margin-top: 4px; color: rgba(255,255,255,.65); font-size: 9px; line-height: 1.35; }
+    .profile-tabs { margin-top: 25px; display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid rgba(255,255,255,.1); }
+    .profile-tab { height: 48px; border: 0; color: rgba(255,255,255,.46); background: transparent; font-weight: 800; cursor: pointer; }
+    .profile-tab[aria-selected="true"] { color: var(--mint); border-bottom: 3px solid var(--mint); }
+    .profile-placeholder { min-height: 110px; padding: 22px 4px; color: rgba(255,255,255,.5); font-size: 12px; }
+
+    .detail-screen { background: #fff8fc; }
+    .detail-scroll { height: 100%; overflow-y: auto; padding-bottom: calc(34px + env(safe-area-inset-bottom)); }
+    .cp-hero { position: relative; height: 298px; overflow: hidden; color: #fff; background: #f6b7d6; }
+    .cp-hero::after { content: ""; position: absolute; inset: auto 0 0; height: 130px; background: linear-gradient(180deg, rgba(157,34,99,.08), rgba(157,34,99,.94) 42%, #8e245c 100%); }
+    .cp-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .detail-top { position: absolute; z-index: 3; top: 26px; left: 8px; right: 8px; display: grid; grid-template-columns: 40px 1fr 40px; align-items: center; }
+    .detail-top h1 { margin: 0; text-align: center; font-size: 19px; }
+    .cp-hero-meta { position: absolute; z-index: 3; left: 18px; right: 18px; bottom: 16px; display: flex; justify-content: space-between; align-items: end; gap: 12px; }
+    .cp-hero-meta strong { display: block; font-size: 18px; }
+    .cp-hero-meta small { font-size: 10px; opacity: .86; }
+    .super-love-float {
+      position: absolute;
+      z-index: 6;
+      top: 72px;
+      right: 0;
+      min-height: 38px;
+      padding: 0 11px 0 9px;
+      border: 2px solid #fff;
+      border-right: 0;
+      border-radius: 22px 0 0 22px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: #fff;
+      background: linear-gradient(90deg, #ff65ba, #d92f86);
+      font-size: 11px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(166,31,100,.3);
+    }
+    .super-love-float svg { width: 18px; height: 18px; }
+    .detail-band { padding: 16px; background: #fff; border-bottom: 8px solid #faedf4; }
+    .home-primary-band { padding-top: 20px; }
+    .section-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .section-head h2 { margin: 0; font-size: 16px; }
+    .section-head p { margin: 3px 0 0; color: var(--muted); font-size: 10px; }
+    .section-head button { border: 0; color: var(--cp-deep); background: transparent; font-size: 10px; font-weight: 900; cursor: pointer; }
+    .level-card { padding: 14px; border: 1px solid var(--line); border-radius: 7px; background: linear-gradient(135deg, #fff, var(--cp-soft)); }
+    .level-row { display: flex; justify-content: space-between; align-items: end; gap: 10px; }
+    .level-row strong { color: var(--cp-deep); font-size: 23px; }
+    .level-row span { color: var(--muted); font-size: 10px; }
+    .meter { height: 8px; margin-top: 9px; overflow: hidden; border-radius: 4px; background: #f1d5e4; }
+    .meter span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--cp), var(--gold)); }
+    .intimacy-entry { width: 100%; min-height: 48px; margin-top: 12px; padding: 11px 0 0; border: 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 32px minmax(0,1fr) auto 18px; align-items: center; gap: 8px; color: var(--ink); background: transparent; text-align: left; cursor: pointer; }
+    .intimacy-entry-icon { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; color: var(--cp-deep); background: #f9dfec; }
+    .intimacy-entry-icon svg { width: 15px; height: 15px; }
+    .intimacy-entry-copy strong, .intimacy-entry-copy small { display: block; }
+    .intimacy-entry-copy strong { font-size: 11px; }
+    .intimacy-entry-copy small { margin-top: 2px; color: var(--muted); font-size: 9px; }
+    .intimacy-entry-value { color: var(--cp-deep); font-size: 10px; font-weight: 900; }
+    .intimacy-entry > svg { width: 16px; height: 16px; color: var(--muted); }
+    .daily-task-entry { width: 100%; min-height: 48px; margin-top: 8px; padding: 10px 0 0; border: 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 32px minmax(0,1fr) auto 18px; align-items: center; gap: 8px; color: var(--ink); background: transparent; text-align: left; cursor: pointer; }
+    .daily-task-entry-icon { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; color: #246c65; background: #e5f5f0; }
+    .daily-task-entry-icon svg { width: 15px; height: 15px; }
+    .daily-task-entry-copy strong, .daily-task-entry-copy small { display: block; }
+    .daily-task-entry-copy strong { font-size: 11px; }
+    .daily-task-entry-copy small { margin-top: 2px; color: var(--muted); font-size: 9px; }
+    .daily-task-entry-value { color: #246c65; font-size: 10px; font-weight: 900; }
+    .daily-task-entry > svg { width: 16px; height: 16px; color: var(--muted); }
+    .memory-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+    .memory { min-width: 0; padding: 0; border: 0; color: inherit; background: transparent; text-align: center; cursor: pointer; }
+    .memory-icon { aspect-ratio: 1; display: grid; place-items: center; border: 1px solid #f0c7dc; border-radius: 7px; color: var(--cp-deep); background: var(--cp-soft); }
+    .memory-icon svg { width: 24px; height: 24px; }
+    .memory small { display: block; margin-top: 5px; color: var(--muted); font-size: 8px; overflow-wrap: anywhere; }
+    .info-list { border-top: 1px solid var(--line); }
+    .info-row { min-height: 44px; display: flex; justify-content: space-between; align-items: center; gap: 14px; border-bottom: 1px solid var(--line); font-size: 11px; }
+    .info-row span { color: var(--muted); }
+
+    .friend-detail { --rel-main: #3f74bf; --rel-dark: #173754; --rel-soft: #edf4ff; background: #f5f8fc; }
+    .friend-detail.bestie-theme { --rel-main: #c84578; --rel-dark: #64334e; --rel-soft: #fff0f5; }
+    .friend-detail.close-theme { --rel-main: #329b82; --rel-dark: #20564e; --rel-soft: #eefaf7; }
+    .relation-hero { position: relative; height: 282px; overflow: hidden; color: #fff; background: linear-gradient(145deg, var(--rel-dark), var(--rel-main)); }
+    .relation-hero::before { content: ""; position: absolute; inset: 0; opacity: .28; background-image: radial-gradient(circle at 20% 25%, #fff 0 2px, transparent 3px), radial-gradient(circle at 80% 38%, #fff 0 2px, transparent 3px); background-size: 82px 82px, 104px 104px; }
+    .relation-stage { position: absolute; inset: 78px 22px 16px; display: grid; grid-template-columns: 1fr 64px 1fr; align-items: center; gap: 8px; text-align: center; }
+    .single-avatar { width: 78px; height: 78px; object-fit: cover; border: 3px solid rgba(255,255,255,.9); border-radius: 50%; background: #fff; }
+    .relation-stage > div:first-child .single-avatar { margin-left: auto; }
+    .relation-emblem { width: 58px; height: 58px; display: grid; place-items: center; border: 2px solid rgba(255,255,255,.72); border-radius: 50%; background: rgba(255,255,255,.14); }
+    .relation-emblem svg { width: 28px; height: 28px; }
+    .relation-stage strong { display: block; margin-top: 8px; font-size: 11px; }
+    .relation-title { position: absolute; left: 18px; right: 18px; bottom: 12px; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 12px; }
+    .relation-title > span { min-width: 0; }
+    .relation-title > span:last-child { text-align: right; }
+    .relation-title strong { display: block; font-size: 18px; }
+    .relation-title small { display: block; margin-top: 3px; font-size: 10px; opacity: .8; }
+    .relation-tabs { height: 50px; display: grid; grid-template-columns: repeat(2, 1fr); border-bottom: 1px solid #dde5ef; background: #fff; }
+    .relation-tab { position: relative; border: 0; color: #7c8797; background: transparent; font-size: 12px; font-weight: 900; cursor: pointer; }
+    .relation-tab[aria-selected="true"] { color: var(--rel-main); }
+    .relation-tab[aria-selected="true"]::after { content: ""; position: absolute; left: 34%; right: 34%; bottom: 0; height: 3px; background: var(--rel-main); }
+    .relation-panel { display: none; padding-bottom: 24px; }
+    .relation-panel.active { display: block; }
+    .relation-band { padding: 16px; background: #fff; border-bottom: 8px solid #eef2f7; }
+    .relation-stat { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid #dde5ef; border-radius: 7px; overflow: hidden; }
+    .relation-stat div { padding: 12px 6px; border-right: 1px solid #dde5ef; text-align: center; }
+    .relation-stat div:last-child { border: 0; }
+    .relation-stat strong { display: block; color: var(--rel-main); font-size: 15px; }
+    .relation-stat small { display: block; margin-top: 3px; color: #8792a2; font-size: 9px; }
+    .relation-growth-head { margin-bottom: 12px; display: flex; justify-content: space-between; align-items: end; gap: 12px; }
+    .relation-growth-head strong, .relation-growth-head small { display: block; }
+    .relation-growth-head strong { color: var(--rel-main); font-size: 19px; }
+    .relation-growth-head small { margin-top: 3px; color: #8792a2; font-size: 9px; }
+    .relation-growth-head span:last-child { text-align: right; }
+    .relation-growth-head span:last-child strong { font-size: 13px; }
+    .relation-growth-meter { height: 7px; margin-bottom: 13px; overflow: hidden; border-radius: 4px; background: #e6edf0; }
+    .relation-growth-meter > span { display: block; height: 100%; border-radius: inherit; background: var(--rel-main); }
+    .relation-band .intimacy-entry-icon { color: var(--rel-main); background: var(--rel-soft); }
+    .relation-band .intimacy-entry-value { color: var(--rel-main); }
+    .task-summary { padding: 15px 16px; color: #fff; background: linear-gradient(110deg, var(--rel-dark), var(--rel-main)); }
+    .task-summary strong { font-size: 16px; }
+    .task-summary-row { display: flex; justify-content: space-between; align-items: end; gap: 10px; }
+    .task-summary span { font-size: 10px; }
+    .period-tabs { margin: 12px 16px 8px; display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid #dce4ee; border-radius: 6px; overflow: hidden; }
+    .period-tab { height: 38px; border: 0; color: #788495; background: #fff; font-size: 11px; font-weight: 900; cursor: pointer; }
+    .period-tab[aria-selected="true"] { color: #fff; background: var(--rel-main); }
+    .task-list { padding: 0 16px; display: grid; gap: 8px; }
+    .task-item { min-height: 94px; padding: 11px 10px; border: 1px solid #dce4ee; border-radius: 7px; display: grid; grid-template-columns: 36px minmax(0, 1fr) auto; align-items: center; gap: 9px; background: #fff; transition: border-color .18s ease, background .18s ease; }
+    .task-item.claimable { border-color: #ef8cbd; background: #fffafd; }
+    .task-item.claimed { border-color: #d6e9e3; }
+    .task-icon { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; color: var(--rel-main); background: var(--rel-soft); }
+    .task-icon svg { width: 17px; height: 17px; }
+    .task-copy { min-width: 0; }
+    .task-copy strong { display: block; font-size: 11px; }
+    .task-copy small { display: block; margin-top: 3px; color: #8590a0; font-size: 9px; line-height: 1.35; }
+    .task-copy b { display: block; margin-top: 3px; color: var(--rel-main); font-size: 9px; line-height: 1.35; }
+    .task-copy .task-source { color: #718096; font-size: 8px; }
+    .task-progress { width: 100%; height: 5px; margin-top: 7px; overflow: hidden; border-radius: 3px; display: block; background: #e8edf3; }
+    .task-progress > span { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--rel-main); transition: width .28s ease; }
+    .task-item.claimable .task-progress > span { background: var(--cp); }
+    .task-action { min-width: 62px; height: 32px; padding: 0 9px; border: 0; border-radius: 16px; color: #fff; background: var(--rel-main); font-size: 10px; font-weight: 900; cursor: pointer; white-space: nowrap; }
+    .task-action.claim { min-width: 72px; background: var(--cp); box-shadow: 0 4px 12px rgba(237,75,157,.22); }
+    .task-action.done { min-width: 36px; width: 36px; padding: 0; color: #24746b; background: #e5f4ef; cursor: default; }
+    .task-action.loading { min-width: 72px; color: #8d285d; background: #fce4f0; cursor: wait; }
+    .task-action svg { width: 15px; height: 15px; vertical-align: middle; }
+    .task-action-spinner { width: 12px; height: 12px; margin-right: 4px; border: 2px solid rgba(141,40,93,.25); border-top-color: #8d285d; border-radius: 50%; display: inline-block; vertical-align: -2px; animation: task-spin .7s linear infinite; }
+    @keyframes task-spin { to { transform: rotate(360deg); } }
+
+    .super-love-page { position: absolute; z-index: 20; inset: 0; display: none; align-items: end; color: var(--ink); background: rgba(31,13,24,.5); }
+    .super-love-page.open { display: flex; }
+    .super-love-sheet { position: relative; width: 100%; height: min(88%,720px); display: flex; flex-direction: column; overflow: hidden; border-radius: 16px 16px 0 0; background: #fff8fc; box-shadow: 0 -18px 48px rgba(67,14,43,.28); animation: sl-rise .22s ease-out; }
+    @keyframes sl-rise { from { transform: translateY(32px); opacity: .7; } to { transform: translateY(0); opacity: 1; } }
+    .sl-hero { position: relative; height: 188px; flex: 0 0 auto; overflow: hidden; color: #fff; background: #f4b8d7; }
+    .sl-hero::after { content: ""; position: absolute; inset: auto 0 0; height: 110px; background: linear-gradient(180deg, rgba(159,46,104,.08), rgba(159,46,104,.95) 42%, #8d285d 100%); }
+    .sl-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .sl-top { position: absolute; z-index: 2; inset: 14px 8px auto; display: grid; grid-template-columns: 40px 1fr 40px; align-items: center; }
+    .sl-top h1 { margin: 0; text-align: center; font-size: 19px; }
+    .sl-meta { position: absolute; z-index: 2; left: 18px; right: 18px; bottom: 12px; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 12px; }
+    .sl-meta > span { min-width: 0; }
+    .sl-meta > span:last-child { text-align: right; }
+    .sl-meta strong { display: block; font-size: 16px; }
+    .sl-meta small { display: block; margin-top: 3px; font-size: 10px; opacity: .88; }
+    .sl-tabs { height: 52px; flex: 0 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--line); background: #fff; }
+    .sl-tab { position: relative; min-width: 0; border: 0; color: var(--muted); background: #fff; font-size: 11px; font-weight: 900; cursor: pointer; }
+    .sl-tab[aria-selected="true"] { color: var(--cp-deep); }
+    .sl-tab[aria-selected="true"]::after { content: ""; position: absolute; left: 27%; right: 27%; bottom: 0; height: 3px; background: var(--cp); }
+    .sl-scroll { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+    .sl-panel { display: none; padding-bottom: 28px; }
+    .sl-panel.active { display: block; }
+    .sl-band { padding: 15px 16px; background: #fff; border-bottom: 8px solid #faedf4; }
+    .protection { width: 100%; padding: 11px; border: 1px solid #e7cf9d; border-left: 4px solid var(--gold); border-radius: 6px; display: flex; justify-content: space-between; align-items: center; gap: 10px; color: var(--gold-deep); background: #fff9e8; text-align: left; font-size: 10px; font-weight: 900; cursor: pointer; }
+    .ring-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .ring-card { position: relative; min-width: 0; min-height: 142px; padding: 18px 8px 11px; border: 1px solid #f1d5e4; border-radius: 7px; display: grid; align-content: start; color: var(--ink); text-align: center; background: #fff; cursor: pointer; }
+    .ring-card:last-child { grid-column: 1 / -1; }
+    .ring-card.selected { border-color: #ed4b9d; box-shadow: inset 0 0 0 1px #ed4b9d; background: #fff8fc; }
+    .item-quantity, .value-tag { position: absolute; top: 5px; min-height: 16px; padding: 0 5px; border-radius: 3px; display: inline-flex; align-items: center; font-size: 7px; font-weight: 900; }
+    .item-quantity { left: 5px; color: #95838d; background: #f1ebee; }
+    .value-tag { right: 5px; color: #fff; background: #ed4b9d; }
+    .ring-icon { width: 52px; height: 52px; margin: 0 auto 6px; display: grid; place-items: center; border-radius: 50%; color: var(--cp); background: var(--cp-soft); }
+    .ring-card:nth-child(2) .ring-icon { color: #7652c9; background: #f0ebff; }
+    .ring-card:nth-child(3) .ring-icon { color: #c66c17; background: #fff0dc; }
+    .ring-card:nth-child(4) .ring-icon { color: #b13c7b; background: #ffe8f3; }
+    .ring-card:nth-child(5) .ring-icon { color: #a4770e; background: #fff4cf; }
+    .ring-icon svg { width: 30px; height: 30px; }
+    .ring-card strong { min-height: 30px; font-size: 10px; }
+    .ring-card b { color: var(--cp-deep); font-size: 10px; }
+    .ring-card small { margin-top: 4px; color: var(--gold-deep); font-size: 10px; font-weight: 900; }
+    .cp-task-summary { padding: 14px 16px; color: #fff; background: linear-gradient(105deg, var(--cp-deep), var(--cp) 60%, var(--gold)); }
+    .cp-task-summary div { display: flex; justify-content: space-between; align-items: center; }
+    .cp-task-summary strong { font-size: 16px; }
+    .cp-task-summary small { display: block; margin-top: 5px; font-size: 9px; opacity: .86; }
+    .cp-period-tabs .period-tab[aria-selected="true"] { background: var(--cp); }
+    .cp-task-list .task-icon { color: var(--cp-deep); background: var(--cp-soft); }
+    .cp-task-list .task-copy b { color: var(--cp-deep); }
+    .cp-task-list .task-action { background: var(--cp); }
+    .gift-intro { padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; gap: 10px; color: #fff; background: linear-gradient(105deg, var(--cp-deep), var(--cp) 60%, var(--gold)); }
+    .gift-intro strong { font-size: 15px; }
+    .gift-intro small { display: block; margin-top: 3px; font-size: 9px; opacity: .86; }
+    .gift-grid { padding: 14px 16px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .gift-card { position: relative; min-width: 0; min-height: 204px; padding: 10px; border: 1px solid var(--line); border-radius: 7px; color: var(--ink); background: #fff; text-align: left; cursor: pointer; }
+    .gift-card.selected { border-color: #ed4b9d; box-shadow: inset 0 0 0 1px #ed4b9d; background: #fff8fc; }
+    .gift-card:last-child { grid-column: 1 / -1; min-height: 166px; display: grid; grid-template-columns: 118px 1fr; align-items: center; gap: 10px; }
+    .gift-art { height: 90px; display: grid; place-items: center; border-radius: 6px; color: #fff; background: linear-gradient(145deg, #ff83bd, #d3408a 62%, #e7ae33); }
+    .gift-card:last-child .gift-art { height: 130px; }
+    .gift-art svg { width: 42px; height: 42px; }
+    .gift-card strong { display: block; margin-top: 8px; font-size: 11px; }
+    .gift-card b { display: block; margin-top: 3px; color: var(--gold-deep); font-size: 11px; }
+    .gift-card small { display: block; margin-top: 5px; color: var(--muted); font-size: 9px; line-height: 1.4; }
+    .lock-dot { position: absolute; top: 14px; right: 14px; width: 24px; height: 24px; display: none; place-items: center; border-radius: 50%; color: #fff; background: rgba(54,40,50,.76); }
+    .lock-dot svg { width: 12px; height: 12px; }
+    .gift-card.locked .lock-dot { display: grid; }
+    .gift-card.locked .gift-art { filter: grayscale(.5); opacity: .65; }
+    .sl-action { flex: 0 0 auto; padding: 9px 14px calc(12px + env(safe-area-inset-bottom)); border-top: 1px solid #f0d3e2; background: rgba(255,255,255,.97); }
+    .sl-action[hidden] { display: none; }
+    .sl-send { width: 100%; min-height: 44px; border: 0; border-radius: 22px; color: #fff; background: linear-gradient(90deg,#ff6eb1,#e83093); font-size: 12px; font-weight: 900; cursor: pointer; box-shadow: 0 8px 18px rgba(216,48,132,.24); }
+    .sl-send:disabled { color: #b59ba8; background: #eadfe5; box-shadow: none; cursor: default; }
+    .sl-loading { position: absolute; z-index: 6; inset: 0; display: none; place-items: center; background: rgba(30,22,27,.45); }
+    .sl-loading.show { display: grid; }
+    .sl-loading-card { width: 86px; min-height: 86px; display: grid; place-items: center; align-content: center; gap: 8px; border-radius: 10px; color: #fff; background: rgba(22,19,21,.88); font-size: 10px; font-weight: 800; }
+    .sl-spinner { width: 27px; height: 27px; border: 3px solid rgba(255,255,255,.24); border-top-color: #ff70b3; border-radius: 50%; animation: sl-spin .75s linear infinite; }
+    @keyframes sl-spin { to { transform: rotate(360deg); } }
+
+    .overlay { position: absolute; z-index: 40; inset: 0; display: none; align-items: end; background: rgba(31,34,34,.52); }
+    .overlay.open { display: flex; }
+    .sheet { width: 100%; max-height: 80%; overflow-y: auto; padding: 10px 16px calc(22px + env(safe-area-inset-bottom)); border-radius: 16px 16px 0 0; color: var(--ink); background: #fff; }
+    .handle { width: 42px; height: 4px; margin: 0 auto 10px; border-radius: 4px; background: #dcc5d1; }
+    .sheet-head { display: grid; grid-template-columns: 40px 1fr 40px; align-items: center; }
+    .sheet-head h2 { margin: 0; text-align: center; font-size: 16px; }
+    .sheet-body { padding-top: 12px; }
+    .detail-list { border-top: 1px solid var(--line); }
+    .detail-item { min-height: 44px; display: flex; justify-content: space-between; align-items: center; gap: 16px; border-bottom: 1px solid var(--line); font-size: 11px; }
+    .detail-item span { color: var(--muted); }
+    .primary-button { width: 100%; min-height: 44px; margin-top: 15px; border: 0; border-radius: 22px; color: #fff; background: linear-gradient(90deg, var(--cp), var(--gold)); font-weight: 900; cursor: pointer; }
+    .primary-button[disabled] { color: #a98c9b; background: #e8dce2; cursor: default; }
+    .seat-summary { margin-bottom: 14px; padding: 11px 12px; border: 1px solid #efd2df; border-radius: 7px; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 10px; background: #fff8fb; }
+    .seat-summary strong, .seat-summary small { display: block; }
+    .seat-summary strong { font-size: 12px; }
+    .seat-summary small { margin-top: 3px; color: var(--muted); font-size: 9px; }
+    .seat-summary b { color: var(--cp); font-size: 12px; }
+    .filter-label { margin: 0 0 8px; color: var(--muted); font-size: 10px; font-weight: 800; }
+    .relation-filters { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 6px; }
+    .relation-filter { min-width: 0; min-height: 34px; padding: 0 4px; border: 1px solid #ead2de; border-radius: 17px; color: #8c6579; background: #fff; font-size: 10px; font-weight: 800; cursor: pointer; }
+    .relation-filter[aria-selected="true"] { border-color: var(--cp); color: #fff; background: var(--cp); }
+    .candidate-list { margin-top: 14px; display: grid; gap: 8px; }
+    .candidate-list-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--muted); font-size: 9px; }
+    .candidate-list-head strong { color: var(--ink); font-size: 10px; }
+    .candidate { min-height: 62px; padding: 8px 9px; border: 1px solid #efd8e3; border-radius: 7px; display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 9px; color: var(--ink); background: #fff; text-align: left; cursor: pointer; }
+    .candidate[hidden] { display: none; }
+    .candidate:disabled { opacity: .55; cursor: default; }
+    .candidate img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+    .candidate strong, .candidate small { display: block; }
+    .candidate strong { font-size: 11px; }
+    .candidate small { margin-top: 3px; color: var(--muted); font-size: 9px; }
+    .candidate-status { color: var(--cp); font-size: 9px; font-weight: 900; }
+    .candidate:disabled .candidate-status { color: #967f8b; }
+    .purchase-card { padding: 14px; border: 1px solid #efcf85; border-radius: 7px; background: linear-gradient(145deg,#fffaf0,#fff5d9); }
+    .purchase-head { display: grid; grid-template-columns: 46px 1fr; align-items: center; gap: 10px; }
+    .purchase-icon { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; color: #7d570d; background: #ffe9a9; }
+    .purchase-icon svg { width: 23px; height: 23px; }
+    .purchase-head strong, .purchase-head small { display: block; }
+    .purchase-head strong { font-size: 13px; }
+    .purchase-head small { margin-top: 4px; color: #937235; font-size: 9px; line-height: 1.4; }
+    .purchase-rows { margin-top: 12px; border-top: 1px solid #ecd69d; }
+    .purchase-row { min-height: 38px; display: flex; justify-content: space-between; align-items: center; gap: 12px; border-bottom: 1px solid #ecd69d; color: #8d6b30; font-size: 10px; }
+    .purchase-row strong { color: #644714; }
+    .toast { position: absolute; z-index: 60; left: 50%; bottom: 24px; max-width: calc(100% - 40px); padding: 10px 14px; border-radius: 6px; color: #fff; background: rgba(34,37,37,.94); font-size: 10px; font-weight: 800; text-align: center; transform: translate(-50%,20px); opacity: 0; pointer-events: none; transition: .2s ease; }
+    .toast.show { transform: translate(-50%,0); opacity: 1; }
+    .mini-room { position: absolute; z-index: 36; left: 14px; bottom: 18px; min-width: 132px; height: 48px; padding: 5px 11px 5px 5px; border: 1px solid rgba(255,255,255,.26); border-radius: 24px; display: none; grid-template-columns: 38px minmax(0,1fr); align-items: center; gap: 8px; color: #fff; background: #10221f; box-shadow: 0 10px 28px rgba(0,0,0,.28); cursor: pointer; }
+    .mini-room.visible { display: grid; }
+    .mini-room:disabled { opacity: .55; cursor: default; }
+    .mini-room-thumb { position: relative; width: 38px; height: 38px; border: 2px solid var(--mint); border-radius: 50%; display: grid; place-items: center; overflow: hidden; background: #0a100f url("assets/room-app-v2.jpg") center 22% / 100% auto no-repeat; }
+    .mini-room-thumb::after { content: ""; position: absolute; inset: 0; background: rgba(3,20,17,.25); }
+    .mini-room-thumb svg { position: relative; z-index: 1; width: 17px; height: 17px; }
+    .mini-room-copy { min-width: 0; text-align: left; }
+    .mini-room-copy strong, .mini-room-copy small { display: block; white-space: nowrap; }
+    .mini-room-copy strong { font-size: 10px; }
+    .mini-room-copy small { margin-top: 2px; color: #80e8cc; font-size: 8px; }
+    .phone.super-love-open .mini-room { top: 14px; bottom: auto; }
+
+    /* v2.8 profile relationship cards */
+    .cp-showcase { min-height: 192px; padding: 14px 14px 12px; background-image: linear-gradient(90deg,rgba(118,23,67,.84),rgba(181,45,105,.84)),url("assets/cp-super-love-hero-v2.png"); background-position: center 42%; }
+    .cp-showcase::before { content: ""; position: absolute; inset: 7px; border: 2px solid rgba(255,226,128,.9); border-radius: 5px; box-shadow: inset 0 0 0 2px rgba(122,34,77,.52); pointer-events: none; }
+    .showcase-level { position: absolute; z-index: 2; top: 12px; left: 14px; min-height: 24px; padding: 0 9px; border: 1px solid #ffe096; border-radius: 12px; display: inline-flex; align-items: center; color: #7c3e11; background: #fff0b8; font-size: 10px; font-weight: 900; }
+    .showcase-pair { position: relative; z-index: 2; margin-top: 30px; display: grid; grid-template-columns: 1fr 86px 1fr; align-items: center; gap: 7px; text-align: center; }
+    .profile-medallion { min-width: 0; }
+    .profile-medallion img { width: 64px; height: 64px; object-fit: cover; border: 3px solid #ffe08a; border-radius: 50%; background: #fff; box-shadow: 0 0 0 3px rgba(142,37,91,.8), 0 5px 14px rgba(0,0,0,.25); }
+    .profile-medallion strong { display: block; margin-top: 6px; color: #fff; font-size: 10px; overflow-wrap: anywhere; }
+    .cp-core { min-width: 0; display: grid; justify-items: center; }
+    .cp-core-icon { width: 45px; height: 45px; display: grid; place-items: center; border: 2px solid #ffe28a; border-radius: 50%; color: #fff; background: linear-gradient(145deg,#ff76ba,#ba236c); box-shadow: 0 0 0 4px rgba(255,218,104,.28); }
+    .cp-core-icon svg { width: 23px; height: 23px; fill: currentColor; }
+    .cp-score { margin-top: 6px; color: #fff; font-size: 18px; font-weight: 900; }
+    .cp-days { margin-top: 2px; color: #ffe7af; font-size: 9px; font-weight: 800; white-space: nowrap; }
+    .showcase-caption { position: relative; z-index: 2; margin-top: 8px; display: flex; justify-content: center; color: rgba(255,255,255,.86); font-size: 9px; }
+    .relation-card-copy { position: relative; z-index: 2; min-width: 0; }
+
+    /* v2.8 CP detail */
+    .cp-detail-screen { --rel-main: #ca3e7d; --rel-dark: #6b2248; --rel-soft: #fff0f7; background: #fff7fb; }
+    .cp-relation-hero { position: relative; height: 282px; overflow: hidden; color: #fff; background: linear-gradient(145deg,#6b2248,#d64f91); }
+    .cp-relation-hero::before { content: ""; position: absolute; inset: 0; opacity: .24; background: url("assets/cp-super-love-hero-v2.png") center 40%/cover; }
+    .cp-relation-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg,rgba(80,16,49,.06),rgba(105,28,68,.1) 45%,rgba(95,24,62,.9)); }
+    .cp-stage { position: absolute; z-index: 2; inset: 76px 22px 17px; display: grid; grid-template-columns: 1fr 66px 1fr; align-items: center; gap: 8px; text-align: center; }
+    .cp-stage .single-avatar { box-shadow: 0 0 0 4px rgba(255,211,107,.32); }
+    .cp-stage strong { display: block; margin-top: 7px; font-size: 10px; }
+    .cp-emblem { width: 60px; height: 60px; display: grid; place-items: center; border: 2px solid rgba(255,231,159,.88); border-radius: 50%; color: #fff; background: linear-gradient(145deg,#ff77b7,#b52369); box-shadow: 0 0 0 5px rgba(255,220,116,.2); }
+    .cp-emblem svg { width: 28px; height: 28px; fill: currentColor; }
+    .cp-hero-title { position: absolute; z-index: 3; left: 18px; right: 18px; bottom: 12px; display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 12px; align-items: end; }
+    .cp-hero-title span:last-child { text-align: right; }
+    .cp-hero-title strong,.cp-hero-title small { display: block; }
+    .cp-hero-title strong { font-size: 18px; }
+    .cp-hero-title small { margin-top: 3px; font-size: 10px; opacity: .82; }
+    .cp-tabs { height: 50px; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); border-bottom: 1px solid var(--line); background: #fff; }
+    .cp-tab { position: relative; min-width: 0; border: 0; color: var(--muted); background: transparent; font-size: 11px; font-weight: 900; cursor: pointer; }
+    .cp-tab[aria-selected="true"] { color: var(--cp-deep); }
+    .cp-tab[aria-selected="true"]::after { content: ""; position: absolute; left: 25%; right: 25%; bottom: 0; height: 3px; background: var(--cp); }
+    .cp-panel { display: none; padding-bottom: 26px; }
+    .cp-panel.active { display: block; }
+    .cp-task-pane .task-summary { background: linear-gradient(110deg,var(--cp-deep),var(--cp)); }
+
+    /* CP ranking */
+    .ranking-shell { min-height: 100%; padding-bottom: 76px; color: #fff; background: #210d19; }
+    .ranking-head { padding: 16px 14px 12px; background: linear-gradient(180deg,#8d245c,#421128); text-align: center; }
+    .ranking-head h2 { margin: 0; font-size: 18px; }
+    .rank-periods { margin-top: 13px; display: grid; grid-template-columns: repeat(3,1fr); border-radius: 5px; overflow: hidden; background: rgba(52,9,31,.5); }
+    .rank-period { height: 36px; border: 0; color: rgba(255,255,255,.62); background: transparent; font-size: 9px; font-weight: 900; cursor: pointer; }
+    .rank-period[aria-selected="true"] { color: #682047; background: #ffe492; box-shadow: inset 0 0 0 2px #cb8d28; }
+    .rank-countdown { margin-top: 8px; color: #ffd4e8; font-size: 9px; }
+    .rank-podium { min-height: 245px; padding: 22px 10px 10px; display: grid; grid-template-columns: repeat(3,1fr); align-items: end; gap: 8px; background: radial-gradient(circle at 50% 15%,rgba(248,157,197,.35),transparent 48%); }
+    .podium-item { min-width: 0; text-align: center; }
+    .podium-item.first { align-self: start; }
+    .rank-medallion { position: relative; width: 82px; height: 82px; margin: auto; display: grid; place-items: center; border: 3px solid #d79f3d; border-radius: 50%; background: linear-gradient(145deg,#fff4c4,#b97017); }
+    .podium-item.first .rank-medallion { width: 104px; height: 104px; border-width: 4px; }
+    .rank-medallion img { width: calc(100% - 10px); height: calc(100% - 10px); object-fit: cover; border: 2px solid #fff; border-radius: 50%; }
+    .rank-badge { position: absolute; top: -13px; left: 50%; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; color: #65234a; background: #ffe187; font-size: 12px; font-weight: 900; transform: translateX(-50%); }
+    .podium-item strong { display: block; margin-top: 9px; font-size: 9px; overflow-wrap: anywhere; }
+    .podium-item small { display: block; margin-top: 3px; color: #ffb9da; font-size: 8px; }
+    .rank-list { padding: 0 13px; display: grid; gap: 8px; }
+    .rank-row { min-height: 58px; padding: 8px 10px; border: 1px solid #9b4b75; border-radius: 6px; display: grid; grid-template-columns: 24px 60px 1fr auto; align-items: center; gap: 8px; background: #4b1833; }
+    .rank-row > b { color: #ffe09a; font-size: 12px; }
+    .rank-pair { display: flex; }
+    .rank-pair img { width: 34px; height: 34px; object-fit: cover; border: 2px solid #fff; border-radius: 50%; background: #fff; }
+    .rank-pair img + img { margin-left: -12px; }
+    .rank-copy { min-width: 0; }
+    .rank-copy strong { display: block; font-size: 9px; overflow-wrap: anywhere; }
+    .rank-copy small { display: block; margin-top: 3px; color: #d6a9bf; font-size: 8px; }
+    .rank-score { color: #ffb7d8; font-size: 9px; font-weight: 900; }
+    .my-rank { position: sticky; bottom: 0; margin: 12px 8px 0; border-color: #e16aa3; background: linear-gradient(90deg,#6d1945,#321020); }
+
+    /* Full-screen supporting pages */
+    .sub-page { position: absolute; z-index: 32; inset: 0; display: none; flex-direction: column; color: var(--ink); background: #fff4fa; }
+    .sub-page.open { display: flex; }
+    .sub-top { height: 68px; padding: 22px 8px 6px; flex: 0 0 auto; display: grid; grid-template-columns: 40px 1fr 40px; align-items: center; border-bottom: 1px solid var(--line); background: #fff; }
+    .sub-top h1 { margin: 0; text-align: center; font-size: 18px; }
+    .sub-scroll { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding-bottom: calc(28px + env(safe-area-inset-bottom)); }
+    .about-cover { min-height: 150px; padding: 28px 22px 20px; display: grid; align-content: end; color: #fff; background: linear-gradient(180deg,rgba(180,39,107,.16),rgba(164,40,103,.86)),url("assets/cp-super-love-hero-v2.png") center 45%/cover; }
+    .about-cover h2 { margin: 0; font-size: 24px; }
+    .about-cover p { margin: 5px 0 0; font-size: 10px; opacity: .86; }
+    .about-content { padding: 12px; display: grid; gap: 10px; }
+    .rule-card { padding: 14px; border: 1px solid #f2cddd; border-radius: 7px; background: #fff; }
+    .rule-card h3 { margin: 0 0 9px; color: var(--cp); font-size: 14px; }
+    .rule-list { margin: 0; padding-left: 18px; color: #7b5368; font-size: 10px; line-height: 1.65; }
+    .rule-visual { min-height: 94px; margin: 10px 0; padding: 12px; border-radius: 6px; display: grid; grid-template-columns: 1fr 58px 1fr; align-items: center; gap: 8px; color: #fff; background: linear-gradient(145deg,#f59ac4,#b52f79); text-align: center; }
+    .rule-visual img { width: 54px; height: 54px; margin: auto; object-fit: cover; border: 2px solid #fff; border-radius: 50%; }
+    .rule-visual span { font-size: 9px; font-weight: 900; }
+    .rule-heart { width: 54px; height: 54px; display: grid; place-items: center; border-radius: 50%; background: rgba(255,255,255,.22); font-size: 11px; }
+    .rule-table { border-top: 1px solid var(--line); }
+    .rule-row { min-height: 42px; display: grid; grid-template-columns: 104px 1fr; gap: 10px; align-items: center; border-bottom: 1px solid var(--line); font-size: 10px; }
+    .rule-row span { color: var(--muted); }
+
+    .memory-cover { padding: 22px 16px; color: #fff; background: linear-gradient(135deg,#8f255d,#e765a4); }
+    .memory-cover strong { font-size: 28px; }
+    .memory-cover span { display: block; margin-top: 4px; font-size: 10px; opacity: .82; }
+    .memory-timeline { padding: 14px; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 9px; }
+    .memory-card { min-width: 0; min-height: 148px; padding: 12px; border: 1px solid #efc9dc; border-radius: 7px; color: var(--ink); background: #fff; text-align: left; cursor: pointer; }
+    .memory-card.locked { color: #9b8290; background: #f8f3f6; }
+    .memory-card-icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: linear-gradient(145deg,var(--cp),var(--gold)); }
+    .memory-card.locked .memory-card-icon { color: #9b8290; background: #e8dfe4; }
+    .memory-card strong { display: block; margin-top: 10px; font-size: 11px; }
+    .memory-card small { display: block; margin-top: 5px; color: var(--muted); font-size: 9px; line-height: 1.45; }
+
+    /* v2.13 intimacy history */
+    .intimacy-history-page { background: #f8f2f6; }
+    .history-summary { min-height: 116px; padding: 18px 18px 16px; display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: end; gap: 14px; color: #fff; background: linear-gradient(120deg,#8d285d,#d94d90 68%,#d79a25); }
+    .history-summary strong, .history-summary small { display: block; }
+    .history-summary strong { font-size: 28px; }
+    .history-summary small { margin-top: 4px; font-size: 10px; opacity: .82; }
+    .history-summary-side { text-align: right; }
+    .history-summary-side strong { font-size: 15px; }
+    .history-filters { min-height: 50px; padding: 0 8px; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); border-bottom: 1px solid var(--line); background: #fff; }
+    .history-filter { position: relative; min-width: 0; border: 0; color: var(--muted); background: transparent; font-size: 10px; font-weight: 900; cursor: pointer; }
+    .history-filter[aria-selected="true"] { color: var(--cp-deep); }
+    .history-filter[aria-selected="true"]::after { content: ""; position: absolute; left: 22%; right: 22%; bottom: 0; height: 3px; background: var(--cp); }
+    .history-list { padding-bottom: 20px; background: #fff; }
+    .history-day { padding: 14px 16px 6px; color: #8e7280; background: #f8f2f6; font-size: 10px; font-weight: 900; }
+    .history-row { width: 100%; min-height: 70px; padding: 10px 14px; border: 0; border-bottom: 1px solid #f0dbe5; display: grid; grid-template-columns: 38px minmax(0,1fr) auto 16px; align-items: center; gap: 9px; color: var(--ink); background: #fff; text-align: left; cursor: pointer; }
+    .history-type-icon { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; }
+    .history-type-icon svg { width: 17px; height: 17px; }
+    .history-type-icon.gift { color: #b82d70; background: #ffe7f2; }
+    .history-type-icon.ring { color: #8a610f; background: #fff1c8; }
+    .history-type-icon.task { color: #236f65; background: #e4f6f1; }
+    .history-type-icon.decay { color: #6d7181; background: #eceef3; }
+    .history-copy { min-width: 0; }
+    .history-copy strong, .history-copy small, .history-change b, .history-change small { display: block; }
+    .history-copy strong { overflow-wrap: anywhere; font-size: 11px; }
+    .history-copy small { margin-top: 4px; color: var(--muted); font-size: 9px; }
+    .history-change { text-align: right; }
+    .history-change b { color: #17836c; font-size: 13px; }
+    .history-change b.negative { color: #7d7180; }
+    .history-change small { margin-top: 4px; color: var(--muted); font-size: 8px; }
+    .history-row > svg { width: 15px; height: 15px; color: #bda7b2; }
+    .history-empty { min-height: 260px; padding: 64px 20px; color: var(--muted); text-align: center; }
+    .history-empty svg { width: 36px; height: 36px; }
+    .history-empty strong, .history-empty small { display: block; }
+    .history-empty strong { margin-top: 10px; color: var(--ink); font-size: 12px; }
+    .history-empty small { margin-top: 5px; font-size: 9px; }
+    .history-detail-change { margin-bottom: 12px; text-align: center; }
+    .history-detail-change span, .history-detail-change strong { display: block; }
+    .history-detail-change span { color: var(--muted); font-size: 10px; }
+    .history-detail-change strong { margin-top: 5px; color: #17836c; font-size: 28px; }
+    .history-detail-change strong.negative { color: #7d7180; }
+    .history-detail-note { margin: 12px 0 0; color: var(--muted); font-size: 10px; line-height: 1.55; }
+
+    @media (max-width: 600px) { .stage { padding: 0; } .phone { width: 100%; height: 100dvh; min-height: 600px; box-shadow: none; } }
+    @media (max-width: 350px) {
+      .profile-content { padding-left: 12px; padding-right: 12px; }
+      .detail-band, .relation-band, .sl-band { padding-left: 12px; padding-right: 12px; }
+      .task-list, .gift-grid { padding-left: 12px; padding-right: 12px; }
+      .task-item { grid-template-columns: 32px 1fr auto; gap: 6px; }
+      .gift-card:last-child { grid-template-columns: 104px 1fr; }
+      .showcase-pair { grid-template-columns: 1fr 78px 1fr; }
+      .profile-medallion img { width: 58px; height: 58px; }
+      .relation-strip { margin-left: -12px; margin-right: -12px; padding-left: 12px; padding-right: 12px; grid-auto-columns: 110px; }
+      .relation-entry { width: 110px; }
+      .rank-medallion { width: 72px; height: 72px; }
+      .podium-item.first .rank-medallion { width: 88px; height: 88px; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } .super-love-sheet { animation: none; } .sl-spinner { animation-duration: 1.4s; } }
+  </style>
+</head>
+<body>
+  <main class="stage">
+    <section class="phone" aria-label="个人主页与亲密关系移动端原型">
+      <section class="screen profile-screen active" data-screen="profile">
+        <header class="profile-hero">
+          <img class="profile-photo" src="assets/profile-hero.png" alt="用户个人主页形象">
+          <div class="profile-top"><button class="icon-button" type="button" aria-label="返回推荐主页" data-return-home><i data-lucide="chevron-left"></i></button><div class="profile-top-actions"><button class="icon-button" type="button" aria-label="主页数据" data-toast="已打开主页数据"><i data-lucide="chart-no-axes-column-increasing"></i></button><button class="icon-button" type="button" aria-label="编辑资料" data-toast="已打开资料编辑"><i data-lucide="pencil"></i></button></div></div>
+          <div class="profile-meta"><h1>coooool</h1><p>ID 20226 · Saudi Arabia</p><div class="badge-row"><span class="badge">Emperor</span><span class="badge">Lv32</span><span class="badge">魅力 41</span><span class="badge">Honor 666</span></div></div>
+        </header>
+        <div class="profile-content">
+          <div class="dark-head"><div><h2>CP</h2><p>当前伴侣关系</p></div></div>
+          <button class="cp-entry cp-showcase" type="button" data-screen-target="cp-detail">
+            <span class="showcase-level">CP Lv15 · S2 默契</span>
+            <span class="showcase-pair"><span class="profile-medallion"><img src="assets/profile-hero.png" alt="coooool"><strong>coooool</strong></span><span class="cp-core"><span class="cp-core-icon"><i data-lucide="heart"></i></span><b class="cp-score" data-current-intimacy>58,806</b><small class="cp-days">CP 36 Days</small></span><span class="profile-medallion"><img src="assets/avatar-mira.png" alt="Mira"><strong>Mira</strong></span></span>
+            <span class="showcase-caption">共同亲密值 · 任务 +20 · 行为 +1,753</span>
+          </button>
+          <button class="daily-task-entry" type="button" data-open-daily-tasks>
+            <span class="daily-task-entry-icon"><i data-lucide="list-checks"></i></span>
+            <span class="daily-task-entry-copy"><strong>Daily Rewards</strong><small>CP 亲密任务 · 今日任务 2/4 · 行为值 +3</small></span>
+            <span class="daily-task-entry-value">+20</span>
+            <i data-lucide="chevron-right"></i>
+          </button>
+
+          <div class="dark-head"><div><h2>Other Intimacy</h2><p><span id="relationSeatCount">亲友关系 2/3</span> · 前 3 席免费</p></div></div>
+          <div class="relation-strip" aria-label="亲友关系席位">
+            <button class="relation-entry brother" type="button" data-open-relation="brother"><span class="slot-avatar"><img src="assets/avatar-lin.png" alt="Lin"></span><span class="relation-card-copy"><strong>Brother · Lin</strong><small>Lv8 · 相伴 52 天</small><small>本周 +140</small></span></button>
+            <button class="relation-entry bestie" type="button" data-open-relation="bestie"><span class="slot-avatar"><img src="assets/avatar-mira.png" alt="Mira"></span><span class="relation-card-copy"><strong>Bestie · Mira</strong><small>Lv12 · 相伴 88 天</small><small>本周 +210</small></span></button>
+            <span class="dynamic-slots" id="dynamicRelationSlots"></span>
+          </div>
+
+          <nav class="profile-tabs" aria-label="个人主页内容"><button class="profile-tab" type="button" aria-selected="true" data-profile-tab="agency">Agency</button><button class="profile-tab" type="button" aria-selected="false" data-profile-tab="profile">Profile</button><button class="profile-tab" type="button" aria-selected="false" data-profile-tab="honor">Honor</button></nav>
+          <div class="profile-placeholder" id="profilePlaceholder">Agency Owner · 1/3 members</div>
+        </div>
+      </section>
+
+      <section class="screen cp-detail-screen" data-screen="cp-detail">
+        <div class="detail-scroll">
+          <header class="cp-relation-hero">
+            <div class="detail-top"><button class="icon-button" type="button" aria-label="返回个人主页" data-screen-target="profile"><i data-lucide="chevron-left"></i></button><h1>CP</h1><button class="icon-button" type="button" aria-label="About CP" data-open-about><i data-lucide="circle-help"></i></button></div>
+            <div class="cp-stage"><div><img class="single-avatar" src="assets/profile-hero.png" alt="coooool"><strong>coooool</strong></div><div class="cp-emblem"><i data-lucide="heart"></i></div><div><img class="single-avatar" src="assets/avatar-mira.png" alt="Mira"><strong>Mira</strong></div></div>
+            <div class="cp-hero-title"><span><strong>CP Lv15 · S2 默契</strong><small>已相伴 36 天</small></span><span><strong data-current-intimacy>58,806</strong><small>共同亲密值</small></span></div>
+          </header>
+          <button class="super-love-float" type="button" data-open-super-love><i data-lucide="heart-pulse"></i><span>Super Love</span></button>
+          <nav class="cp-tabs" aria-label="CP 关系页面"><button class="cp-tab" type="button" aria-selected="true" data-cp-tab="relationship">关系</button><button class="cp-tab" type="button" aria-selected="false" data-cp-tab="tasks">亲密任务</button><button class="cp-tab" type="button" aria-selected="false" data-cp-tab="ranking">CP 榜单</button></nav>
+
+          <section class="cp-panel active" data-cp-panel="relationship">
+            <div class="detail-band home-primary-band"><div class="section-head"><div><h2>CP Level</h2><p>等级保护中 · 剩余 3 天</p></div><button type="button" data-open-super-love>提升等级</button></div><div class="level-card"><div class="level-row"><strong>Lv15</strong><span><b data-cp-exp>5,806</b> / 6,200 CP EXP</span></div><div class="meter"><span style="width:78%"></span></div><button class="intimacy-entry" type="button" data-open-intimacy-history><span class="intimacy-entry-icon"><i data-lucide="list-tree"></i></span><span class="intimacy-entry-copy"><strong>亲密值记录</strong><small>礼物、戒指、任务与衰减明细</small></span><span class="intimacy-entry-value" data-today-intimacy>今日 +1,773</span><i data-lucide="chevron-right"></i></button></div></div>
+            <div class="detail-band"><div class="section-head"><div><h2>Memorial Days</h2><p>已解锁 3/8</p></div><button type="button" data-open-memorial>查看全部</button></div><div class="memory-grid"><button class="memory" type="button" data-memory="formed"><div class="memory-icon"><i data-lucide="heart"></i></div><small>Form CP</small></button><button class="memory" type="button" data-memory="day7"><div class="memory-icon"><i data-lucide="calendar-days"></i></div><small>CP 7 Days</small></button><button class="memory" type="button" data-memory="day30"><div class="memory-icon"><i data-lucide="sparkles"></i></div><small>CP 1 Month</small></button><button class="memory" type="button" data-memory="day90"><div class="memory-icon"><i data-lucide="lock"></i></div><small>CP 3 Months</small></button></div></div>
+            <div class="detail-band"><div class="section-head"><div><h2>Relationship</h2></div></div><div class="info-list"><div class="info-row"><span>Proposal anniversary</span><strong>2026-07-28</strong></div><div class="info-row"><span>Wedding anniversary</span><strong>2026-07-29</strong></div><div class="info-row"><span>CP time</span><strong>36 Days</strong></div></div></div>
+          </section>
+
+          <section class="cp-panel cp-task-pane" data-cp-panel="tasks">
+            <div class="task-summary"><div class="task-summary-row"><strong data-cp-task-title>CP 亲密任务 2/4</strong><span data-cp-task-gain>任务奖励 +20 / +40</span></div><span data-cp-base-gain>行为亲密值 +3 · 自动到账</span></div>
+            <div class="period-tabs cp-period-tabs"><button class="period-tab" type="button" aria-selected="true" data-cp-period="daily">日任务</button><button class="period-tab" type="button" aria-selected="false" data-cp-period="weekly">周任务</button></div>
+            <div class="task-list cp-task-list" data-cp-task-list="daily"><article class="task-item" data-task-key="chat" data-task-period="daily"><span class="task-icon"><i data-lucide="messages-square"></i></span><span class="task-copy"><strong>互相问候</strong><small>有效双向聊天 3 回合 · 3/3</small><b>行为 +1/回合 · 任务 +10 · 已到账</b></span><button class="task-action done" type="button" data-complete-task data-task-key="chat" data-task-period="daily" disabled><i data-lucide="check"></i></button></article><article class="task-item" data-task-key="room" data-task-period="daily"><span class="task-icon"><i data-lucide="radio"></i></span><span class="task-copy"><strong>同房陪伴</strong><small>有效共处 10 分钟 · 10/10</small><b>行为 +0 · 任务 +10 · 已到账</b></span><button class="task-action done" type="button" data-complete-task data-task-key="room" data-task-period="daily" disabled><i data-lucide="check"></i></button></article><article class="task-item" data-task-key="mic" data-task-period="daily"><span class="task-icon"><i data-lucide="mic-2"></i></span><span class="task-copy"><strong>语音默契</strong><small>同时有效在麦 5 分钟 · 3/5</small><b>行为 +0 · 完成后 +10</b></span><button class="task-action" type="button" data-complete-task data-task-key="mic" data-task-period="daily">去上麦</button></article><article class="task-item" data-task-key="game" data-task-period="daily"><span class="task-icon"><i data-lucide="gamepad-2"></i></span><span class="task-copy"><strong>一起玩</strong><small>完成 1 局有效玩法 · 0/1</small><b>行为 +10/局 · 完成后 +10</b></span><button class="task-action" type="button" data-complete-task data-task-key="game" data-task-period="daily">去玩</button></article></div>
+            <div class="task-list cp-task-list" data-cp-task-list="weekly" hidden><article class="task-item" data-task-key="days" data-task-period="weekly"><span class="task-icon"><i data-lucide="calendar-days"></i></span><span class="task-copy"><strong>三日相伴</strong><small>完成同房或同麦 · 2/3 天</small><b>完成后 +20 CP EXP</b></span><button class="task-action" type="button" data-complete-task data-task-key="days" data-task-period="weekly">去完成</button></article><article class="task-item" data-task-key="voiceWeek" data-task-period="weekly"><span class="task-icon"><i data-lucide="headphones"></i></span><span class="task-copy"><strong>语音常在</strong><small>同时有效在麦 60 分钟 · 24/60</small><b>完成后 +20 CP EXP</b></span><button class="task-action" type="button" data-complete-task data-task-key="voiceWeek" data-task-period="weekly">去上麦</button></article><article class="task-item" data-task-key="gamesWeek" data-task-period="weekly"><span class="task-icon"><i data-lucide="gamepad-2"></i></span><span class="task-copy"><strong>一起玩</strong><small>有效双人玩法 3 局 · 1/3</small><b>完成后 +20 CP EXP</b></span><button class="task-action" type="button" data-complete-task data-task-key="gamesWeek" data-task-period="weekly">去玩</button></article><article class="task-item" data-task-key="activeDays" data-task-period="weekly"><span class="task-icon"><i data-lucide="message-circle-heart"></i></span><span class="task-copy"><strong>五日有互动</strong><small>完成任一日任务 · 2/5 天</small><b>完成后 +20 CP EXP</b></span><button class="task-action" type="button" data-complete-task data-task-key="activeDays" data-task-period="weekly">去完成</button></article></div>
+          </section>
+
+          <section class="cp-panel" data-cp-panel="ranking">
+            <div class="ranking-shell"><div class="ranking-head"><h2>CP Ranking</h2><div class="rank-periods"><button class="rank-period" type="button" aria-selected="true" data-rank-period="daily">Daily</button><button class="rank-period" type="button" aria-selected="false" data-rank-period="weekly">Weekly</button><button class="rank-period" type="button" aria-selected="false" data-rank-period="monthly">Monthly</button></div><div class="rank-countdown" id="rankCountdown">Daily ends in 11:48:18</div></div>
+              <div class="rank-podium"><article class="podium-item"><div class="rank-medallion"><span class="rank-badge">2</span><img src="assets/avatar-lin.png" alt="第 2 名 CP"></div><strong>Lin &amp; Noor</strong><small data-rank-score>48,210</small></article><article class="podium-item first"><div class="rank-medallion"><span class="rank-badge">1</span><img src="assets/avatar-mira.png" alt="第 1 名 CP"></div><strong>Mira &amp; Chris</strong><small data-rank-score>66,880</small></article><article class="podium-item"><div class="rank-medallion"><span class="rank-badge">3</span><img src="assets/profile-hero.png" alt="第 3 名 CP"></div><strong>Wiss &amp; Lua</strong><small data-rank-score>42,900</small></article></div>
+              <div class="rank-list"><article class="rank-row"><b>4</b><span class="rank-pair"><img src="assets/avatar-lin.png" alt=""><img src="assets/avatar-mira.png" alt=""></span><span class="rank-copy"><strong>Hadi &amp; Aseel</strong><small>CP Lv22 · S2</small></span><span class="rank-score" data-rank-score>36,700</span></article><article class="rank-row"><b>5</b><span class="rank-pair"><img src="assets/profile-hero.png" alt=""><img src="assets/avatar-lin.png" alt=""></span><span class="rank-copy"><strong>NNT &amp; NOC</strong><small>CP Lv19 · S2</small></span><span class="rank-score" data-rank-score>31,460</span></article><button class="rank-row my-rank" type="button" data-toast="已定位到我的 CP 排名"><b>18</b><span class="rank-pair"><img src="assets/profile-hero.png" alt=""><img src="assets/avatar-mira.png" alt=""></span><span class="rank-copy"><strong>coooool &amp; Mira</strong><small>我的 CP · Lv15</small></span><span class="rank-score" data-rank-score>12,860</span></button></div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="screen friend-detail" data-screen="friend-detail">
+        <div class="detail-scroll">
+          <header class="relation-hero">
+            <div class="detail-top"><button class="icon-button" type="button" aria-label="返回个人主页" data-screen-target="profile"><i data-lucide="chevron-left"></i></button><h1 id="relationHeader">Brother</h1><button class="icon-button" type="button" aria-label="关系设置" data-toast="已打开关系设置"><i data-lucide="more-horizontal"></i></button></div>
+            <div class="relation-stage"><div><img class="single-avatar" src="assets/profile-hero.png" alt="coooool"><strong>coooool</strong></div><div class="relation-emblem" id="relationEmblem"><span class="fists"><span>✊</span><span>✊</span></span></div><div><img class="single-avatar" id="relationPartnerAvatar" src="assets/avatar-lin.png" alt="关系好友"><strong id="relationPartnerName">Lin</strong></div></div>
+            <div class="relation-title"><span><strong id="relationTitle">兄弟关系</strong><small id="relationSubtitle">一起并肩的第 52 天</small></span><span><strong id="relationExp">3,860</strong><small>关系经验</small></span></div>
+          </header>
+          <nav class="relation-tabs" aria-label="亲友关系页面"><button class="relation-tab" type="button" aria-selected="true" data-relation-tab="overview">关系主页</button><button class="relation-tab" type="button" aria-selected="false" data-relation-tab="tasks">亲密任务</button></nav>
+          <section class="relation-panel active" data-relation-panel="overview">
+            <div class="relation-band home-primary-band"><div class="relation-growth-head"><span><strong id="relationLevelText">Lv8</strong><small id="relationLevelNext">下一级还差 240</small></span><span><strong id="relationGrowthValue">3,860</strong><small>当前经验</small></span></div><div class="relation-growth-meter"><span id="relationGrowthMeter" style="width:68%"></span></div><div class="relation-stat"><div><strong id="relationDays">52</strong><small>相伴天数</small></div><div><strong id="relationWeekExp">+140</strong><small>本周经验</small></div><div><strong id="relationTaskProgress">2/4</strong><small>今日任务</small></div></div><button class="intimacy-entry" type="button" data-open-intimacy-history="relation"><span class="intimacy-entry-icon"><i data-lucide="list-tree"></i></span><span class="intimacy-entry-copy"><strong>经验记录</strong><small>任务、送礼增长与衰退明细</small></span><span class="intimacy-entry-value" id="relationMonthChange">本月 +320</span><i data-lucide="chevron-right"></i></button></div>
+            <div class="relation-band"><div class="section-head"><div><h2>关系纪念</h2><p>永久记录，不随经验衰退清空</p></div></div><div class="info-list"><div class="info-row"><span>建立关系</span><strong id="relationStarted">2026-07-12</strong></div><div class="info-row"><span>最近互动</span><strong>Today 16:02</strong></div><div class="info-row"><span>共同完成任务</span><strong>68</strong></div></div></div>
+          </section>
+          <section class="relation-panel" data-relation-panel="tasks">
+            <div class="task-summary"><div class="task-summary-row"><strong id="friendTaskTitle">兄弟亲密任务 2/4</strong><span id="friendTaskGain">任务奖励 +20 / +40</span></div><span id="friendTaskBaseGain">行为亲密值 +3 · 自动到账</span></div>
+            <div class="period-tabs"><button class="period-tab" type="button" aria-selected="true" data-friend-period="daily">日任务</button><button class="period-tab" type="button" aria-selected="false" data-friend-period="weekly">周任务</button></div>
+            <div class="task-list" data-friend-task-list="daily">
+              <article class="task-item" data-task-key="chat" data-task-period="daily"><span class="task-icon"><i data-lucide="messages-square"></i></span><span class="task-copy"><strong>互相问候</strong><small>有效双向聊天 3 回合 · 3/3</small><b>行为 +1/回合 · 任务 +10 · 已到账</b></span><button class="task-action done" type="button" data-complete-task data-task-key="chat" data-task-period="daily" disabled><i data-lucide="check"></i></button></article>
+              <article class="task-item" data-task-key="room" data-task-period="daily"><span class="task-icon"><i data-lucide="radio"></i></span><span class="task-copy"><strong>同房陪伴</strong><small>有效共处 10 分钟 · 10/10</small><b>行为 +0 · 任务 +10 · 已到账</b></span><button class="task-action done" type="button" data-complete-task data-task-key="room" data-task-period="daily" disabled><i data-lucide="check"></i></button></article>
+              <article class="task-item" data-task-key="mic" data-task-period="daily"><span class="task-icon"><i data-lucide="mic-2"></i></span><span class="task-copy"><strong>语音默契</strong><small>同时有效在麦 5 分钟 · 3/5</small><b>行为 +0 · 完成后 +10</b></span><button class="task-action" type="button" data-complete-task data-task-key="mic" data-task-period="daily">去上麦</button></article>
+              <article class="task-item" data-task-key="game" data-task-period="daily"><span class="task-icon"><i data-lucide="gamepad-2"></i></span><span class="task-copy"><strong id="friendGameTask">一起玩</strong><small>完成 1 局有效玩法 · 0/1</small><b>行为 +10/局 · 完成后 +10</b></span><button class="task-action" type="button" data-complete-task data-task-key="game" data-task-period="daily">去玩</button></article>
+            </div>
+            <div class="task-list" data-friend-task-list="weekly" hidden>
+              <article class="task-item" data-task-key="days" data-task-period="weekly"><span class="task-icon"><i data-lucide="calendar-days"></i></span><span class="task-copy"><strong>三日相伴</strong><small>完成同房或同麦 · 2/3 天</small><b>完成后 +20 关系经验</b></span><button class="task-action" type="button" data-complete-task data-task-key="days" data-task-period="weekly">去完成</button></article>
+              <article class="task-item" data-task-key="voiceWeek" data-task-period="weekly"><span class="task-icon"><i data-lucide="headphones"></i></span><span class="task-copy"><strong>语音常在</strong><small>同时有效在麦 60 分钟 · 24/60</small><b>完成后 +20 关系经验</b></span><button class="task-action" type="button" data-complete-task data-task-key="voiceWeek" data-task-period="weekly">去上麦</button></article>
+              <article class="task-item" data-task-key="gamesWeek" data-task-period="weekly"><span class="task-icon"><i data-lucide="gamepad-2"></i></span><span class="task-copy"><strong>一起玩</strong><small>有效双人玩法 3 局 · 1/3</small><b>完成后 +20 关系经验</b></span><button class="task-action" type="button" data-complete-task data-task-key="gamesWeek" data-task-period="weekly">去玩</button></article>
+              <article class="task-item" data-task-key="activeDays" data-task-period="weekly"><span class="task-icon"><i data-lucide="message-circle-heart"></i></span><span class="task-copy"><strong>五日有互动</strong><small>完成任一日任务 · 2/5 天</small><b>完成后 +20 关系经验</b></span><button class="task-action" type="button" data-complete-task data-task-key="activeDays" data-task-period="weekly">去完成</button></article>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="super-love-page" data-super-love-page aria-hidden="true">
+        <div class="super-love-sheet" role="dialog" aria-modal="true" aria-label="Super Love">
+        <header class="sl-hero"><img src="assets/cp-super-love-hero-v2.png" alt="Super Love 主视觉"><div class="sl-top"><button class="icon-button" type="button" aria-label="Super Love 规则" data-open="sl-rules"><i data-lucide="circle-help"></i></button><h1>Super Love</h1><button class="icon-button" type="button" aria-label="关闭 Super Love" data-close-super-love><i data-lucide="x"></i></button></div><div class="sl-meta"><span><strong id="slLevelLabel">CP Lv15 · S2 默契</strong><small id="slLevelStatus">等级保护中 · 剩余 3 天</small></span><span><strong id="slExp">5,806</strong><small>CP EXP</small></span></div></header>
+        <nav class="sl-tabs" aria-label="Super Love 页面"><button class="sl-tab" type="button" aria-selected="true" data-sl-tab="rings">升级戒指</button><button class="sl-tab" type="button" aria-selected="false" data-sl-tab="gifts">CP 礼物</button><button class="sl-tab" type="button" aria-selected="false" data-sl-tab="tasks">CP 任务</button></nav>
+        <div class="sl-scroll">
+          <section class="sl-panel active" data-sl-panel="rings"><div class="sl-band"><button class="protection" type="button" data-open="decay"><span id="slProtectionText">等级保护中 · 恢复 Lv15 还差 120 EXP</span><i data-lucide="shield-check"></i></button></div><div class="sl-band"><div class="section-head"><div><h2>Choose a ring</h2><p>保留现网 5 枚戒指、价格与亲密值</p></div></div><div class="ring-list"><button class="ring-card" type="button" data-ring="r1" aria-pressed="false"><span class="item-quantity">x1</span><span class="value-tag">+1,000</span><span class="ring-icon"><i data-lucide="gem"></i></span><strong>Eternal Vow</strong><b>+1,000 CP EXP</b><small>56,000</small></button><button class="ring-card" type="button" data-ring="r2" aria-pressed="false"><span class="item-quantity">x1</span><span class="value-tag">+2,500</span><span class="ring-icon"><i data-lucide="infinity"></i></span><strong>Heartbeat Harmony</strong><b>+2,500 CP EXP</b><small>136,000</small></button><button class="ring-card" type="button" data-ring="r3" aria-pressed="false"><span class="item-quantity">x1</span><span class="value-tag">+8,000</span><span class="ring-icon"><i data-lucide="diamond"></i></span><strong>Kiss of Time</strong><b>+8,000 CP EXP</b><small>400,000</small></button><button class="ring-card" type="button" data-ring="r4" aria-pressed="false"><span class="item-quantity">x1</span><span class="value-tag">+12,000</span><span class="ring-icon"><i data-lucide="sparkles"></i></span><strong>Stellar Affection</strong><b>+12,000 CP EXP</b><small>616,000</small></button><button class="ring-card" type="button" data-ring="r5" aria-pressed="false"><span class="item-quantity">x1</span><span class="value-tag">+16,000</span><span class="ring-icon"><i data-lucide="crown"></i></span><strong>Entwined Destiny</strong><b>+16,000 CP EXP</b><small>792,000</small></button></div></div></section>
+          <section class="sl-panel" data-sl-panel="gifts"><div class="gift-intro"><span><strong>CP Gifts</strong><small>只在有效 CP 双方之间赠送</small></span><span><i data-lucide="coins"></i> <b id="balance">200,000</b></span></div><div class="gift-grid"><button class="gift-card" type="button" data-gift="g1"><span class="lock-dot"><i data-lucide="lock"></i></span><span class="gift-art"><i data-lucide="flower-2"></i></span><strong>心动花束 · 有 CP 即解锁</strong><b>29,999</b><small>亲密值（CP EXP）+600<span data-gift-lock-note hidden></span></small></button><button class="gift-card" type="button" data-gift="g2"><span class="lock-dot"><i data-lucide="lock"></i></span><span class="gift-art"><i data-lucide="mail"></i></span><strong>星河情书 · CP Lv10</strong><b>69,999</b><small>亲密值（CP EXP）+1,750<span data-gift-lock-note hidden></span></small></button><button class="gift-card locked" type="button" data-gift="g3"><span class="lock-dot"><i data-lucide="lock"></i></span><span class="gift-art"><i data-lucide="castle"></i></span><span><strong>永恒城堡 · CP Lv20</strong><b>199,999</b><small>亲密值（CP EXP）+6,000<span data-gift-lock-note><br>当前未达解锁等级</span></small></span></button></div></section>
+          <section class="sl-panel" data-sl-panel="tasks"></section>
+        </div>
+        <div class="sl-action" id="slAction"><button class="sl-send" id="slSendButton" type="button" disabled>Send</button></div>
+        <div class="sl-loading" id="slLoading" aria-hidden="true"><div class="sl-loading-card"><span class="sl-spinner"></span><strong>Loading...</strong></div></div>
+        </div>
+      </section>
+
+      <section class="sub-page about-page" data-about-page aria-hidden="true">
+        <header class="sub-top"><button class="icon-button" type="button" aria-label="关闭 About CP" data-close-about><i data-lucide="chevron-left"></i></button><h1>About CP</h1><span></span></header>
+        <div class="sub-scroll"><div class="about-cover"><h2>About CP</h2><p>建立、成长、纪念与解除规则</p></div><div class="about-content">
+          <section class="rule-card"><h3>I How to become CP?</h3><div class="rule-visual"><span><img src="assets/profile-hero.png" alt="发起方">coooool</span><span class="rule-heart">2,000</span><span><img src="assets/avatar-mira.png" alt="接收方">Mira</span></div><ol class="rule-list"><li>双方为符合条件的互关好友，双人亲密度达到 2,000，即可选择对方发起求婚；不要求对方是亲密度最高的好友。</li><li>发起方必须选择求婚戒指、信纸并填写寄语；申请默认 24 小时有效。</li><li>接收方确认接受后建立 CP。建立成功只注入一次 2,000 CP EXP，建立前超出的亲密度不直接转为 CP EXP。</li></ol></section>
+          <section class="rule-card"><h3>II Proposal item outcomes</h3><div class="rule-table"><div class="rule-row"><span>发起方主动取消</span><strong>戒指已送出，不可取回</strong></div><div class="rule-row"><span>接收方明确拒绝</span><strong>系统退回戒指给送礼人</strong></div><div class="rule-row"><span>申请超时</span><strong>默认不退，按独立原因码记录</strong></div><div class="rule-row"><span>系统创建失败/重复扣除</span><strong>自动退回或等值补偿</strong></div></div></section>
+          <section class="rule-card"><h3>III What can I do when I have CP?</h3><ol class="rule-list"><li>解锁 CP Room、双人主页、纪念时间线和专属麦位；CP 身份不会自动授予房间 Admin。</li><li>参与 CP 日任务、周任务和日/周/月榜；任务达标后由用户主动领取 CP EXP。</li><li>通过私信聊天、同房陪伴、语音互动、普通礼物、CP 礼物和 Super Love 升级戒指共同成长。</li></ol></section>
+          <section class="rule-card"><h3>IV CP gifts and Super Love</h3><div class="rule-table"><div class="rule-row"><span>G1 心动花束</span><strong>有效 CP 即解锁 · +600 亲密值</strong></div><div class="rule-row"><span>G2 星河情书</span><strong>CP Lv10 · +1,750 亲密值</strong></div><div class="rule-row"><span>G3 永恒城堡</span><strong>CP Lv20 · +6,000 亲密值</strong></div><div class="rule-row"><span>升级戒指</span><strong>保留现有 5 枚与对应经验</strong></div></div><p style="margin:10px 0 0;color:var(--muted);font-size:10px;line-height:1.6">CP 礼物只允许有效 CP 双方互赠，礼物亲密值即 CP 等级成长值，不另外叠加第二份经验。礼物不能用于求婚，也不会降低 2,000 建立门槛。</p></section>
+          <section class="rule-card"><h3>V Tasks, decay and level protection</h3><ol class="rule-list"><li>日任务 4 项：亲密聊天、同房陪伴、语音互动、送出心意；周任务 4 项：三日相伴、语音常在、心意相伴、五日有互动。每项达标后主动领取，日上限 +40、周上限 +80。</li><li>任务卡展示完成进度、待领取与已领取状态；既有行为亲密值仍独立累计，不替代任务奖励领取。</li><li>沿用现网 CP EXP 衰退服务，最低保持 2,000；衰退不会解除 CP、清空纪念或要求重新求婚。正常衰退跨级默认进入 7 天等级保护。</li></ol></section>
+          <section class="rule-card"><h3>VI Memorial, privacy and ending CP</h3><ol class="rule-list"><li>建立、7/30/90/180/365 天及等级里程碑进入纪念时间线；历史纪念和永久奖励不因衰退清空。</li><li>关系通知遵循双方公开范围、房间开关和地区规则，任一方关闭公开时按更严格范围执行。</li><li>解除后持续性 CP 权益立即失效；协议解除、屏蔽、举报和安全解除分别保留审计记录。</li></ol></section>
+        </div></div>
+      </section>
+
+      <section class="sub-page memorial-page" data-memorial-page aria-hidden="true">
+        <header class="sub-top"><button class="icon-button" type="button" aria-label="关闭 Memorial Days" data-close-memorial><i data-lucide="chevron-left"></i></button><h1>Memorial Days</h1><button class="icon-button" type="button" aria-label="纪念规则" data-toast="纪念永久保留，不随经验衰退清空"><i data-lucide="circle-help"></i></button></header>
+        <div class="sub-scroll"><div class="memory-cover"><strong>3 / 8</strong><span>已解锁纪念 · CP 36 Days</span></div><div class="memory-timeline">
+          <button class="memory-card" type="button" data-memory="formed"><span class="memory-card-icon"><i data-lucide="heart"></i></span><strong>Form CP</strong><small>2026-07-29 · 已解锁<br>记录关系正式建立</small></button>
+          <button class="memory-card" type="button" data-memory="day7"><span class="memory-card-icon"><i data-lucide="calendar-days"></i></span><strong>CP 7 Days</strong><small>2026-08-05 · 已解锁<br>七日陪伴纪念</small></button>
+          <button class="memory-card" type="button" data-memory="day30"><span class="memory-card-icon"><i data-lucide="sparkles"></i></span><strong>CP 1 Month</strong><small>2026-08-28 · 已解锁<br>首月纪念卡</small></button>
+          <button class="memory-card locked" type="button" data-memory="day90"><span class="memory-card-icon"><i data-lucide="lock"></i></span><strong>CP 3 Months</strong><small>还差 54 天<br>达到 90 天解锁</small></button>
+          <button class="memory-card locked" type="button" data-memory="day180"><span class="memory-card-icon"><i data-lucide="lock"></i></span><strong>CP 6 Months</strong><small>还差 144 天<br>达到 180 天解锁</small></button>
+          <button class="memory-card locked" type="button" data-memory="day365"><span class="memory-card-icon"><i data-lucide="lock"></i></span><strong>CP 1 Year</strong><small>还差 329 天<br>达到 365 天解锁</small></button>
+          <button class="memory-card locked" type="button" data-memory="lv41"><span class="memory-card-icon"><i data-lucide="lock"></i></span><strong>同行里程碑</strong><small>CP Lv41 解锁<br>记录首次达到 S3</small></button>
+          <button class="memory-card locked" type="button" data-memory="lv81"><span class="memory-card-icon"><i data-lucide="lock"></i></span><strong>长伴里程碑</strong><small>CP Lv81 解锁<br>记录首次达到 S5</small></button>
+        </div></div>
+      </section>
+
+      <section class="sub-page intimacy-history-page" data-intimacy-history-page aria-hidden="true">
+        <header class="sub-top"><button class="icon-button" type="button" aria-label="返回关系详情" data-close-intimacy-history><i data-lucide="chevron-left"></i></button><h1 id="historyPageTitle">亲密值记录</h1><span></span></header>
+        <div class="sub-scroll">
+          <div class="history-summary"><span><strong id="historyCurrentValue">58,796</strong><small id="historyCurrentLabel">当前共同亲密值</small></span><span class="history-summary-side"><strong id="historyMonthValue">+4,430</strong><small>本月净变化</small></span></div>
+          <nav class="history-filters" aria-label="亲密值记录筛选"><button class="history-filter" type="button" aria-selected="true" data-history-filter="all">全部</button><button class="history-filter" type="button" aria-selected="false" data-history-filter="growth">增长</button><button class="history-filter" type="button" aria-selected="false" data-history-filter="decay">衰退</button></nav>
+          <div class="history-list" id="intimacyHistoryList" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <div class="overlay" data-overlay="locked" aria-hidden="true"><section class="sheet" role="dialog" aria-modal="true" aria-label="礼物未解锁"><div class="handle"></div><div class="sheet-head"><span></span><h2 id="lockedGiftTitle">CP Lv20 解锁</h2><button class="icon-button" type="button" aria-label="关闭" data-close><i data-lucide="x"></i></button></div><div class="sheet-body"><p id="lockedGiftBody" style="margin:0;color:var(--muted);font-size:11px;line-height:1.6">当前 CP Lv15。完成 CP 任务或继续互动即可成长，等级保护期间仍按 Lv15 权益判断。</p><button class="primary-button" type="button" data-sl-tab-target="tasks" data-close>去做 CP 任务</button></div></section></div>
+      <div class="overlay" data-overlay="decay" aria-hidden="true"><section class="sheet" role="dialog" aria-modal="true" aria-label="等级保护详情"><div class="handle"></div><div class="sheet-head"><span></span><h2>等级保护中</h2><button class="icon-button" type="button" aria-label="关闭" data-close><i data-lucide="x"></i></button></div><div class="sheet-body"><p style="margin:0;color:var(--muted);font-size:11px;line-height:1.6">现网衰退已使计算等级降至 Lv14。保护期内继续保留 Lv15 与对应权益；再获得 120 CP EXP 可恢复。到期仍未恢复时，只调整持续性权益，不解除 CP、不清空纪念。</p><button class="primary-button" type="button" data-sl-tab-target="tasks" data-close>去做 CP 任务</button></div></section></div>
+      <div class="overlay" data-overlay="create" aria-hidden="true">
+        <section class="sheet" role="dialog" aria-modal="true" aria-label="建立亲友关系">
+          <div class="handle"></div>
+          <div class="sheet-head"><span></span><h2>建立亲友关系</h2><button class="icon-button" type="button" aria-label="关闭" data-close><i data-lucide="x"></i></button></div>
+          <div class="sheet-body">
+            <div class="seat-summary"><span><strong id="createSeatName">关系席位 · 第 3 席</strong><small>双方亲密度达到 2,000 后可邀请</small></span><b id="createSeatStatus">2/3</b></div>
+            <p class="filter-label">关系类型</p>
+            <div class="relation-filters" role="radiogroup" aria-label="选择关系类型">
+              <button class="relation-filter" type="button" role="radio" aria-checked="false" aria-selected="false" data-relation-type="brother">兄弟</button>
+              <button class="relation-filter" type="button" role="radio" aria-checked="false" aria-selected="false" data-relation-type="bestie">闺蜜</button>
+              <button class="relation-filter" type="button" role="radio" aria-checked="false" aria-selected="false" data-relation-type="close">挚友</button>
+            </div>
+            <div class="candidate-list">
+              <div class="candidate-list-head"><strong>好友列表</strong><span>亲密值从高到低</span></div>
+              <button class="candidate" type="button" data-candidate="Noor" data-candidate-avatar="assets/avatar-lin.png" data-candidate-intimacy="2360"><img src="assets/avatar-lin.png" alt="Noor"><span><strong>Noor</strong><small>双方亲密度 2,360</small></span><span class="candidate-status">可邀请</span></button>
+              <button class="candidate" type="button" data-candidate="Aseel" data-candidate-avatar="assets/avatar-mira.png" data-candidate-intimacy="2180"><img src="assets/avatar-mira.png" alt="Aseel"><span><strong>Aseel</strong><small>双方亲密度 2,180</small></span><span class="candidate-status">可邀请</span></button>
+              <button class="candidate" type="button" data-candidate="Hadi" data-candidate-avatar="assets/profile-hero.png" data-candidate-intimacy="1840" disabled><img src="assets/profile-hero.png" alt="Hadi"><span><strong>Hadi</strong><small>双方亲密度 1,840</small></span><span class="candidate-status">差 160</span></button>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="overlay" data-overlay="invite-confirm" aria-hidden="true">
+        <section class="sheet" role="dialog" aria-modal="true" aria-label="确认亲友邀请">
+          <div class="handle"></div>
+          <div class="sheet-head"><span></span><h2>确认邀请</h2><button class="icon-button" type="button" aria-label="关闭" data-close><i data-lucide="x"></i></button></div>
+          <div class="sheet-body"><div class="detail-list"><div class="detail-item"><span>邀请对象</span><strong id="inviteName">Noor</strong></div><div class="detail-item"><span>关系类型</span><strong id="inviteType">挚友</strong></div><div class="detail-item"><span>双方亲密度</span><strong id="inviteIntimacy">2,360</strong></div></div><button class="primary-button" type="button" data-confirm-invite>发送邀请</button></div>
+        </section>
+      </div>
+      <div class="overlay" data-overlay="invite-status" aria-hidden="true">
+        <section class="sheet" role="dialog" aria-modal="true" aria-label="亲友邀请状态">
+          <div class="handle"></div>
+          <div class="sheet-head"><span></span><h2>邀请待确认</h2><button class="icon-button" type="button" aria-label="关闭" data-close><i data-lucide="x"></i></button></div>
+          <div class="sheet-body"><div class="detail-list"><div class="detail-item"><span>邀请对象</span><strong id="pendingInviteName">Noor</strong></div><div class="detail-item"><span>关系类型</span><strong id="pendingInviteType">挚友</strong></div><div class="detail-item"><span>当前状态</span><strong>等待对方接受</strong></div></div><button class="primary-button" type="button" data-refresh-invite>刷新邀请状态</button></div>
+        </section>
+      </div>
+      <div class="overlay" data-overlay="paid-seat" aria-hidden="true">
+        <section class="sheet" role="dialog" aria-modal="true" aria-label="解锁亲友关系席位">
+          <div class="handle"></div>
+          <div class="sheet-head"><span></span><h2>解锁扩展席位</h2><button class="icon-button" type="button" aria-label="关闭" data-close><i data-lucide="x"></i></button></div>
+          <div class="sheet-body"><div class="purchase-card"><div class="purchase-head"><span class="purchase-icon"><i data-lucide="unlock-keyhole"></i></span><span><strong id="seatPurchaseTitle">第 4 个亲友关系席位</strong><small id="seatPurchaseCopy">现有关系席位全部建立后，可永久解锁下一个席位，最多 5 席。</small></span></div><div class="purchase-rows"><div class="purchase-row"><span>解锁价格</span><strong>99,999 金币</strong></div><div class="purchase-row"><span>当前余额</span><strong id="seatBalance">200,000 金币</strong></div><div class="purchase-row"><span>支付后余额</span><strong id="seatBalanceAfter">100,001 金币</strong></div></div></div><button class="primary-button" type="button" data-confirm-paid-slot>确认支付 99,999 金币</button></div>
+        </section>
+      </div>
+      <div class="overlay" data-overlay="memory-detail" aria-hidden="true"><section class="sheet" role="dialog" aria-modal="true" aria-label="纪念详情"><div class="handle"></div><div class="sheet-head"><span></span><h2 id="memoryTitle">Form CP</h2><button class="icon-button" type="button" aria-label="关闭" data-close><i data-lucide="x"></i></button></div><div class="sheet-body"><div class="detail-list"><div class="detail-item"><span>状态</span><strong id="memoryStatus">已解锁</strong></div><div class="detail-item"><span>日期/条件</span><strong id="memoryDate">2026-07-29</strong></div><div class="detail-item"><span>纪念内容</span><strong id="memoryRule">关系正式建立</strong></div></div><button class="primary-button" type="button" id="memoryAction" data-toast="纪念卡已生成">生成纪念卡</button></div></section></div>
+      <div class="overlay" data-overlay="history-detail" aria-hidden="true"><section class="sheet" role="dialog" aria-modal="true" aria-label="亲密值记录详情"><div class="handle"></div><div class="sheet-head"><span></span><h2 id="historyDetailTitle">记录详情</h2><button class="icon-button" type="button" aria-label="关闭" data-close><i data-lucide="x"></i></button></div><div class="sheet-body"><div class="history-detail-change"><span>亲密值变化</span><strong id="historyDetailChange">+10</strong></div><div class="detail-list"><div class="detail-item"><span>记录类型</span><strong id="historyDetailType">任务</strong></div><div class="detail-item"><span>来源</span><strong id="historyDetailSource">CP 日任务</strong></div><div class="detail-item"><span>变更后亲密值</span><strong id="historyDetailAfter">58,806</strong></div><div class="detail-item"><span>入账时间</span><strong id="historyDetailTime">2026-09-09 16:02</strong></div><div class="detail-item"><span>状态</span><strong id="historyDetailStatus">已入账</strong></div><div class="detail-item"><span>流水号</span><strong id="historyDetailId">CPR-09091602</strong></div></div><p class="history-detail-note" id="historyDetailNote">任务达标后自动入账。</p></div></section></div>
+      <div class="overlay" data-overlay="sl-rules" aria-hidden="true"><section class="sheet" role="dialog" aria-modal="true" aria-label="Super Love 规则"><div class="handle"></div><div class="sheet-head"><span></span><h2>Super Love</h2><button class="icon-button" type="button" aria-label="关闭" data-close><i data-lucide="x"></i></button></div><div class="sheet-body"><div class="detail-list"><div class="detail-item"><span>CP 日任务</span><strong>4 项 · 每项 +10</strong></div><div class="detail-item"><span>CP 周任务</span><strong>4 项 · 每项 +20</strong></div><div class="detail-item"><span>任务内容</span><strong>聊天、同房、同麦、送礼</strong></div><div class="detail-item"><span>结算</span><strong>达标后主动领取</strong></div><div class="detail-item"><span>共享规则</span><strong>关系双方仅入账一次</strong></div><div class="detail-item"><span>等级保护</span><strong>默认 7 天</strong></div></div></div></section></div>
+      <button class="mini-room" id="miniRoom" type="button" aria-label="返回已最小化的房间" aria-hidden="true"><span class="mini-room-thumb"><i data-lucide="mic-2"></i></span><span class="mini-room-copy"><strong>Room active</strong><small>Tap to return</small></span></button>
+      <div class="toast" role="status" aria-live="polite"></div>
+    </section>
+  </main>
+  <script src="assets/lucide.min.js"></script>
+  <script>
+    (() => {
+      const state = { screen: 'profile', relation: 'brother', rightsLevel: 15, cpTaskDone: 2, friendTaskDone: { brother: 2, bestie: 2, close: 0, 'seat-3': 0, 'seat-4': 0 }, balance: 200000, cpExp: 5796, sharedIntimacy: 58796, todayIntimacy: 1763, todayBehaviorIntimacy: 1753, todayPaidIntimacy: 1750, todayTaskIntimacy: 10, monthIntimacy: 4430, gift: null, ring: null, slTab: 'rings', sending: false, rankPeriod: 'daily', taskPeriod: 'daily', historyFilter: 'all', historyScope: 'cp', capacity: 4, slots: { 3: { status: 'accepted', name: 'Noor', type: 'close', avatar: 'assets/avatar-lin.png', intimacy: '2360', relationKey: 'seat-3' }, 4: { status: 'accepted', name: 'Aseel', type: 'bestie', avatar: 'assets/avatar-mira.png', intimacy: '2180', relationKey: 'seat-4' } }, inviteSeat: 5, pendingSeat: null, unlockTarget: 5, selectedRelationType: null, pendingCandidate: null };
+      const taskState = {
+        daily: {
+          chat: { progress: 3, target: 3, bonus: 10, source: '有效双向互动', cta: '去私信', complete: true, claimed: true, claiming: false },
+          room: { progress: 10, target: 10, bonus: 10, source: '有效同房陪伴', cta: '去房间', complete: true, claimed: false, claiming: false },
+          mic: { progress: 3, target: 5, bonus: 10, source: '有效在麦发言', cta: '去上麦', complete: false, claimed: false, claiming: false },
+          game: { progress: 0, target: 1, bonus: 10, source: '有效礼物', cta: '去送礼', complete: false, claimed: false, claiming: false }
+        },
+        weekly: {
+          days: { progress: 2, target: 3, bonus: 20, source: '', cta: '去房间', complete: false, claimed: false, claiming: false },
+          voiceWeek: { progress: 24, target: 60, bonus: 20, source: '', cta: '去上麦', complete: false, claimed: false, claiming: false },
+          gamesWeek: { progress: 1, target: 3, bonus: 20, source: '', cta: '去送礼', complete: false, claimed: false, claiming: false },
+          activeDays: { progress: 2, target: 5, bonus: 20, source: '', cta: '去互动', complete: false, claimed: false, claiming: false }
+        }
+      };
+      const taskDefinitions = {
+        chat: { title: '亲密聊天', icon: 'messages-square', progress: value => `有效双向聊天 ${value.target} 回合 · ${Math.min(value.progress, value.target)}/${value.target}` },
+        room: { title: '同房陪伴', icon: 'radio', progress: value => `有效共处 ${value.target} 分钟 · ${Math.min(value.progress, value.target)}/${value.target}` },
+        mic: { title: '语音互动', icon: 'mic-2', progress: value => `同时在麦并有效发言 ${value.target} 分钟 · ${Math.min(value.progress, value.target)}/${value.target}` },
+        game: { title: '送出心意', icon: 'gift', progress: value => `送出 ${value.target} 笔有效礼物 · ${Math.min(value.progress, value.target)}/${value.target}` },
+        days: { title: '三日相伴', icon: 'calendar-days', progress: value => `完成同房或同麦 · ${Math.min(value.progress, value.target)}/${value.target} 天` },
+        voiceWeek: { title: '语音常在', icon: 'headphones', progress: value => `同时有效在麦 ${value.target} 分钟 · ${Math.min(value.progress, value.target)}/${value.target}` },
+        gamesWeek: { title: '心意相伴', icon: 'gift', progress: value => `跨至少 2 天送出 ${value.target} 笔礼物 · ${Math.min(value.progress, value.target)}/${value.target}` },
+        activeDays: { title: '五日有互动', icon: 'message-circle-heart', progress: value => `完成任一日任务 · ${Math.min(value.progress, value.target)}/${value.target} 天` }
+      };
+      const seatPrice = 99999;
+      const maxRelationSeats = 5;
+      const relationData = {
+        brother: { header: 'Brother', label: '兄弟', title: '兄弟关系', subtitle: '一起并肩的第 52 天', partner: 'Lin', avatar: 'assets/avatar-lin.png', exp: '3,860', level: 'Lv8 · 下一级还差 240', days: '52', started: '2026-07-12', game: '并肩作战' },
+        bestie: { header: 'Bestie', label: '闺蜜', title: '闺蜜关系', subtitle: '分享心事的第 88 天', partner: 'Mira', avatar: 'assets/avatar-mira.png', exp: '6,420', level: 'Lv12 · 下一级还差 180', days: '88', started: '2026-06-06', game: '一起玩耍' },
+        close: { header: 'Close Friend', label: '挚友', title: '挚友关系', subtitle: '珍藏彼此的每次陪伴', partner: 'Noor', avatar: 'assets/avatar-lin.png', exp: '2,360', level: 'Lv1 · 下一级还差 140', days: '1', started: '2026-09-04', game: '默契同行' },
+        'seat-3': { header: 'Close Friend', label: '挚友', title: '挚友关系', subtitle: '与 Noor 的关系已建立', partner: 'Noor', avatar: 'assets/avatar-lin.png', exp: '2,360', level: 'Lv1 · 下一级还差 140', days: '1', started: '2026-09-04', game: '默契同行', visualType: 'close' },
+        'seat-4': { header: 'Bestie', label: '闺蜜', title: '闺蜜关系', subtitle: '与 Aseel 的关系已建立', partner: 'Aseel', avatar: 'assets/avatar-mira.png', exp: '2,180', level: 'Lv1 · 下一级还差 140', days: '1', started: '2026-09-04', game: '一起玩耍', visualType: 'bestie' }
+      };
+      const gifts = {
+        g1: { name: '心动花束', price: 29999, intimacy: 600, exp: 600, unlock: 1 },
+        g2: { name: '星河情书', price: 69999, intimacy: 1750, exp: 1750, unlock: 10 },
+        g3: { name: '永恒城堡', price: 199999, intimacy: 6000, exp: 6000, unlock: 20 }
+      };
+      const rings = {
+        r1: { name: 'Eternal Vow', price: 56000, exp: 1000 },
+        r2: { name: 'Heartbeat Harmony', price: 136000, exp: 2500 },
+        r3: { name: 'Kiss of Time', price: 400000, exp: 8000 },
+        r4: { name: 'Stellar Affection', price: 616000, exp: 12000 },
+        r5: { name: 'Entwined Destiny', price: 792000, exp: 16000 }
+      };
+      const memories = {
+        formed: { title: 'Form CP', status: '已解锁', date: '2026-07-29', rule: '双方确认后关系正式建立', unlocked: true },
+        day7: { title: 'CP 7 Days', status: '已解锁', date: '2026-08-05', rule: 'CP 相伴满 7 天', unlocked: true },
+        day30: { title: 'CP 1 Month', status: '已解锁', date: '2026-08-28', rule: 'CP 相伴满 30 天', unlocked: true },
+        day90: { title: 'CP 3 Months', status: '未解锁', date: '还差 54 天', rule: 'CP 相伴满 90 天', unlocked: false },
+        day180: { title: 'CP 6 Months', status: '未解锁', date: '还差 144 天', rule: 'CP 相伴满 180 天', unlocked: false },
+        day365: { title: 'CP 1 Year', status: '未解锁', date: '还差 329 天', rule: 'CP 相伴满 365 天', unlocked: false },
+        lv41: { title: '同行里程碑', status: '未解锁', date: 'CP Lv41', rule: '首次达到 S3 同行', unlocked: false },
+        lv81: { title: '长伴里程碑', status: '未解锁', date: 'CP Lv81', rule: '首次达到 S5 长伴', unlocked: false }
+      };
+      const ranking = {
+        daily: { countdown: 'Daily ends in 11:48:18', scores: ['48,210','66,880','42,900','36,700','31,460','12,860'] },
+        weekly: { countdown: 'Weekly ends in 4 days', scores: ['286,400','368,920','254,800','219,600','188,300','78,540'] },
+        monthly: { countdown: 'Monthly ends in 18 days', scores: ['1,240,800','1,588,600','1,112,900','986,200','821,400','346,700'] }
+      };
+      const relationGrowth = {
+        brother: { weekly: 140, monthly: 320, meter: 68 },
+        bestie: { weekly: 210, monthly: 540, meter: 72 },
+        close: { weekly: 60, monthly: 120, meter: 18 },
+        'seat-3': { weekly: 60, monthly: 120, meter: 18 },
+        'seat-4': { weekly: 45, monthly: 90, meter: 14 }
+      };
+      const intimacyRecords = [
+        { id: 'task-chat-0909', type: 'task', typeLabel: '任务', icon: 'messages-square', title: '日任务 · 亲密聊天', source: 'CP 日任务', date: '今天 · 9月9日', time: '16:02', fullTime: '2026-09-09 16:02', change: 10, after: 58796, status: '已入账', eventId: 'CPR-09091602', note: '双方完成有效双向聊天 3 回合后，由用户主动领取；关系双方共享一次奖励。' },
+        { id: 'gift-letter-0909', type: 'gift', typeLabel: '礼物', icon: 'gift', title: '收到 CP 礼物 · 星河情书', source: 'Mira 赠送', date: '今天 · 9月9日', time: '11:24', fullTime: '2026-09-09 11:24', change: 1750, after: 58796, status: '已入账', eventId: 'GFT-09091124', note: '礼物发放成功后，为 coooool 与 Mira 的当前 CP 关系增加亲密值。' },
+        { id: 'ring-harmony-0908', type: 'ring', typeLabel: '戒指', icon: 'gem', title: 'Super Love 戒指 · Heartbeat Harmony', source: 'coooool 赠送', date: '昨天 · 9月8日', time: '20:18', fullTime: '2026-09-08 20:18', change: 2500, after: 57046, status: '已入账', eventId: 'RNG-09082018', note: '升级戒指支付及发放成功后，亲密值一次性入账。' },
+        { id: 'task-room-0908', type: 'task', typeLabel: '任务', icon: 'radio', title: '日任务 · 同房陪伴', source: 'CP 日任务', date: '昨天 · 9月8日', time: '17:40', fullTime: '2026-09-08 17:40', change: 10, after: 54546, status: '已入账', eventId: 'CPR-09081740', note: '双方共同在房达到 10 分钟后，由用户主动领取任务奖励。' },
+        { id: 'decay-0907', type: 'decay', typeLabel: '衰减', icon: 'trending-down', title: '每日亲密值衰减', source: '系统定时结算', date: '9月7日', time: '05:00', fullTime: '2026-09-07 05:00', change: -120, after: 54536, status: '已扣减', eventId: 'DCY-09070500', note: '按当前衰减规则完成定时结算；本次扣减不解除 CP，也不清空已解锁纪念。' },
+        { id: 'gift-bond-0906', type: 'gift', typeLabel: '礼物', icon: 'gift', title: '收到 BOND 礼物 · 同行礼盒', source: 'Mira 赠送', date: '9月6日', time: '22:31', fullTime: '2026-09-06 22:31', change: 350, after: 54656, status: '已入账', eventId: 'GFT-09062231', note: 'BOND 礼物按当前 CP 关系子单入账，不叠加 CP 专属礼物倍率。' },
+        { id: 'task-week-0906', type: 'task', typeLabel: '任务', icon: 'calendar-check', title: '周任务 · 三日相伴', source: 'CP 周任务', date: '9月6日', time: '18:12', fullTime: '2026-09-06 18:12', change: 20, after: 54306, status: '已入账', eventId: 'CPR-09061812', note: '本周已有 3 天完成同房或同麦任务，用户领取后完成入账。' },
+        { id: 'decay-0905', type: 'decay', typeLabel: '衰减', icon: 'trending-down', title: '每日亲密值衰减', source: '系统定时结算', date: '9月5日', time: '05:00', fullTime: '2026-09-05 05:00', change: -80, after: 54286, status: '已扣减', eventId: 'DCY-09050500', note: '按当前衰减规则完成定时结算；衰减流水可追溯且不会重复扣减。' }
+      ];
+      function relationHistoryRecords() {
+        const data = relationData[state.relation];
+        const current = Number(data.exp.replaceAll(',', '')) || 0;
+        const prefix = 'REL-' + state.relation;
+        return [
+          { id: prefix + '-task', type: 'task', typeLabel: '任务', icon: 'messages-square', title: '日任务 · 亲密聊天', source: data.label + '日任务', date: '今天 · 9月9日', time: '15:18', fullTime: '2026-09-09 15:18', change: 10, after: current, status: '已入账', eventId: prefix + '-091518', note: '任务达标后由用户主动领取，双方共享一次关系经验。' },
+          { id: prefix + '-gift', type: 'gift', typeLabel: '礼物', icon: 'gift', title: '收到关系礼物 · 同行礼盒', source: data.partner + ' 赠送', date: '今天 · 9月9日', time: '10:42', fullTime: '2026-09-09 10:42', change: 120, after: current - 10, status: '已入账', eventId: 'GFT-' + state.relation + '-091042', note: '礼物成功送达后，为与 ' + data.partner + ' 的当前' + data.label + '关系增加经验。' },
+          { id: prefix + '-decay', type: 'decay', typeLabel: '衰退', icon: 'trending-down', title: '每日关系经验衰退', source: '系统定时结算', date: '昨天 · 9月8日', time: '05:00', fullTime: '2026-09-08 05:00', change: -30, after: current - 130, status: '已扣减', eventId: 'DCY-' + state.relation + '-090500', note: '按关系衰退规则完成定时结算，流水可追溯且不会重复扣减。' },
+          { id: prefix + '-weekly', type: 'task', typeLabel: '任务', icon: 'calendar-check', title: '周任务 · 三日相伴', source: data.label + '周任务', date: '9月7日', time: '20:06', fullTime: '2026-09-07 20:06', change: 20, after: current - 100, status: '已入账', eventId: prefix + '-072006', note: '周任务完成并主动领取后，关系经验入账一次。' }
+        ];
+      }
+      function currentHistoryRecords() { return state.historyScope === 'relation' ? relationHistoryRecords() : intimacyRecords; }
+      const toast = document.querySelector('.toast');
+      let toastTimer;
+      function showToast(message) { toast.textContent = message; toast.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 1800); }
+      function showScreen(name) { state.screen = name; document.querySelectorAll('[data-screen]').forEach(screen => screen.classList.toggle('active', screen.dataset.screen === name)); closeSuperLove(); closeSubPages(); closeOverlays(); const scroll = document.querySelector(`[data-screen="${name}"] .detail-scroll`); if (scroll) scroll.scrollTop = 0; }
+      function closeOverlays() { document.querySelectorAll('.overlay').forEach(item => { item.classList.remove('open'); item.setAttribute('aria-hidden','true'); }); }
+      function openOverlay(name) { closeOverlays(); const overlay = document.querySelector(`[data-overlay="${name}"]`); if (overlay) { overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false'); } }
+      function selectRelationType(type) {
+        state.selectedRelationType = type;
+        document.querySelectorAll('[data-relation-type]').forEach(button => {
+          const selected = button.dataset.relationType === type;
+          button.setAttribute('aria-selected', String(selected));
+          button.setAttribute('aria-checked', String(selected));
+        });
+      }
+      function acceptedSeatCount() {
+        return 2 + Object.values(state.slots).filter(slot => slot.status === 'accepted').length;
+      }
+      function allSeatsAccepted() {
+        return acceptedSeatCount() === state.capacity;
+      }
+      function slotTheme(type) {
+        return type === 'close' ? 'close-friend' : type;
+      }
+      function renderRelationSlots() {
+        const root = document.getElementById('dynamicRelationSlots');
+        let html = '';
+        let pendingCount = 0;
+        for (let seat = 3; seat <= state.capacity; seat += 1) {
+          const slot = state.slots[seat] || { status: 'empty' };
+          if (slot.status === 'pending') {
+            pendingCount += 1;
+            const typeData = relationData[slot.type];
+            html += `<button class="relation-entry ${slotTheme(slot.type)} pending" type="button" data-pending-seat="${seat}"><span class="slot-avatar"><img src="${slot.avatar}" alt="${slot.name}"></span><span class="relation-card-copy"><strong>${typeData.header} · ${slot.name}</strong><span class="slot-status">等待接受</span><small>邀请已发送</small></span></button>`;
+          } else if (slot.status === 'accepted') {
+            const data = relationData[slot.relationKey];
+            html += `<button class="relation-entry ${slotTheme(slot.type)}" type="button" data-dynamic-relation="${slot.relationKey}"><span class="slot-avatar"><img src="${slot.avatar}" alt="${slot.name}"></span><span class="relation-card-copy"><strong>${data.header} · ${slot.name}</strong><small>Lv1 · 相伴 1 天</small><small>关系已建立</small></span></button>`;
+          } else {
+            html += `<button class="relation-entry empty" type="button" data-open-seat="${seat}"><span class="slot-avatar"><i data-lucide="user-plus"></i></span><span class="relation-card-copy"><strong>可邀请</strong><small>关系席位 ${seat}/${state.capacity}</small><small>亲密度达到 2,000</small></span></button>`;
+          }
+        }
+        if (state.capacity < maxRelationSeats) {
+          const target = state.capacity + 1;
+          const lockedClass = allSeatsAccepted() ? '' : ' is-locked';
+          html += `<button class="relation-entry paid-slot${lockedClass}" type="button" data-unlock-seat="${target}"><span class="slot-avatar"><i data-lucide="lock-keyhole"></i></span><span class="relation-card-copy"><strong>解锁第 ${target} 席</strong><span class="slot-price"><i data-lucide="circle-dollar-sign"></i>99,999</span><small class="slot-kicker">关系席位满后可解锁</small></span></button>`;
+        }
+        root.innerHTML = html;
+        const pendingText = pendingCount ? ` · ${pendingCount} 待确认` : '';
+        document.getElementById('relationSeatCount').textContent = `亲友关系 ${acceptedSeatCount()}/${state.capacity}${pendingText}`;
+        requestAnimationFrame(() => { root.parentElement.scrollLeft = root.parentElement.scrollWidth; });
+        if (window.lucide) lucide.createIcons();
+      }
+      function openCreate(seat = 3) {
+        state.inviteSeat = seat;
+        state.selectedRelationType = null;
+        document.getElementById('createSeatName').textContent = `关系席位 · 第 ${seat} 席`;
+        document.getElementById('createSeatStatus').textContent = `${acceptedSeatCount()}/${state.capacity}`;
+        document.querySelectorAll('[data-relation-type]').forEach(button => { button.setAttribute('aria-selected', 'false'); button.setAttribute('aria-checked', 'false'); });
+        openOverlay('create');
+      }
+      function selectCandidate(button) {
+        const type = state.selectedRelationType;
+        if (!type) { showToast('请先选择关系类型'); return; }
+        state.pendingCandidate = { name: button.dataset.candidate, type, avatar: button.dataset.candidateAvatar, intimacy: button.dataset.candidateIntimacy };
+        document.getElementById('inviteName').textContent = state.pendingCandidate.name;
+        document.getElementById('inviteType').textContent = relationData[type].label;
+        document.getElementById('inviteIntimacy').textContent = Number(state.pendingCandidate.intimacy).toLocaleString('zh-CN');
+        openOverlay('invite-confirm');
+      }
+      function confirmInvite() {
+        if (!state.pendingCandidate) return;
+        const candidate = state.pendingCandidate;
+        const typeData = relationData[candidate.type];
+        state.slots[state.inviteSeat] = { status: 'pending', ...candidate };
+        renderRelationSlots();
+        closeOverlays();
+        showToast(`已向 ${candidate.name} 发送${typeData.label}关系邀请`);
+      }
+      function openPendingStatus(seat) {
+        const slot = state.slots[seat];
+        if (!slot || slot.status !== 'pending') return;
+        state.pendingSeat = seat;
+        document.getElementById('pendingInviteName').textContent = slot.name;
+        document.getElementById('pendingInviteType').textContent = relationData[slot.type].label;
+        openOverlay('invite-status');
+      }
+      function refreshInviteStatus() {
+        const seat = state.pendingSeat;
+        const slot = state.slots[seat];
+        if (!slot || slot.status !== 'pending') return;
+        const base = relationData[slot.type];
+        const relationKey = `seat-${seat}`;
+        relationData[relationKey] = { ...base, visualType: slot.type, partner: slot.name, avatar: slot.avatar, exp: Number(slot.intimacy).toLocaleString('zh-CN'), level: 'Lv1 · 下一级还差 140', days: '1', started: '2026-09-04', subtitle: `与 ${slot.name} 的关系已建立` };
+        state.friendTaskDone[relationKey] = 0;
+        state.slots[seat] = { ...slot, status: 'accepted', relationKey };
+        renderRelationSlots();
+        closeOverlays();
+        showToast(`${slot.name} 已接受邀请，关系正式建立`);
+      }
+      function openPaidSlot(target) {
+        if (!allSeatsAccepted()) { showToast('当前关系席位尚未占满'); return; }
+        if (state.capacity >= maxRelationSeats || target !== state.capacity + 1) return;
+        state.unlockTarget = target;
+        const after = state.balance - seatPrice;
+        document.getElementById('seatPurchaseTitle').textContent = `第 ${target} 个亲友关系席位`;
+        document.getElementById('seatPurchaseCopy').textContent = `当前 ${state.capacity} 个关系席位已全部建立，可永久解锁第 ${target} 席，最多 5 席。`;
+        document.getElementById('seatBalance').textContent = `${state.balance.toLocaleString('zh-CN')} 金币`;
+        document.getElementById('seatBalanceAfter').textContent = after >= 0 ? `${after.toLocaleString('zh-CN')} 金币` : '余额不足';
+        const button = document.querySelector('[data-confirm-paid-slot]');
+        button.disabled = after < 0;
+        button.textContent = after < 0 ? '金币余额不足' : '确认支付 99,999 金币';
+        openOverlay('paid-seat');
+      }
+      function confirmPaidSlot() {
+        const target = state.unlockTarget;
+        if (state.balance < seatPrice || !allSeatsAccepted() || state.capacity >= maxRelationSeats || target !== state.capacity + 1) return;
+        state.balance -= seatPrice;
+        state.capacity = target;
+        state.slots[target] = { status: 'empty' };
+        const balance = document.getElementById('balance');
+        if (balance) balance.textContent = state.balance.toLocaleString('zh-CN');
+        renderRelationSlots();
+        closeOverlays();
+        showToast(`第 ${target} 个亲友关系席位已解锁`);
+      }
+      function openSuperLove() {
+        const page = document.querySelector('[data-super-love-page]');
+        page.classList.add('open');
+        page.setAttribute('aria-hidden','false');
+        document.querySelector('.phone').classList.add('super-love-open');
+        setSlTab('rings');
+      }
+      function openSuperLoveTab(name) { openSuperLove(); setSlTab(name); }
+      function closeSuperLove() {
+        if (state.sending) return;
+        const page = document.querySelector('[data-super-love-page]');
+        page.classList.remove('open');
+        page.setAttribute('aria-hidden','true');
+        document.querySelector('.phone').classList.remove('super-love-open');
+      }
+      function closeSubPages() { document.querySelectorAll('.sub-page').forEach(page => { page.classList.remove('open'); page.setAttribute('aria-hidden','true'); }); }
+      function openSubPage(selector) { closeSubPages(); closeOverlays(); const page = document.querySelector(selector); page.classList.add('open'); page.setAttribute('aria-hidden','false'); const scroll = page.querySelector('.sub-scroll'); if (scroll) scroll.scrollTop = 0; }
+      function formatHistoryChange(value) { return `${value >= 0 ? '+' : '-'}${Math.abs(value).toLocaleString('zh-CN')}`; }
+      function renderIntimacyHistory() {
+        const allRecords = currentHistoryRecords();
+        const records = allRecords.filter(item => state.historyFilter === 'all' || (state.historyFilter === 'growth' ? item.change > 0 : item.change < 0));
+        const root = document.getElementById('intimacyHistoryList');
+        if (!records.length) {
+          root.innerHTML = '<div class="history-empty"><i data-lucide="inbox"></i><strong>暂无记录</strong><small>完成对应行为后，亲密值变化会显示在这里</small></div>';
+          if (window.lucide) lucide.createIcons();
+          return;
+        }
+        let currentDate = '';
+        root.innerHTML = records.map(item => {
+          const day = item.date === currentDate ? '' : `<div class="history-day">${item.date}</div>`;
+          currentDate = item.date;
+          return `${day}<button class="history-row" type="button" data-history-record="${item.id}"><span class="history-type-icon ${item.type}"><i data-lucide="${item.icon}"></i></span><span class="history-copy"><strong>${item.title}</strong><small>${item.source}</small></span><span class="history-change"><b class="${item.change < 0 ? 'negative' : ''}">${formatHistoryChange(item.change)}</b><small>${item.time}</small></span><i data-lucide="chevron-right"></i></button>`;
+        }).join('');
+        if (window.lucide) lucide.createIcons();
+      }
+      function setHistoryFilter(name) {
+        state.historyFilter = name;
+        document.querySelectorAll('[data-history-filter]').forEach(button => button.setAttribute('aria-selected', String(button.dataset.historyFilter === name)));
+        renderIntimacyHistory();
+        const scroll = document.querySelector('[data-intimacy-history-page] .sub-scroll');
+        if (scroll) scroll.scrollTop = 0;
+      }
+      function openIntimacyHistory(scope = 'cp') {
+        state.historyScope = scope === 'relation' ? 'relation' : 'cp';
+        const isRelation = state.historyScope === 'relation';
+        const relation = relationData[state.relation];
+        const growth = relationGrowth[state.relation] || relationGrowth.close;
+        document.getElementById('historyPageTitle').textContent = isRelation ? `${relation.label}经验记录` : '亲密值记录';
+        document.getElementById('historyCurrentValue').textContent = isRelation ? relation.exp : state.sharedIntimacy.toLocaleString('zh-CN');
+        document.getElementById('historyCurrentLabel').textContent = isRelation ? '当前关系经验' : '当前共同亲密值';
+        document.getElementById('historyMonthValue').textContent = `+${(isRelation ? growth.monthly : state.monthIntimacy).toLocaleString('zh-CN')}`;
+        document.querySelector('.history-filters').setAttribute('aria-label', isRelation ? '关系经验记录筛选' : '亲密值记录筛选');
+        setHistoryFilter('all');
+        openSubPage('[data-intimacy-history-page]');
+      }
+      function openHistoryDetail(id) {
+        const item = currentHistoryRecords().find(record => record.id === id);
+        if (!item) return;
+        document.getElementById('historyDetailTitle').textContent = item.title;
+        document.querySelector('.history-detail-change span').textContent = state.historyScope === 'relation' ? '关系经验变化' : '亲密值变化';
+        document.querySelectorAll('[data-overlay="history-detail"] .detail-item span')[2].textContent = state.historyScope === 'relation' ? '变更后关系经验' : '变更后亲密值';
+        const change = document.getElementById('historyDetailChange');
+        change.textContent = formatHistoryChange(item.change);
+        change.classList.toggle('negative', item.change < 0);
+        document.getElementById('historyDetailType').textContent = item.typeLabel;
+        document.getElementById('historyDetailSource').textContent = item.source;
+        document.getElementById('historyDetailAfter').textContent = item.after.toLocaleString('zh-CN');
+        document.getElementById('historyDetailTime').textContent = item.fullTime;
+        document.getElementById('historyDetailStatus').textContent = item.status;
+        document.getElementById('historyDetailId').textContent = item.eventId;
+        document.getElementById('historyDetailNote').textContent = item.note;
+        openOverlay('history-detail');
+      }
+      function setSlTab(name) {
+        state.slTab = name;
+        document.querySelectorAll('[data-sl-tab]').forEach(tab => tab.setAttribute('aria-selected', String(tab.dataset.slTab === name)));
+        document.querySelectorAll('[data-sl-panel]').forEach(panel => panel.classList.toggle('active', panel.dataset.slPanel === name));
+        document.querySelector('.sl-scroll').scrollTop = 0;
+        renderSuperLoveSelection();
+      }
+      function setCpTab(name) { document.querySelectorAll('[data-cp-tab]').forEach(tab => tab.setAttribute('aria-selected', String(tab.dataset.cpTab === name))); document.querySelectorAll('[data-cp-panel]').forEach(panel => panel.classList.toggle('active', panel.dataset.cpPanel === name)); document.querySelector('[data-screen="cp-detail"] .detail-scroll').scrollTop = 282; }
+      function setRelationTab(name) { document.querySelectorAll('[data-relation-tab]').forEach(tab => tab.setAttribute('aria-selected', String(tab.dataset.relationTab === name))); document.querySelectorAll('[data-relation-panel]').forEach(panel => panel.classList.toggle('active', panel.dataset.relationPanel === name)); document.querySelector('[data-screen="friend-detail"] .detail-scroll').scrollTop = 0; }
+      function openRelation(type) {
+        state.relation = type;
+        const data = relationData[type];
+        const growth = relationGrowth[type] || relationGrowth.close;
+        const visualType = data.visualType || type;
+        const screen = document.querySelector('[data-screen="friend-detail"]');
+        screen.classList.toggle('bestie-theme', visualType === 'bestie');
+        screen.classList.toggle('close-theme', visualType === 'close');
+        document.getElementById('relationHeader').textContent = data.header;
+        document.getElementById('relationTitle').textContent = data.title;
+        document.getElementById('relationSubtitle').textContent = data.subtitle;
+        document.getElementById('relationPartnerName').textContent = data.partner;
+        document.getElementById('relationPartnerAvatar').src = data.avatar;
+        document.getElementById('relationExp').textContent = data.exp;
+        document.getElementById('relationGrowthValue').textContent = data.exp;
+        document.getElementById('relationLevelText').textContent = data.level.split(' · ')[0];
+        document.getElementById('relationLevelNext').textContent = `关系成长 · ${data.level.split(' · ')[1] || '继续互动提升等级'}`;
+        document.getElementById('relationGrowthMeter').style.width = `${growth.meter}%`;
+        document.getElementById('relationWeekExp').textContent = `+${growth.weekly}`;
+        document.getElementById('relationMonthChange').textContent = `本月 +${growth.monthly}`;
+        document.getElementById('relationTaskProgress').textContent = `${state.friendTaskDone[type] || 0}/4`;
+        document.getElementById('relationDays').textContent = data.days;
+        document.getElementById('relationStarted').textContent = data.started;
+        document.getElementById('relationEmblem').innerHTML = visualType === 'bestie' ? '<span class="rose-symbol" aria-hidden="true">🌹</span>' : visualType === 'close' ? '<i data-lucide="sparkles"></i>' : '<span class="fists"><span>✊</span><span>✊</span></span>';
+        showScreen('friend-detail');
+        setRelationTab('overview');
+        renderTaskUI();
+        if (window.lucide) lucide.createIcons();
+      }
+      function setFriendPeriod(name) { state.taskPeriod = name; document.querySelectorAll('[data-friend-period]').forEach(tab => tab.setAttribute('aria-selected', String(tab.dataset.friendPeriod === name))); document.querySelectorAll('[data-friend-task-list]').forEach(list => list.hidden = list.dataset.friendTaskList !== name); renderTaskUI(); }
+      function setCpPeriod(name) { state.taskPeriod = name; document.querySelectorAll('[data-cp-period]').forEach(tab => tab.setAttribute('aria-selected', String(tab.dataset.cpPeriod === name))); document.querySelectorAll('[data-cp-task-list]').forEach(list => list.hidden = list.dataset.cpTaskList !== name); renderTaskUI(); }
+      function setRankPeriod(name) { state.rankPeriod = name; const data = ranking[name]; document.querySelectorAll('[data-rank-period]').forEach(tab => tab.setAttribute('aria-selected', String(tab.dataset.rankPeriod === name))); document.getElementById('rankCountdown').textContent = data.countdown; document.querySelectorAll('[data-rank-score]').forEach((item,index) => item.textContent = data.scores[index]); }
+      function openMemory(key) { const data = memories[key]; if (!data) return; document.getElementById('memoryTitle').textContent = data.title; document.getElementById('memoryStatus').textContent = data.status; document.getElementById('memoryDate').textContent = data.date; document.getElementById('memoryRule').textContent = data.rule; const action = document.getElementById('memoryAction'); action.disabled = !data.unlocked; action.textContent = data.unlocked ? '生成纪念卡' : '尚未达到解锁条件'; openOverlay('memory-detail'); }
+      function taskDoneCount(period) { return Object.values(taskState[period]).filter(item => item.complete).length; }
+      function taskClaimedCount(period) { return Object.values(taskState[period]).filter(item => item.claimed).length; }
+      function taskPendingCount(period) { return Object.values(taskState[period]).filter(item => item.complete && !item.claimed).length; }
+      function taskRewardTotal(period) { return Object.values(taskState[period]).filter(item => item.claimed).reduce((sum, item) => sum + item.bonus, 0); }
+      function taskRewardText(value) {
+        const prefix = value.source ? `${value.source} · ` : '';
+        if (value.claimed) return `${prefix}任务 +${value.bonus} · 已领取`;
+        if (value.complete) return `${prefix}任务 +${value.bonus} · 待领取`;
+        return `${prefix}完成后可领 +${value.bonus} 亲密值`;
+      }
+      function renderTaskCard(card) {
+        const period = card.dataset.taskPeriod;
+        const key = card.dataset.taskKey;
+        const value = taskState[period] && taskState[period][key];
+        const definition = taskDefinitions[key];
+        if (!value || !definition) return;
+        const title = card.querySelector('.task-copy strong');
+        const icon = card.querySelector('.task-icon');
+        const button = card.querySelector('.task-action');
+        const detail = card.querySelector('small');
+        const reward = card.querySelector('b');
+        let progress = card.querySelector('.task-progress');
+        if (!progress) {
+          progress = document.createElement('span');
+          progress.className = 'task-progress';
+          progress.innerHTML = '<span></span>';
+          card.querySelector('.task-copy').appendChild(progress);
+        }
+        const percent = Math.min(100, Math.round(value.progress / value.target * 100));
+        card.classList.toggle('claimable', value.complete && !value.claimed);
+        card.classList.toggle('claimed', value.claimed);
+        if (title) title.textContent = definition.title;
+        if (icon) icon.innerHTML = `<i data-lucide="${definition.icon}"></i>`;
+        if (detail) detail.textContent = definition.progress(value);
+        if (reward) reward.textContent = taskRewardText(value);
+        progress.setAttribute('aria-label', `任务进度 ${Math.min(value.progress, value.target)}/${value.target}`);
+        progress.querySelector('span').style.width = `${percent}%`;
+        if (button) {
+          button.removeAttribute('data-complete-task');
+          button.dataset.taskAction = value.complete ? 'claim' : 'advance';
+          button.disabled = value.claimed || value.claiming;
+          button.classList.toggle('claim', value.complete && !value.claimed && !value.claiming);
+          button.classList.toggle('done', value.claimed);
+          button.classList.toggle('loading', value.claiming);
+          button.setAttribute('aria-label', value.claimed ? `${definition.title}奖励已领取` : value.complete ? `领取${definition.title}奖励，加${value.bonus}亲密值` : `${value.cta}完成${definition.title}`);
+          if (value.claiming) button.innerHTML = '<span class="task-action-spinner"></span>领取中';
+          else if (value.claimed) button.innerHTML = '<i data-lucide="check"></i>';
+          else if (value.complete) button.textContent = `领取 +${value.bonus}`;
+          else button.textContent = value.cta;
+        }
+      }
+      function renderSuperLoveTasksPanel() {
+        const panel = document.querySelector('[data-sl-panel="tasks"]');
+        if (!panel) return;
+        const card = (key, period) => {
+          const definition = taskDefinitions[key];
+          const value = taskState[period][key];
+          return `<article class="task-item" data-task-key="${key}" data-task-period="${period}"><span class="task-icon"><i data-lucide="${definition.icon}"></i></span><span class="task-copy"><strong>${definition.title}</strong><small>${definition.progress(value)}</small><b>${taskRewardText(value)}</b><span class="task-progress"><span></span></span></span><button class="task-action" type="button" data-task-key="${key}" data-task-period="${period}">${value.cta}</button></article>`;
+        };
+        panel.innerHTML = `<div class="cp-task-summary"><div><strong data-cp-task-title>今日任务 ${taskDoneCount('daily')}/4</strong><span data-cp-task-gain>已领取 +${taskRewardTotal('daily')} / +40</span></div><small data-cp-base-gain>任务达标后请主动领取，关系双方共享一次奖励</small></div><div class="period-tabs cp-period-tabs"><button class="period-tab" type="button" aria-selected="true" data-cp-period="daily">日任务</button><button class="period-tab" type="button" aria-selected="false" data-cp-period="weekly">周任务</button></div><div class="task-list cp-task-list" data-cp-task-list="daily">${['chat','room','mic','game'].map(key => card(key, 'daily')).join('')}</div><div class="task-list cp-task-list" data-cp-task-list="weekly" hidden>${['days','voiceWeek','gamesWeek','activeDays'].map(key => card(key, 'weekly')).join('')}</div>`;
+      }
+      function renderTaskUI() {
+        const dailyDone = taskDoneCount('daily');
+        const dailyReward = taskRewardTotal('daily');
+        const activePeriod = state.taskPeriod || 'daily';
+        const activeDone = taskDoneCount(activePeriod);
+        const activeReward = taskRewardTotal(activePeriod);
+        const activeLimit = activePeriod === 'daily' ? 40 : 80;
+        const periodLabel = activePeriod === 'daily' ? '日' : '周';
+        state.cpTaskDone = dailyDone;
+        document.querySelectorAll('.task-item[data-task-key]').forEach(renderTaskCard);
+        document.querySelectorAll('[data-cp-task-title]').forEach(item => { item.textContent = item.closest('[data-sl-panel="tasks"]') ? `${activePeriod === 'daily' ? '今日' : '本周'}任务 ${activeDone}/4` : `CP ${periodLabel}任务 ${activeDone}/4`; });
+        document.querySelectorAll('[data-cp-task-gain]').forEach(item => item.textContent = `已领取 +${activeReward} / +${activeLimit}`);
+        document.querySelectorAll('[data-cp-base-gain]').forEach(item => item.textContent = activePeriod === 'daily' ? `今日来源：聊天 +3 · 礼物/戒指 +${state.todayPaidIntimacy.toLocaleString('zh-CN')} · 任务已领 +${state.todayTaskIntimacy}` : '任务达标后请主动领取，关系双方共享一次奖励');
+        const friendTitle = document.getElementById('friendTaskTitle');
+        const friendGain = document.getElementById('friendTaskGain');
+        const friendBase = document.getElementById('friendTaskBaseGain');
+        if (friendTitle) friendTitle.textContent = `${relationData[state.relation].label}${periodLabel}任务 ${activeDone}/4`;
+        if (friendGain) friendGain.textContent = `已领取 +${activeReward} / +${activeLimit}`;
+        if (friendBase) friendBase.textContent = activePeriod === 'daily' ? `今日来源：聊天 +3 · 礼物/戒指 +${state.todayPaidIntimacy.toLocaleString('zh-CN')} · 任务已领 +${state.todayTaskIntimacy}` : '任务达标后请主动领取，关系双方共享一次奖励';
+        document.querySelectorAll('.daily-task-entry-copy small').forEach(item => item.textContent = `今日完成 ${dailyDone}/4 · 待领取 ${taskPendingCount('daily')} · 行为值 +${state.todayBehaviorIntimacy.toLocaleString('zh-CN')}`);
+        document.querySelectorAll('.daily-task-entry-value').forEach(item => item.textContent = `已领 +${dailyReward}`);
+        if (window.lucide) lucide.createIcons();
+      }
+      function addTaskHistory(key, period, bonus) {
+        const now = new Date();
+        const stamp = now.getTime();
+        const title = `${period === 'daily' ? '日任务' : '周任务'} · ${taskDefinitions[key].title}`;
+        intimacyRecords.unshift({ id: `task-${stamp}`, type: 'task', typeLabel: '任务', icon: taskDefinitions[key].icon, title, source: `CP ${period === 'daily' ? '日任务' : '周任务'}`, date: '今天 · 9月9日', time: `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`, fullTime: `2026-09-09 ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`, change: bonus, after: state.sharedIntimacy, status: '已入账', eventId: `TSK-${stamp}`, note: `${taskDefinitions[key].title}完成后由用户主动领取；关系双方共享进度，本次仅入账一次。` });
+      }
+      function advanceTask(button) {
+        const period = button.dataset.taskPeriod;
+        const key = button.dataset.taskKey;
+        const value = taskState[period] && taskState[period][key];
+        if (!value || value.complete || value.claiming) return;
+        if (key === 'game' || key === 'gamesWeek') {
+          openSuperLoveTab('gifts');
+          showToast('请选择礼物送出，成功后更新任务进度');
+          return;
+        }
+        value.progress = value.target;
+        value.complete = true;
+        renderTaskUI();
+        showToast('任务已完成，快去领取');
+      }
+      function claimTask(button) {
+        const period = button.dataset.taskPeriod;
+        const key = button.dataset.taskKey;
+        const value = taskState[period] && taskState[period][key];
+        if (!value || !value.complete || value.claimed || value.claiming) return;
+        value.claiming = true;
+        renderTaskUI();
+        window.setTimeout(() => {
+          if (value.claimed) return;
+          value.claiming = false;
+          value.claimed = true;
+          state.cpExp += value.bonus;
+          state.sharedIntimacy += value.bonus;
+          state.todayIntimacy += value.bonus;
+          state.todayTaskIntimacy += value.bonus;
+          state.monthIntimacy += value.bonus;
+          addTaskHistory(key, period, value.bonus);
+          renderTaskUI();
+          updateGrowthDisplay();
+          showToast(`领取成功，+${value.bonus} 共同亲密值`);
+        }, 520);
+      }
+      function handleTaskAction(button) {
+        if (button.dataset.taskAction === 'claim') claimTask(button);
+        else advanceTask(button);
+      }
+      function renderSuperLoveGiftLocks() {
+        document.querySelectorAll('[data-gift]').forEach(button => {
+          const gift = gifts[button.dataset.gift];
+          const locked = state.rightsLevel < gift.unlock;
+          if (locked && state.gift === button.dataset.gift) state.gift = null;
+          const selected = !locked && state.gift === button.dataset.gift;
+          button.classList.toggle('locked', locked);
+          button.classList.toggle('selected', selected);
+          button.setAttribute('aria-pressed', String(selected));
+          button.setAttribute('aria-label', locked ? `${gift.name}，CP Lv${gift.unlock} 解锁，点击查看提升方式` : `${gift.name}，${gift.price.toLocaleString('zh-CN')} 金币`);
+          const note = button.querySelector('[data-gift-lock-note]');
+          if (note) { note.hidden = !locked; note.innerHTML = locked ? `<br>当前 CP Lv${state.rightsLevel}，未达解锁等级` : ''; }
+        });
+      }
+      function renderSuperLoveSelection() {
+        document.querySelectorAll('[data-ring]').forEach(button => {
+          const selected = state.ring === button.dataset.ring;
+          button.classList.toggle('selected', selected);
+          button.setAttribute('aria-pressed', String(selected));
+        });
+        renderSuperLoveGiftLocks();
+        const action = document.getElementById('slAction');
+        const send = document.getElementById('slSendButton');
+        action.hidden = state.slTab === 'tasks';
+        const item = state.slTab === 'rings' ? rings[state.ring] : state.slTab === 'gifts' ? gifts[state.gift] : null;
+        const insufficient = Boolean(item && state.balance < item.price);
+        send.disabled = !item || insufficient || state.sending;
+        send.textContent = insufficient ? '余额不足' : 'Send';
+        send.setAttribute('aria-label', item ? `${insufficient ? '余额不足，无法赠送' : '赠送'} ${item.name}，${item.price.toLocaleString('zh-CN')} 金币` : '请先选择礼物');
+      }
+      function selectRing(key) {
+        if (!rings[key] || state.sending) return;
+        state.ring = key;
+        renderSuperLoveSelection();
+      }
+      function selectGift(key) {
+        const gift = gifts[key];
+        if (!gift || state.sending) return;
+        if (state.rightsLevel < gift.unlock) {
+          document.getElementById('lockedGiftTitle').textContent = `CP Lv${gift.unlock} 解锁`;
+          document.getElementById('lockedGiftBody').textContent = `当前 CP Lv${state.rightsLevel}。完成 CP 任务或继续互动即可成长。`;
+          openOverlay('locked');
+          return;
+        }
+        state.gift = key;
+        renderSuperLoveSelection();
+      }
+      function updateGrowthDisplay() {
+        document.getElementById('balance').textContent = state.balance.toLocaleString('zh-CN');
+        document.getElementById('slExp').textContent = state.cpExp.toLocaleString('zh-CN');
+        document.querySelectorAll('[data-cp-exp]').forEach(item => item.textContent = state.cpExp.toLocaleString('zh-CN'));
+        document.querySelectorAll('[data-current-intimacy]').forEach(item => item.textContent = state.sharedIntimacy.toLocaleString('zh-CN'));
+        document.querySelectorAll('[data-today-intimacy]').forEach(item => item.textContent = `今日 +${state.todayIntimacy.toLocaleString('zh-CN')}`);
+        document.querySelectorAll('[data-month-intimacy]').forEach(item => item.textContent = `+${state.monthIntimacy.toLocaleString('zh-CN')}`);
+      }
+      function addGiftHistory(kind, item) {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2,'0');
+        const minutes = String(now.getMinutes()).padStart(2,'0');
+        const seconds = String(now.getSeconds()).padStart(2,'0');
+        const recordType = kind === 'ring' ? 'ring' : 'gift';
+        intimacyRecords.unshift({
+          id: `${recordType}-${now.getTime()}`,
+          type: recordType,
+          typeLabel: kind === 'ring' ? '戒指' : '礼物',
+          icon: kind === 'ring' ? 'gem' : 'gift',
+          title: `${kind === 'ring' ? 'Super Love 戒指' : '送出 CP 礼物'} · ${item.name}`,
+          source: 'coooool 赠送给 Mira',
+          date: '今天 · 9月9日',
+          time: `${hours}:${minutes}`,
+          fullTime: `2026-09-09 ${hours}:${minutes}:${seconds}`,
+          change: item.exp,
+          after: state.sharedIntimacy,
+          status: '已入账',
+          eventId: `${kind === 'ring' ? 'RNG' : 'GFT'}-${now.getTime()}`,
+          note: `${kind === 'ring' ? '升级戒指' : 'CP 礼物'}支付及发放成功后，亲密值与 CP EXP 使用同一成长账户入账。`
+        });
+      }
+      function recordGiftTaskProgress() {
+        const dailyGift = taskState.daily.game;
+        const weeklyGift = taskState.weekly.gamesWeek;
+        const newlyCompleted = !dailyGift.complete;
+        dailyGift.progress = dailyGift.target;
+        dailyGift.complete = true;
+        if (!weeklyGift.complete) {
+          weeklyGift.progress = Math.min(weeklyGift.target, weeklyGift.progress + 1);
+          weeklyGift.complete = weeklyGift.progress >= weeklyGift.target;
+        }
+        return newlyCompleted;
+      }
+      function sendSuperLoveItem() {
+        if (state.sending || !['rings','gifts'].includes(state.slTab)) return;
+        const kind = state.slTab === 'rings' ? 'ring' : 'gift';
+        const item = kind === 'ring' ? rings[state.ring] : gifts[state.gift];
+        if (!item) return;
+        if (state.balance < item.price) { showToast('金币余额不足'); return; }
+        state.sending = true;
+        document.getElementById('miniRoom').disabled = true;
+        document.getElementById('slLoading').classList.add('show');
+        document.getElementById('slLoading').setAttribute('aria-hidden','false');
+        document.querySelector('[data-super-love-page]').setAttribute('aria-busy','true');
+        renderSuperLoveSelection();
+        setTimeout(() => {
+          state.balance -= item.price;
+          state.cpExp += item.exp;
+          state.sharedIntimacy += item.exp;
+          state.todayIntimacy += item.exp;
+          state.todayBehaviorIntimacy += item.exp;
+          state.todayPaidIntimacy += item.exp;
+          state.monthIntimacy += item.exp;
+          addGiftHistory(kind, item);
+          const giftTaskCompleted = kind === 'gift' && recordGiftTaskProgress();
+          updateGrowthDisplay();
+          renderTaskUI();
+          state.ring = null;
+          state.gift = null;
+          state.sending = false;
+          document.getElementById('miniRoom').disabled = false;
+          document.getElementById('slLoading').classList.remove('show');
+          document.getElementById('slLoading').setAttribute('aria-hidden','true');
+          document.querySelector('[data-super-love-page]').removeAttribute('aria-busy');
+          closeSuperLove();
+          renderSuperLoveSelection();
+          showToast(giftTaskCompleted ? '送礼成功 · 任务已完成，快去领取' : 'Send successfully · +' + item.exp.toLocaleString('zh-CN') + ' CP EXP');
+        }, 850);
+      }
+      function openDailyTasks() { showScreen('cp-detail'); setCpTab('tasks'); setCpPeriod('daily'); }
+
+      renderSuperLoveTasksPanel();
+      renderTaskUI();
+      updateGrowthDisplay();
+      document.querySelectorAll('[data-screen-target]').forEach(button => button.addEventListener('click', () => showScreen(button.dataset.screenTarget)));
+      document.querySelectorAll('[data-open-relation]').forEach(button => button.addEventListener('click', () => openRelation(button.dataset.openRelation)));
+      document.getElementById('dynamicRelationSlots').addEventListener('click', event => {
+        const button = event.target.closest('button');
+        if (!button) return;
+        if (button.dataset.openSeat) openCreate(Number(button.dataset.openSeat));
+        if (button.dataset.pendingSeat) openPendingStatus(Number(button.dataset.pendingSeat));
+        if (button.dataset.dynamicRelation) openRelation(button.dataset.dynamicRelation);
+        if (button.dataset.unlockSeat) openPaidSlot(Number(button.dataset.unlockSeat));
+      });
+      document.querySelectorAll('[data-relation-type]').forEach(button => button.addEventListener('click', () => selectRelationType(button.dataset.relationType)));
+      document.querySelectorAll('[data-candidate]').forEach(button => button.addEventListener('click', () => selectCandidate(button)));
+      document.querySelector('[data-confirm-invite]').addEventListener('click', confirmInvite);
+      document.querySelector('[data-refresh-invite]').addEventListener('click', refreshInviteStatus);
+      document.querySelector('[data-confirm-paid-slot]').addEventListener('click', confirmPaidSlot);
+      document.querySelectorAll('[data-open]').forEach(button => button.addEventListener('click', () => openOverlay(button.dataset.open)));
+      document.querySelectorAll('[data-close]').forEach(button => button.addEventListener('click', closeOverlays));
+      document.querySelectorAll('.overlay').forEach(overlay => overlay.addEventListener('click', event => { if (event.target === overlay) closeOverlays(); }));
+      document.querySelectorAll('[data-open-super-love]').forEach(button => button.addEventListener('click', openSuperLove));
+      document.querySelectorAll('[data-open-super-love-tab]').forEach(button => button.addEventListener('click', () => openSuperLoveTab(button.dataset.openSuperLoveTab)));
+      document.querySelector('[data-close-super-love]').addEventListener('click', closeSuperLove);
+      document.querySelector('[data-super-love-page]').addEventListener('click', event => { if (event.target === event.currentTarget) closeSuperLove(); });
+      document.querySelector('[data-open-about]').addEventListener('click', () => openSubPage('[data-about-page]'));
+      document.querySelector('[data-close-about]').addEventListener('click', closeSubPages);
+      document.querySelector('[data-open-memorial]').addEventListener('click', () => openSubPage('[data-memorial-page]'));
+      document.querySelector('[data-close-memorial]').addEventListener('click', closeSubPages);
+      document.querySelectorAll('[data-open-intimacy-history]').forEach(button => button.addEventListener('click', () => openIntimacyHistory(button.dataset.openIntimacyHistory || 'cp')));
+      document.querySelector('[data-close-intimacy-history]').addEventListener('click', closeSubPages);
+      document.querySelectorAll('[data-history-filter]').forEach(button => button.addEventListener('click', () => setHistoryFilter(button.dataset.historyFilter)));
+      document.getElementById('intimacyHistoryList').addEventListener('click', event => { const row = event.target.closest('[data-history-record]'); if (row) openHistoryDetail(row.dataset.historyRecord); });
+      document.querySelectorAll('[data-sl-tab]').forEach(tab => tab.addEventListener('click', () => setSlTab(tab.dataset.slTab)));
+      document.querySelectorAll('[data-sl-tab-target]').forEach(button => button.addEventListener('click', () => { closeOverlays(); setSlTab(button.dataset.slTabTarget); }));
+      document.querySelectorAll('[data-cp-tab]').forEach(tab => tab.addEventListener('click', () => setCpTab(tab.dataset.cpTab)));
+      document.querySelectorAll('[data-relation-tab]').forEach(tab => tab.addEventListener('click', () => setRelationTab(tab.dataset.relationTab)));
+      document.querySelectorAll('[data-relation-tab-target]').forEach(button => button.addEventListener('click', () => setRelationTab(button.dataset.relationTabTarget)));
+      document.querySelectorAll('[data-friend-period]').forEach(tab => tab.addEventListener('click', () => setFriendPeriod(tab.dataset.friendPeriod)));
+      document.querySelectorAll('[data-friend-period-target]').forEach(button => button.addEventListener('click', () => setFriendPeriod(button.dataset.friendPeriodTarget)));
+      document.querySelectorAll('[data-cp-period]').forEach(tab => tab.addEventListener('click', () => setCpPeriod(tab.dataset.cpPeriod)));
+      document.querySelectorAll('[data-cp-period-target]').forEach(button => button.addEventListener('click', () => setCpPeriod(button.dataset.cpPeriodTarget)));
+      document.querySelectorAll('[data-rank-period]').forEach(button => button.addEventListener('click', () => setRankPeriod(button.dataset.rankPeriod)));
+      document.querySelectorAll('[data-memory]').forEach(button => button.addEventListener('click', () => openMemory(button.dataset.memory)));
+      document.querySelectorAll('[data-ring]').forEach(button => button.addEventListener('click', () => selectRing(button.dataset.ring)));
+      document.querySelectorAll('[data-gift]').forEach(button => button.addEventListener('click', () => selectGift(button.dataset.gift)));
+      document.getElementById('slSendButton').addEventListener('click', sendSuperLoveItem);
+      document.querySelectorAll('[data-open-daily-tasks]').forEach(button => button.addEventListener('click', openDailyTasks));
+      document.addEventListener('click', event => { const button = event.target.closest('[data-task-action]'); if (button) handleTaskAction(button); });
+      document.querySelectorAll('[data-profile-tab]').forEach(tab => tab.addEventListener('click', () => { document.querySelectorAll('[data-profile-tab]').forEach(item => item.setAttribute('aria-selected', String(item === tab))); document.getElementById('profilePlaceholder').textContent = tab.dataset.profileTab === 'agency' ? 'Agency Owner · 1/3 members' : tab.dataset.profileTab === 'honor' ? 'Emperor · Honor 666' : 'Active since 2026 · CP Room Owner'; }));
+      document.querySelector('[data-return-home]').addEventListener('click', () => {
+        window.location.href = './CP｜关系入口与礼物面板联动｜HTML原型｜v1.8｜可评审版.html';
+      });
+      document.querySelectorAll('[data-toast]').forEach(button => button.addEventListener('click', () => showToast(button.dataset.toast)));
+      document.addEventListener('keydown', event => { if (event.key === 'Escape') { closeOverlays(); closeSuperLove(); closeSubPages(); } });
+      window.relationshipPrototype = { openProfile: () => showScreen('profile'), openCp: () => showScreen('cp-detail'), openRelation, openCreate, openPaidSlot, acceptPending: refreshInviteStatus, openSuperLove, openIntimacyHistory, openAbout: () => openSubPage('[data-about-page]'), openMemorial: () => openSubPage('[data-memorial-page]') };
+      renderRelationSlots();
+      const entryParams = new URLSearchParams(window.location.search);
+      const entry = entryParams.get('entry');
+      const sourceCpLevel = Number.parseInt(entryParams.get('cpLevel'), 10);
+      const requiredLevel = Number.parseInt(entryParams.get('requiredLevel'), 10);
+      const miniRoom = document.getElementById('miniRoom');
+      if (entryParams.get('from') === 'room') {
+        miniRoom.classList.add('visible');
+        miniRoom.setAttribute('aria-hidden','false');
+      }
+      miniRoom.addEventListener('click', () => {
+        window.location.href = './CP｜关系礼物面板交互｜HTML原型｜v2.1｜可评审版.html?resume=1';
+      });
+      if (entry === 'super-love') {
+        if (Number.isInteger(sourceCpLevel) && sourceCpLevel >= 1 && sourceCpLevel <= 100) {
+          state.rightsLevel = sourceCpLevel;
+          document.getElementById('slLevelLabel').textContent = `CP Lv${sourceCpLevel} · S2 默契`;
+          document.getElementById('slLevelStatus').textContent = '从礼物面板进入 · 房间已最小化';
+          document.getElementById('slProtectionText').textContent = `当前 CP Lv${sourceCpLevel} · 继续互动或购买戒指提升等级`;
+          document.getElementById('lockedGiftBody').textContent = `当前 CP Lv${sourceCpLevel}。完成 CP 任务或继续互动即可成长。`;
+        }
+        if (Number.isInteger(requiredLevel) && requiredLevel >= 1 && requiredLevel <= 100) {
+          document.getElementById('lockedGiftTitle').textContent = `CP Lv${requiredLevel} 解锁`;
+        }
+        renderSuperLoveGiftLocks();
+        showScreen('cp-detail');
+        openSuperLove();
+      } else if (entry === 'cp-home') {
+        showScreen('cp-detail');
+      } else if (entry === 'intimacy-history') {
+        showScreen('cp-detail');
+        openIntimacyHistory();
+      } else if (entry === 'memorial') {
+        showScreen('cp-detail');
+        openSubPage('[data-memorial-page]');
+      } else if (entry === 'relationship-home') {
+        showScreen('profile');
+      }
+      if (window.lucide) lucide.createIcons();
+    })();
+  </script>
+</body>
+</html>
