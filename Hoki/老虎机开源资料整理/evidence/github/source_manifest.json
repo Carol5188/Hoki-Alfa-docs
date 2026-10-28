@@ -1,0 +1,228 @@
+{
+  "date": "2026-10-28",
+  "scope": "read-only source inspection; no third-party code installed or executed",
+  "sources": [
+    {
+      "repository": "StakeEngine/math-sdk",
+      "commit": "a6dccd86de740cc5d318079483cb6204cc5c19bc",
+      "source_path": "LICENSE",
+      "github_url": "https://github.com/StakeEngine/math-sdk/blob/a6dccd86de740cc5d318079483cb6204cc5c19bc/LICENSE",
+      "local": "stake/LICENSE",
+      "sha256": "4b66c492ce853e329249b45ca688d0417352fd279b981317b16932ba99fb2c7a"
+    },
+    {
+      "repository": "StakeEngine/math-sdk",
+      "commit": "a6dccd86de740cc5d318079483cb6204cc5c19bc",
+      "source_path": "README.md",
+      "github_url": "https://github.com/StakeEngine/math-sdk/blob/a6dccd86de740cc5d318079483cb6204cc5c19bc/README.md",
+      "local": "stake/README.md",
+      "sha256": "ee89da2d7a3f1a26505394b32cdcafda50b212dc19d22e27488c54f25b8638a4"
+    },
+    {
+      "repository": "StakeEngine/math-sdk",
+      "commit": "a6dccd86de740cc5d318079483cb6204cc5c19bc",
+      "source_path": "games/0_0_lines/game_config.py",
+      "github_url": "https://github.com/StakeEngine/math-sdk/blob/a6dccd86de740cc5d318079483cb6204cc5c19bc/games/0_0_lines/game_config.py",
+      "local": "stake/games/0_0_lines/game_config.py",
+      "sha256": "4014bb6d05ab9c9743a371eedf9e49b1fe77f4cd67b6c40e2e620f603044f94a"
+    },
+    {
+      "repository": "StakeEngine/math-sdk",
+      "commit": "a6dccd86de740cc5d318079483cb6204cc5c19bc",
+      "source_path": "games/0_0_lines/reels/BR0.csv",
+      "github_url": "https://github.com/StakeEngine/math-sdk/blob/a6dccd86de740cc5d318079483cb6204cc5c19bc/games/0_0_lines/reels/BR0.csv",
+      "local": "stake/games/0_0_lines/reels/BR0.csv",
+      "sha256": "b4f90bedc4bdebeed61c4b083e9e711b31c509f322e3519a63dc1f132acc19d1"
+    },
+    {
+      "repository": "StakeEngine/math-sdk",
+      "commit": "a6dccd86de740cc5d318079483cb6204cc5c19bc",
+      "source_path": "games/0_0_lines/gamestate.py",
+      "github_url": "https://github.com/StakeEngine/math-sdk/blob/a6dccd86de740cc5d318079483cb6204cc5c19bc/games/0_0_lines/gamestate.py",
+      "local": "stake/games/0_0_lines/gamestate.py",
+      "sha256": "d55860df89ec08d26f8a1ef5636e73649b06d8c933dff6038aa035482ab72242"
+    },
+    {
+      "repository": "StakeEngine/math-sdk",
+      "commit": "a6dccd86de740cc5d318079483cb6204cc5c19bc",
+      "source_path": "src/calculations/board.py",
+      "github_url": "https://github.com/StakeEngine/math-sdk/blob/a6dccd86de740cc5d318079483cb6204cc5c19bc/src/calculations/board.py",
+      "local": "stake/src/calculations/board.py",
+      "sha256": "4a32f7b911cc2c4152dcebc9460868b678e1c098483b71536ec74b09ce8245ee"
+    },
+    {
+      "repository": "StakeEngine/math-sdk",
+      "commit": "a6dccd86de740cc5d318079483cb6204cc5c19bc",
+      "source_path": "src/calculations/lines.py",
+      "github_url": "https://github.com/StakeEngine/math-sdk/blob/a6dccd86de740cc5d318079483cb6204cc5c19bc/src/calculations/lines.py",
+      "local": "stake/src/calculations/lines.py",
+      "sha256": "f338b481ef93e47f7ceaf5be8282319f431fff1201b05041f55ff2562486a206"
+    },
+    {
+      "repository": "StakeEngine/math-sdk",
+      "commit": "a6dccd86de740cc5d318079483cb6204cc5c19bc",
+      "source_path": "src/calculations/statistics.py",
+      "github_url": "https://github.com/StakeEngine/math-sdk/blob/a6dccd86de740cc5d318079483cb6204cc5c19bc/src/calculations/statistics.py",
+      "local": "stake/src/calculations/statistics.py",
+      "sha256": "4be7a25c5a9ce10b96e8a74474411415eb680e5623f553e38d189d8978befbf7"
+    },
+    {
+      "repository": "StakeEngine/math-sdk",
+      "commit": "a6dccd86de740cc5d318079483cb6204cc5c19bc",
+      "source_path": "src/executables/executables.py",
+      "github_url": "https://github.com/StakeEngine/math-sdk/blob/a6dccd86de740cc5d318079483cb6204cc5c19bc/src/executables/executables.py",
+      "local": "stake/src/executables/executables.py",
+      "sha256": "1221b87c8609de2f2d7337667ed197b6e7a7bda8c90da7dccdd66ae214727433"
+    },
+    {
+      "repository": "StakeEngine/math-sdk",
+      "commit": "a6dccd86de740cc5d318079483cb6204cc5c19bc",
+      "source_path": "src/state/run_sims.py",
+      "github_url": "https://github.com/StakeEngine/math-sdk/blob/a6dccd86de740cc5d318079483cb6204cc5c19bc/src/state/run_sims.py",
+      "local": "stake/src/state/run_sims.py",
+      "sha256": "2943d048e8869978a1ed26eace4b76101092a89464da0bb3abbed3bc1b025332"
+    },
+    {
+      "repository": "StakeEngine/math-sdk",
+      "commit": "a6dccd86de740cc5d318079483cb6204cc5c19bc",
+      "source_path": "tests/win_calculations/test_linespay.py",
+      "github_url": "https://github.com/StakeEngine/math-sdk/blob/a6dccd86de740cc5d318079483cb6204cc5c19bc/tests/win_calculations/test_linespay.py",
+      "local": "stake/tests/win_calculations/test_linespay.py",
+      "sha256": "be605a302712600496be1d8be0f216b94af0315b83313051553039315bd16aa2"
+    },
+    {
+      "repository": "StakeEngine/math-sdk",
+      "commit": "a6dccd86de740cc5d318079483cb6204cc5c19bc",
+      "source_path": "utils/analysis/distribution_functions.py",
+      "github_url": "https://github.com/StakeEngine/math-sdk/blob/a6dccd86de740cc5d318079483cb6204cc5c19bc/utils/analysis/distribution_functions.py",
+      "local": "stake/utils/analysis/distribution_functions.py",
+      "sha256": "7f9aee4989d35c0e687b4c42f9d1a226300cbcda20560e93be61f7c7b49ff0db"
+    },
+    {
+      "repository": "StakeEngine/math-sdk",
+      "commit": "a6dccd86de740cc5d318079483cb6204cc5c19bc",
+      "source_path": "docs/math_docs/overview_section/game_format.md",
+      "github_url": "https://github.com/StakeEngine/math-sdk/blob/a6dccd86de740cc5d318079483cb6204cc5c19bc/docs/math_docs/overview_section/game_format.md",
+      "local": "stake/docs/math_docs/overview_section/game_format.md",
+      "sha256": "b95218a9d73bb06e16e627dceeecc02bebf3a0ead968afecbfd7d74e65d43de6"
+    },
+    {
+      "repository": "StakeEngine/math-sdk",
+      "commit": "a6dccd86de740cc5d318079483cb6204cc5c19bc",
+      "source_path": "docs/math_docs/optimization_section/optimization_algorithm.md",
+      "github_url": "https://github.com/StakeEngine/math-sdk/blob/a6dccd86de740cc5d318079483cb6204cc5c19bc/docs/math_docs/optimization_section/optimization_algorithm.md",
+      "local": "stake/docs/math_docs/optimization_section/optimization_algorithm.md",
+      "sha256": "097db9145b5fa44ae7e36d3fee2e31cbf3d8f14f916500f656fdfb6d1ad435fe"
+    },
+    {
+      "repository": "slotopol/server",
+      "commit": "5142e87b4844181d57a37e6d32a406e17512dccc",
+      "source_path": "LICENSE",
+      "github_url": "https://github.com/slotopol/server/blob/5142e87b4844181d57a37e6d32a406e17512dccc/LICENSE",
+      "local": "slotopol/LICENSE",
+      "sha256": "c2a8f578469dc1dc741e189d36e7691ee001b562c0890f58b350fd181d5039ec"
+    },
+    {
+      "repository": "slotopol/server",
+      "commit": "5142e87b4844181d57a37e6d32a406e17512dccc",
+      "source_path": "README.md",
+      "github_url": "https://github.com/slotopol/server/blob/5142e87b4844181d57a37e6d32a406e17512dccc/README.md",
+      "local": "slotopol/README.md",
+      "sha256": "5e1220052083a0cb39cdff730507e51579057bb1063aa8bb0e006b9ed70218e8"
+    },
+    {
+      "repository": "slotopol/server",
+      "commit": "5142e87b4844181d57a37e6d32a406e17512dccc",
+      "source_path": "game/slot/reels.go",
+      "github_url": "https://github.com/slotopol/server/blob/5142e87b4844181d57a37e6d32a406e17512dccc/game/slot/reels.go",
+      "local": "slotopol/game/slot/reels.go",
+      "sha256": "93f374aa6641fe9687a9577e1e9d6f4f84df727de32ede34d6cdeeaab105aac9"
+    },
+    {
+      "repository": "slotopol/server",
+      "commit": "5142e87b4844181d57a37e6d32a406e17512dccc",
+      "source_path": "game/slot/stat.go",
+      "github_url": "https://github.com/slotopol/server/blob/5142e87b4844181d57a37e6d32a406e17512dccc/game/slot/stat.go",
+      "local": "slotopol/game/slot/stat.go",
+      "sha256": "a97cae1773387f851c43078252f51e5141c034e436df8885894d03c17e3fb590"
+    },
+    {
+      "repository": "slotopol/server",
+      "commit": "5142e87b4844181d57a37e6d32a406e17512dccc",
+      "source_path": "game/slot/parsheet.go",
+      "github_url": "https://github.com/slotopol/server/blob/5142e87b4844181d57a37e6d32a406e17512dccc/game/slot/parsheet.go",
+      "local": "slotopol/game/slot/parsheet.go",
+      "sha256": "275af71900c7073ba475b57deb5c0dbef5da8131fb12fd730c8bb96d9d0317db"
+    },
+    {
+      "repository": "slotopol/server",
+      "commit": "5142e87b4844181d57a37e6d32a406e17512dccc",
+      "source_path": "game/slot/montecarlo.go",
+      "github_url": "https://github.com/slotopol/server/blob/5142e87b4844181d57a37e6d32a406e17512dccc/game/slot/montecarlo.go",
+      "local": "slotopol/game/slot/montecarlo.go",
+      "sha256": "f6a15b2e19e223fdaef80e33224a4ec662210d0fd540292374b5dce1c1335681"
+    },
+    {
+      "repository": "slotopol/server",
+      "commit": "5142e87b4844181d57a37e6d32a406e17512dccc",
+      "source_path": "api/slot.go",
+      "github_url": "https://github.com/slotopol/server/blob/5142e87b4844181d57a37e6d32a406e17512dccc/api/slot.go",
+      "local": "slotopol/api/slot.go",
+      "sha256": "b218bd08625b35b11d7a153cbb4540e020ade1cfcca42bddda22150abd9d8ca9"
+    },
+    {
+      "repository": "dotnet/runtime",
+      "commit": "b386290257e35bddca7b2f8c453a0796915b29ff",
+      "source_path": "src/libraries/System.Private.CoreLib/src/System/Random.cs",
+      "github_url": "https://github.com/dotnet/runtime/blob/b386290257e35bddca7b2f8c453a0796915b29ff/src/libraries/System.Private.CoreLib/src/System/Random.cs",
+      "local": "dotnet/Random.cs",
+      "sha256": "ef7544018e301f62e6d73af6a4af375e72a23e5fe368b94908c0eac58c83066b",
+      "read_method": "GitHub rendered rawLines normalized to LF"
+    },
+    {
+      "repository": "dotnet/runtime",
+      "commit": "b386290257e35bddca7b2f8c453a0796915b29ff",
+      "source_path": "src/libraries/System.Security.Cryptography/src/System/Security/Cryptography/RandomNumberGenerator.cs",
+      "github_url": "https://github.com/dotnet/runtime/blob/b386290257e35bddca7b2f8c453a0796915b29ff/src/libraries/System.Security.Cryptography/src/System/Security/Cryptography/RandomNumberGenerator.cs",
+      "local": "dotnet/RandomNumberGenerator.cs",
+      "sha256": "f65da0481e4addf22f80cf79bc20c97ba62c6d0e110a9e0c9c1d6cad5a7940da",
+      "read_method": "raw.githubusercontent.com"
+    },
+    {
+      "repository": "dotnet/runtime",
+      "commit": "b386290257e35bddca7b2f8c453a0796915b29ff",
+      "source_path": "src/libraries/System.Security.Cryptography/src/System/Security/Cryptography/HMACSHA256.cs",
+      "github_url": "https://github.com/dotnet/runtime/blob/b386290257e35bddca7b2f8c453a0796915b29ff/src/libraries/System.Security.Cryptography/src/System/Security/Cryptography/HMACSHA256.cs",
+      "local": "dotnet/HMACSHA256.cs",
+      "sha256": "7d6af2da0608a04707e30c2d8ab803bf82ddf046244839daac47bb312d714f6f",
+      "read_method": "raw.githubusercontent.com"
+    },
+    {
+      "repository": "dotnet/runtime",
+      "commit": "b386290257e35bddca7b2f8c453a0796915b29ff",
+      "source_path": "LICENSE.TXT",
+      "github_url": "https://github.com/dotnet/runtime/blob/b386290257e35bddca7b2f8c453a0796915b29ff/LICENSE.TXT",
+      "local": "dotnet/LICENSE.TXT",
+      "sha256": "cfc21f5e8bd655ae997eec916138b707b1d290b83272c02a95c9f821b8c87310",
+      "read_method": "raw.githubusercontent.com"
+    },
+    {
+      "repository": "openssl/openssl",
+      "commit": "93d5616734b9a11bc180cda496222f658ccdbd29",
+      "source_path": "doc/man3/RAND_bytes.pod",
+      "github_url": "https://github.com/openssl/openssl/blob/93d5616734b9a11bc180cda496222f658ccdbd29/doc/man3/RAND_bytes.pod",
+      "local": "openssl/RAND_bytes.pod",
+      "sha256": "8549b9f6c1be5e219d50247e4578b37900dfaebc07db488789e26796d781804b",
+      "read_method": "GitHub rendered rawLines normalized to LF"
+    },
+    {
+      "repository": "openssl/openssl",
+      "commit": "93d5616734b9a11bc180cda496222f658ccdbd29",
+      "source_path": "LICENSE.txt",
+      "github_url": "https://github.com/openssl/openssl/blob/93d5616734b9a11bc180cda496222f658ccdbd29/LICENSE.txt",
+      "local": "openssl/LICENSE.txt",
+      "sha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a",
+      "read_method": "raw.githubusercontent.com"
+    }
+  ]
+}

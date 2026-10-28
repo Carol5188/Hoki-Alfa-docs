@@ -1,0 +1,202 @@
+{
+  "date": "2026-10-26",
+  "interactive": [
+    {
+      "cp": "G1 心动",
+      "links": 3,
+      "rights": 3,
+      "tier": "G1 · Lv1–Lv20"
+    },
+    {
+      "cp": "G2 默契",
+      "links": 3,
+      "rights": 4,
+      "tier": "G2 · Lv21–Lv40"
+    },
+    {
+      "cp": "G3 相伴",
+      "links": 3,
+      "rights": 5,
+      "tier": "G3 · Lv41–Lv60"
+    },
+    {
+      "cp": "G4 挚爱",
+      "links": 3,
+      "rights": 6,
+      "tier": "G4 · Lv61–Lv80"
+    },
+    {
+      "cp": "G5 永恒",
+      "links": 3,
+      "rights": 7,
+      "tier": "G5 · Lv81–Lv100"
+    },
+    {
+      "checked": "false",
+      "partnerVisible": "none",
+      "single": true,
+      "statsVisible": true,
+      "surface": "我的主态 · 已恢复原有样式"
+    },
+    {
+      "checked": "false",
+      "partnerVisible": "none",
+      "single": true,
+      "statsVisible": true,
+      "surface": "个人主页 · 已恢复原有样式"
+    },
+    {
+      "checked": "false",
+      "partnerVisible": "none",
+      "single": true,
+      "statsVisible": false,
+      "surface": "房间mini资料卡 · 已恢复原有样式"
+    },
+    {
+      "checked": "true",
+      "partnerVisible": "block",
+      "surface": "我的主态 · 双头像展示中"
+    },
+    {
+      "checked": "true",
+      "partnerVisible": "block",
+      "surface": "个人主页 · 双头像展示中"
+    },
+    {
+      "checked": "true",
+      "partnerVisible": "block",
+      "surface": "房间mini资料卡 · 双头像展示中"
+    },
+    {
+      "cross": 0,
+      "layout": "horizontal",
+      "note": "1↔2　8↔9　16↔17 · 展示中",
+      "pairs": [
+        "1-2",
+        "8-9",
+        "16-17"
+      ]
+    },
+    {
+      "cross": 0,
+      "layout": "vertical",
+      "note": "1↔6　9↔14　15↔20 · 展示中",
+      "pairs": [
+        "1-6",
+        "9-14",
+        "15-20"
+      ]
+    },
+    {
+      "cross": 0,
+      "layout": "diagonal",
+      "note": "2↔8　4↔10　11↔17 · 展示中",
+      "pairs": [
+        "2-8",
+        "4-10",
+        "11-17"
+      ]
+    },
+    {
+      "cross": 0,
+      "layout": "mixed",
+      "note": "1↔2　9↔14　11↔17 · 展示中",
+      "pairs": [
+        "1-2",
+        "9-14",
+        "11-17"
+      ]
+    },
+    {
+      "cross": 2,
+      "layout": "cross",
+      "note": "1↔7　2↔6　14↔15 · 交叉位轮播",
+      "pairs": [
+        "1-7",
+        "2-6",
+        "14-15"
+      ]
+    },
+    {
+      "cross": 0,
+      "layout": "gap",
+      "note": "1↔3 / 2↔12 / 5↔6 · 均不触发",
+      "pairs": []
+    }
+  ],
+  "responsive320": [
+    {
+      "clipped": [],
+      "imagesBroken": 0,
+      "layout": "horizontal",
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "clipped": [],
+      "imagesBroken": 0,
+      "layout": "vertical",
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "clipped": [],
+      "imagesBroken": 0,
+      "layout": "diagonal",
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "clipped": [],
+      "imagesBroken": 0,
+      "layout": "mixed",
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "clipped": [],
+      "imagesBroken": 0,
+      "layout": "cross",
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "clipped": [],
+      "imagesBroken": 0,
+      "layout": "gap",
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "dir": "rtl",
+      "scroll": 320,
+      "width": 320
+    }
+  ],
+  "responsiveFinal": [
+    {
+      "brokenImages": 0,
+      "scrollWidth": 390,
+      "width": 390
+    },
+    {
+      "brokenImages": 0,
+      "scrollWidth": 430,
+      "width": 430
+    },
+    {
+      "brokenImages": 0,
+      "scrollWidth": 1280,
+      "width": 1280
+    }
+  ],
+  "additional": {
+    "staticParticlesHidden": true,
+    "staticCrossHidden": true,
+    "keyboardWrap": true,
+    "faq": true,
+    "reset": true,
+    "backTop": true,
+    "warnErrorLogs": []
+  }
+}

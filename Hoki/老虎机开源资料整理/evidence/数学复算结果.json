@@ -1,0 +1,210 @@
+{
+  "scope": "原文算术与数学方法复核；教学模型为独立另造，不是宝藏探险，不是原作者源码验证",
+  "generated_at": "2026-10-28T11:52:06+08:00",
+  "script_sha256": "ea3c812d7aa12639ae71e36e8a9413b342437fc4422601213bc3b1b0eb3dd554",
+  "source_checks": {
+    "S2_symbol_column_sums_percent": [
+      100.1,
+      100.1,
+      99.9
+    ],
+    "S2_counts_if_nearest_integer_64": [
+      [
+        4,
+        5,
+        6,
+        7,
+        8,
+        8,
+        9,
+        9,
+        7,
+        1,
+        0
+      ],
+      [
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        9,
+        10,
+        8,
+        1,
+        0
+      ],
+      [
+        6,
+        6,
+        7,
+        7,
+        8,
+        7,
+        7,
+        7,
+        6,
+        3,
+        0
+      ]
+    ],
+    "S2_scatter_direct_rtp": 0.044,
+    "S2_tier_probability_sum": 0.2670008,
+    "S2_tier_minimum_rtp_if_total_bet_unconditional_disjoint": 1.982,
+    "S2_tier_minimum_rtp_first_four": 1.378,
+    "S2_tier_minimum_rtp_without_final_subset": 1.978,
+    "S2_feature_conditional_ev_total_bet": {
+      "free": 22.589285714285715,
+      "bonus": 6.666666666666667
+    },
+    "S2_bonus_minimum_ev_if_three_draws_each_minimum_cash_2": 7.5,
+    "S2_CV_if_sigma_6_3_mean_0_962": 6.548856548856549,
+    "S2_bonus_trigger_lower_bound_if_6_of_64_independent_axes": 0.0087890625,
+    "S2_no_free_trigger_after_100_iid_paid_spins": 0.32422445915724657,
+    "S2_no_maxwin_after_one_million_iid_spins": 0.4493288203215628,
+    "S2_unconditional_percent_100x_plus_among_wins": 0.022474906367041195,
+    "S2_equal_turnover_lucky_mix_example": 0.96258,
+    "S3_ten_spin_iid_event_probabilities": [
+      {
+        "p": 0.15,
+        "at_least_one_in_ten": 0.8031255956592774,
+        "mean_wait": 6.666666666666667
+      },
+      {
+        "p": 0.25,
+        "at_least_one_in_ten": 0.9436864852905273,
+        "mean_wait": 4.0
+      },
+      {
+        "p": 0.05,
+        "at_least_one_in_ten": 0.4012630607616213,
+        "mean_wait": 20.0
+      },
+      {
+        "p": 0.08,
+        "at_least_one_in_ten": 0.5656115457763677,
+        "mean_wait": 12.5
+      },
+      {
+        "p": 0.01,
+        "at_least_one_in_ten": 0.09561792499119559,
+        "mean_wait": 100.0
+      },
+      {
+        "p": 0.02,
+        "at_least_one_in_ten": 0.1829271931124533,
+        "mean_wait": 50.0
+      },
+      {
+        "p": 0.005,
+        "at_least_one_in_ten": 0.048889869534228136,
+        "mean_wait": 200.0
+      }
+    ],
+    "S5_report_total_rtp": 0.9649,
+    "S5_report_sum_components_rtp": 0.9649,
+    "S5_report_sample_count": 100000000000,
+    "S5_rare_event_expected_hits_at_10_billion": 1030.9278350515465,
+    "S5_rare_event_95_relative_halfwidth_at_10_billion": 0.0610438499428075
+  },
+  "method_checks": {
+    "scatter_reel_window_probability": 0.046875,
+    "scatter_independent_cell_probability": 0.046146392822265625,
+    "loss_run_exact_dp": 0.375,
+    "loss_run_brute_force": 0.375,
+    "loss_run_wrong_independent_window_result": 0.4375,
+    "normal_approx_n_sigma_6_3_95_halfwidth_0_0005": 609892416
+  },
+  "teaching_model": {
+    "config": {
+      "reels": [
+        [
+          "A",
+          "A",
+          "B",
+          "B",
+          "W"
+        ],
+        [
+          "A",
+          "A",
+          "B",
+          "B",
+          "W"
+        ],
+        [
+          "A",
+          "A",
+          "B",
+          "B",
+          "W"
+        ]
+      ],
+      "rows": 1,
+      "lines": 1,
+      "bet": 1,
+      "triple_payouts": {
+        "A": 1,
+        "B": 2,
+        "W": 3
+      },
+      "wild": "W",
+      "rule": "Wild substitutes A/B; pay only maximum valid triple; no features"
+    },
+    "exact_outcomes": 125,
+    "exact_payout_counts": {
+      "0": 72,
+      "1": 26,
+      "2": 26,
+      "3": 1
+    },
+    "exact_rtp": 0.648,
+    "exact_hit_rate": 0.42400000000000004,
+    "exact_variance": 0.692096,
+    "simulation_rng": "Python random.Random / MT; simulation only",
+    "simulation_seed": 20261028,
+    "simulation_rounds": 200000,
+    "simulation_payout_counts": {
+      "0": 115011,
+      "1": 41828,
+      "2": 41545,
+      "3": 1616
+    },
+    "simulation_rtp": 0.64883,
+    "simulation_95_ci_normal": [
+      0.6451847606946846,
+      0.6524752393053155
+    ],
+    "exact_value_inside_this_realized_ci": true,
+    "batch_results": [
+      {
+        "rounds": 12345,
+        "bet": 12345,
+        "win": 8001,
+        "rtp": 0.6481166464155529
+      },
+      {
+        "rounds": 54321,
+        "bet": 54321,
+        "win": 35266,
+        "rtp": 0.6492148524511699
+      },
+      {
+        "rounds": 133334,
+        "bet": 133334,
+        "win": 86499,
+        "rtp": 0.6487392563037185
+      }
+    ],
+    "merged_rtp": 0.64883,
+    "unweighted_batch_rtp_mean_for_comparison": 0.6486902517234805
+  },
+  "assertions_passed": [
+    "loss DP agrees with exact enumeration",
+    "toy exact mean equals 81/125",
+    "all 200000 planned samples counted",
+    "sum of batch totals agrees with global totals",
+    "toy sample mean within six exact standard errors of exact value"
+  ]
+}

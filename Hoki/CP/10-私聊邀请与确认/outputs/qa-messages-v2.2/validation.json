@@ -1,0 +1,95 @@
+{
+  "checks": [
+    {
+      "name": "Me入口进入真实个人主页且默认关系Tab",
+      "passed": true
+    },
+    {
+      "name": "信封在CP标题右侧且44×44",
+      "passed": true
+    },
+    {
+      "name": "信封进入收到/发出申请列表",
+      "passed": true
+    },
+    {
+      "name": "亲友接受成功展示只读结果",
+      "passed": true
+    },
+    {
+      "name": "消息返回关系Tab",
+      "passed": true
+    },
+    {
+      "name": "查看并关闭pending仍保留红点",
+      "passed": true
+    },
+    {
+      "name": "消息返回恢复57px滚动位置",
+      "passed": true
+    },
+    {
+      "name": "个人主页返回Me功能列表",
+      "passed": true
+    },
+    {
+      "name": "删除IM后仍可沿新路径处理申请",
+      "passed": true
+    },
+    {
+      "name": "CP拒绝结果只读",
+      "passed": true
+    },
+    {
+      "name": "全部pending处理及新结果可见后信封保留而红点清除",
+      "passed": true
+    },
+    {
+      "name": "无CP仍可进消息且返回保留无CP场景",
+      "passed": true
+    },
+    {
+      "name": "Agency内容及CP/兄弟卡片详情和返回保留",
+      "passed": true
+    },
+    {
+      "name": "320宽主页入口与申请按钮无溢出、图片完整",
+      "passed": true
+    }
+  ],
+  "passed": 14,
+  "scope": "真实浏览器导航/样式与原型状态；非生产接口验收",
+  "console": "IAB捕获MutationObserver.observe的TypeError；原型内联脚本未使用该API，来源尚未定位，已验证的入口/处理操作可完成。未记为console error为0。",
+  "mobile": {
+    "p320": {
+      "button": {
+        "height": 44,
+        "right": 308,
+        "width": 44
+      },
+      "missing": 0,
+      "overflow": false,
+      "width": 320
+    },
+    "d320": {
+      "buttons": [
+        {
+          "bottom": 724.6953125,
+          "left": 29,
+          "right": 155,
+          "text": "拒绝"
+        },
+        {
+          "bottom": 724.6953125,
+          "left": 165,
+          "right": 291,
+          "text": "接受"
+        }
+      ],
+      "missing": 0,
+      "overflow": false,
+      "width": 320
+    }
+  },
+  "checked_at": "2026-10-09T19:03:12+08:00"
+}

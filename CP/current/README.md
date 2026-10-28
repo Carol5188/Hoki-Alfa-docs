@@ -1,3 +1,9 @@
+# 当前资料迁移入口｜2026-10-28
+
+最新CP资料已集中到[Hoki/CP/PROJECT_INDEX.md](../../Hoki/CP/PROJECT_INDEX.md)。下方是此前同步记录，旧版文件及尚未完成的Release链接不作为当前下载承诺。
+
+---
+
 # Hoki CP 当前评审资料
 
 更新时间：2026-10-08（Asia/Shanghai）。当前资料为评审候选，待确认事项见下方。

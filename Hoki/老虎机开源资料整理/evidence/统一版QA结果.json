@@ -1,0 +1,28 @@
+{
+  "checked_at": "2026-10-28T13:51:49+08:00",
+  "status": "PASS",
+  "document": "Slots｜概率玩法源码与验证全解｜v1.1｜综合评审版.md",
+  "document_sha256": "d3c6c2357031107c549f223292ca0de21fbc5306c581f222bc3ddc759d5454e3",
+  "scope": "Document merge, exact source/evidence embedding, structural checks; no third-party execution",
+  "checks": {
+    "chapters": 17,
+    "original_problem_IDs": 32,
+    "GitHub_mapping_IDs": 32,
+    "category_counts": {
+      "A": 10,
+      "C": 7,
+      "B": 14,
+      "D": 1
+    },
+    "complete_saved_source_files_embedded": 27,
+    "exact_source_excerpts": 7,
+    "embedded_local_evidence_files": 3,
+    "code_blocks": 70,
+    "tables": 34,
+    "internal_links": 51,
+    "source_reference_definitions": 21,
+    "historical_files_unchanged": 2,
+    "source_details": 27
+  },
+  "issues": []
+}

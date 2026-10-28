@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hoki｜亲密关系管理后台 v2.2</title>
+  <style>
+    :root{--bg:#f3f5f8;--surface:#fff;--ink:#172033;--muted:#778091;--line:#e1e5eb;--nav:#121212;--green:#10b981;--green-dark:#087f6d;--green-soft:#e7f8f2;--amber:#b7791f;--amber-soft:#fff6df;--red:#c24152;--red-soft:#fff0f2;--blue:#2878b5;--blue-soft:#eef5fb}
+    *{box-sizing:border-box}body{margin:0;min-width:320px;background:var(--bg);color:var(--ink);font:13px/1.5 Inter,-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.45}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #10b98155;outline-offset:2px}[hidden]{display:none!important}
+    .app{min-height:100vh;display:flex}.sidebar{width:224px;flex:0 0 224px;background:var(--nav);color:white;display:flex;flex-direction:column}.brand{height:72px;padding:0 20px;display:flex;align-items:center;gap:11px;border-bottom:1px solid #292929}.brand-mark{width:34px;height:34px;display:grid;place-items:center;border-radius:9px;background:#0c8d75;font-size:19px;font-weight:900}.brand strong{font-size:18px}.brand small{display:block;color:#a5a8af;font-size:10px}.side-title{padding:20px 18px 8px;color:#797d86;font-size:11px}.side-group{padding:0 8px}.side-item{width:100%;min-height:43px;padding:0 12px;display:flex;align-items:center;gap:11px;border:0;border-radius:7px;background:transparent;color:#a5a8b0;text-align:left;font-weight:700;margin:3px 0}.side-item:hover{background:#242424;color:white}.side-item.active{background:#2b2b2b;color:white}.nav-icon{width:19px;text-align:center;font-size:16px}.active .nav-icon{color:#2bd3a2}.side-foot{margin-top:auto;padding:16px;border-top:1px solid #292929;color:#8b8f98;font-size:11px}.main{min-width:0;flex:1}.topbar{height:52px;padding:0 22px;display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fff;border-bottom:1px solid var(--line)}.crumb{color:#78818e}.crumb strong{color:var(--ink)}.top-actions{display:flex;align-items:center;gap:9px;font-size:11px}.snapshot-label{padding:6px 10px;border-radius:5px;background:#fff6df;color:var(--amber)}.avatar{width:28px;height:28px;display:grid;place-items:center;background:#e7f8f2;border-radius:50%;font-weight:800;color:var(--green-dark)}
+    .workspace{padding:18px 18px 28px}.page-tabs{display:flex;gap:2px;padding:0 8px;border:1px solid var(--line);border-radius:7px;background:#fff;overflow-x:auto}.page-tab{height:44px;flex:0 0 auto;padding:0 15px;border:0;border-bottom:2px solid transparent;background:transparent;color:#727b88;font-weight:800;white-space:nowrap}.page-tab.active{border-color:var(--green);background:#f1fbf7;color:var(--green-dark)}.page-head{margin:18px 0 13px;display:flex;align-items:flex-end;justify-content:space-between;gap:14px}.page-head h1{margin:0;font-size:22px}.page-head p{margin:4px 0 0;color:var(--muted);font-size:12px}.head-actions{display:flex;gap:8px}.btn{height:34px;padding:0 13px;display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);border-radius:6px;background:white;color:var(--ink);font-weight:700;white-space:nowrap}.btn.primary{background:var(--green);border-color:var(--green);color:white}.btn.ghost{background:var(--green-soft);color:var(--green-dark);border-color:#b8e8d8}.panel{background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 2px #17203308}.filter-panel{padding:14px 16px}.type-strip{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}.type-chip{height:31px;padding:0 13px;border:1px solid var(--line);border-radius:5px;background:white;color:#697384;font-weight:700}.type-chip.active{background:var(--green-soft);border-color:#a5e2d0;color:var(--green-dark)}.type-chip small{margin-left:5px;font-size:10px;opacity:.75}.filter-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.4fr auto;gap:10px;align-items:end}.field label{display:block;margin-bottom:6px;color:#657080;font-size:11px;font-weight:800}.field input,.field select{width:100%;height:35px;padding:0 9px;border:1px solid #dfe3e8;border-radius:6px;background:white;color:var(--ink);min-width:0}.date-fields{display:flex;gap:5px;align-items:center}.filter-actions{display:flex;gap:7px}.filter-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:12px;padding-top:11px;border-top:1px solid #edf0f3;color:var(--muted);font-size:11px}.context-bar{margin-top:12px;padding:10px 13px;background:#e7f8f2;border:1px solid #b8e8d8;border-radius:6px;display:flex;align-items:center;justify-content:space-between;gap:12px}.context-bar strong{color:var(--green-dark)}.link-button{border:0;background:transparent;color:var(--green-dark);font-size:12px;cursor:pointer;padding:0;font-weight:700}.notice{margin-top:13px;padding:10px 13px;border:1px solid #f0dfa7;background:#fffaf0;border-radius:6px;color:#8b681c;font-size:11px}.error-text{color:var(--red);margin:8px 0 0;font-size:12px}
+    .kpi-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin:13px 0}.kpi{padding:13px 14px;min-height:94px}.kpi-label{color:#788291;font-size:11px}.kpi-value{margin-top:8px;font-size:24px;font-weight:900;line-height:1.1}.kpi-note{color:var(--muted);font-size:10px;margin-top:7px}.kpi.cp-emphasis{border-top:3px solid var(--green);padding-top:11px}.two-col{display:grid;grid-template-columns:1.45fr 1fr;gap:13px;margin-top:13px}.panel-title{min-height:54px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line)}.panel-title h2{margin:0;font-size:15px}.panel-title small{display:block;color:var(--muted);font-size:11px}.panel-body{padding:16px}.type-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.type-card{border:1px solid var(--line);border-radius:7px;padding:12px;background:#fafbfc}.type-card.cp{background:var(--green-soft);border-color:#aee2d3}.type-card strong{font-size:24px;display:block;margin:5px 0}.type-card p{font-size:11px;color:var(--muted);margin:0}.type-card .link-button{margin-top:9px}.cp-focus{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.cp-focus strong{display:block;font-size:23px;margin:6px 0;color:var(--green-dark)}.cp-focus span{font-size:11px;color:var(--muted)}.sources{display:grid;gap:10px}.source-row{display:grid;grid-template-columns:100px 1fr 88px;align-items:center;gap:12px;font-size:12px}.bar{height:6px;border-radius:4px;background:#edf0f3;overflow:hidden}.bar span{display:block;height:100%;border-radius:4px;background:var(--green)}.amount{font-variant-numeric:tabular-nums;font-weight:700}.positive{color:var(--green-dark)}.negative{color:var(--red)}
+    .table-panel{margin-top:13px;overflow:hidden}.table-wrap{overflow:auto;max-width:100%}.data-table{width:100%;min-width:1120px;border-collapse:collapse}.data-table th{background:#fafbfc;color:#7b8592;font-size:11px;font-weight:800;text-align:left;padding:11px 12px;white-space:nowrap;border-bottom:1px solid var(--line)}.data-table td{padding:12px;border-bottom:1px solid #edf0f3;color:#3d4653;vertical-align:middle;white-space:nowrap;font-size:12px}.data-table tr:last-child td{border-bottom:0}.data-table tbody tr:hover{background:#fbfefc}.data-table small{display:block;font-size:10px;color:#8b95a3;margin-top:3px}.type-badge,.status,.tag{display:inline-flex;align-items:center;padding:3px 7px;border-radius:4px;font-size:11px;font-weight:700}.type-badge.cp{background:#e7f8f2;color:#087f6d}.type-badge.brother{background:#fff6df;color:#9c620f}.type-badge.bestie{background:#fff0f2;color:#b23d53}.type-badge.friend{background:#eef5fb;color:#2878b5}.status.good{background:#e7f8f2;color:#087f6d}.status.warn{background:#fff6df;color:#9c620f}.status.bad{background:#fff0f2;color:#b23d53}.status.neutral,.tag{background:#eff2f5;color:#737d8b}.pair{font-weight:700;color:var(--ink)}.row-actions{display:flex;gap:6px}.row-btn{height:28px;padding:0 8px;border:1px solid var(--line);border-radius:5px;background:white;color:#536174;font-size:11px;font-weight:700}.row-btn:hover{border-color:#a9e3d3;color:var(--green-dark)}.pagination{min-height:51px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--line);color:#7d8793;font-size:11px}.pager-actions{display:flex;align-items:center;gap:8px}.pagination select{height:28px;border:1px solid var(--line);border-radius:5px;background:white}.empty{padding:42px 16px;text-align:center;color:var(--muted)}.empty strong{display:block;color:var(--ink);margin-bottom:5px}.state-demo{margin-top:12px;display:flex;gap:8px;align-items:center;color:var(--muted);font-size:11px;flex-wrap:wrap}.loading-line{display:inline-block;width:12px;height:12px;margin-right:7px;border:2px solid #10b98144;border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+    .sub-filters{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:13px 0}.sub-filters label{font-size:11px;color:var(--muted)}.sub-filters select{height:32px;padding:0 9px;border:1px solid var(--line);border-radius:5px;background:white}.detail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.detail-item{padding:11px;border:1px solid var(--line);border-radius:6px;background:#fafbfc;min-width:0}.detail-item span{display:block;color:#85909d;font-size:10px}.detail-item strong{display:block;margin-top:6px;font-size:13px;overflow-wrap:anywhere}.section-title{font-size:14px;margin:20px 0 10px}.detail-note{margin:13px 0 0;color:var(--muted);font-size:11px;line-height:1.7}.detail-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.rule-list{display:grid;gap:11px}.rule-item{padding:12px;border:1px solid var(--line);border-radius:6px;background:#fafbfc}.rule-item strong{font-size:12px}.rule-item p{margin:5px 0 0;color:var(--muted);font-size:11px}.task-rules{margin-top:13px}.task-rules summary{padding:12px 16px;font-weight:700;cursor:pointer}.task-rules .data-table{min-width:720px}.dialog{width:min(850px,calc(100vw - 32px));max-height:calc(100vh - 36px);padding:0;border:0;border-radius:9px;background:white;color:var(--ink);box-shadow:0 20px 70px #0004}.dialog::backdrop{background:#10141b77}.modal-head{position:sticky;top:0;z-index:1;min-height:56px;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;background:white;border-bottom:1px solid var(--line)}.modal-head h2{font-size:16px;margin:0}.modal-close{border:0;background:transparent;font-size:23px;color:var(--muted)}.modal-body{padding:18px}.modal-foot{padding:12px 18px;display:flex;justify-content:flex-end;gap:8px;border-top:1px solid var(--line);position:sticky;bottom:0;background:white}.dialog .data-table{min-width:650px}.dialog textarea{width:100%;min-height:70px;padding:9px;border:1px solid var(--line);border-radius:5px;margin-top:6px}.toast{position:fixed;right:22px;bottom:22px;z-index:40;padding:11px 14px;border-radius:7px;background:#18202c;color:white;box-shadow:0 9px 28px #0003;max-width:calc(100vw - 40px);opacity:0;pointer-events:none;transition:.2s}.toast.show{opacity:1}
+    @media(max-width:1250px){.sidebar{width:190px;flex-basis:190px}.filter-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.filter-actions{grid-column:span 2}.kpi-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.two-col{grid-template-columns:1fr}.type-summary{grid-template-columns:repeat(4,minmax(0,1fr))}}
+    @media(max-width:760px){.sidebar{width:54px;flex-basis:54px}.brand{height:58px;padding:0;justify-content:center}.brand>div:last-child,.side-title,.side-item span:not(.nav-icon),.side-foot{display:none}.side-group{padding:5px}.side-item{padding:0;justify-content:center}.topbar{padding:0 10px}.top-actions>span,.snapshot-label{display:none}.workspace{padding:12px 10px 24px}.page-head{align-items:flex-start;flex-direction:column}.head-actions{width:100%}.head-actions .btn{flex:1}.filter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.field.search-field,.field.date-field{grid-column:span 2}.filter-actions{grid-column:span 2}.kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.type-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.cp-focus{grid-template-columns:repeat(3,minmax(0,1fr))}.cp-focus strong{font-size:20px}.type-chip{padding:0 9px}.filter-panel{padding:12px}.detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dialog{width:calc(100vw - 16px);max-height:calc(100vh - 16px)}.modal-body{padding:12px}.pagination{align-items:flex-start;flex-wrap:wrap}.source-row{grid-template-columns:80px 1fr 70px}.context-bar{align-items:flex-start}.topbar .crumb{font-size:11px}}
+
+    .task-mode-tabs{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap}.config-panel{overflow:hidden}.config-panel .panel-title{flex-wrap:wrap}.config-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.config-banner{padding:14px;background:#f0fbf6;border:1px solid #b8e8d8;border-radius:7px}.config-banner>strong{color:var(--green-dark)}.config-banner p{margin:6px 0 12px;color:#58746a;font-size:12px}.config-totals{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:14px}.config-totals>div{background:#fafbfc;border:1px solid var(--line);border-radius:6px;padding:10px}.config-totals strong,.config-totals span{display:block}.config-totals span{color:var(--muted);font-size:11px;margin-top:3px}.config-table .data-table{min-width:1160px;table-layout:fixed}.config-table th:nth-child(1){width:160px}.config-table th:nth-child(2){width:60px}.config-table th:nth-child(3){width:100px}.config-table th:nth-child(4){width:220px}.config-table th:nth-child(5){width:85px}.config-table th:nth-child(6){width:80px}.config-table th:nth-child(7){width:220px}.config-table th:nth-child(8){width:55px}.config-table th:nth-child(9){width:140px}.config-table td{white-space:normal;overflow-wrap:anywhere;vertical-align:top}.config-table .tag{white-space:normal}.config-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.config-form .field{min-width:0}.config-form .field-full{grid-column:1/-1}.config-form small{display:block;color:var(--muted);font-size:10px;margin-top:5px}.config-form input[readonly],.config-form select:disabled{background:#f4f6f8;color:#6d7887}.config-types{min-width:0;margin:0;border:1px solid var(--line);border-radius:6px;padding:10px 12px}.config-types legend{padding:0 5px;color:#657080;font-size:11px;font-weight:800}.config-types label{display:inline-flex;align-items:center;gap:4px;margin-right:15px;font-size:12px}.config-types input{accent-color:var(--green)}.config-targets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;background:#fafbfc;border:1px solid var(--line);border-radius:6px;padding:12px}.config-targets .detail-note{grid-column:1/-1;margin:0}.config-log td{white-space:normal;overflow-wrap:anywhere;min-width:110px;max-width:280px}
+    @media(max-width:760px){.config-totals{grid-template-columns:repeat(2,minmax(0,1fr))}.config-panel .panel-title{align-items:flex-start;flex-direction:column}.config-panel .panel-body{padding:12px}.config-actions .btn{font-size:12px;padding:0 10px}.config-types label{margin-right:10px}}
+    @media(max-width:560px){.config-form,.config-targets{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" aria-label="管理导航">
+      <div class="brand"><div class="brand-mark">H</div><div><strong>Hoki</strong><small>运营管理平台</small></div></div>
+      <div class="side-title">亲密关系管理</div><nav class="side-group" id="sideNav"></nav>
+      <div class="side-foot">亲密关系后台 v2.2<br>查询 / 配置视角 · 示例<br>关系与账本统一查询</div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><div class="crumb">关系业务 / <strong id="crumbCurrent">数据总览</strong></div><div class="top-actions"><div class="snapshot-label">可评审原型 · 示例数据 · 本机配置</div><span>客服审计</span><div class="avatar">H</div></div></header>
+      <section class="workspace">
+        <nav class="page-tabs" id="pageTabs" aria-label="查询页面"></nav>
+        <div class="page-head"><div><h1 id="pageTitle">亲密关系数据总览</h1><p id="pageSubtitle"></p></div><div class="head-actions"><button class="btn" id="exportButton">↓ 导出筛选结果</button><button class="btn primary" id="refreshButton">↻ 刷新查询</button></div></div>
+        <section class="panel filter-panel" aria-label="统一查询条件">
+          <div class="type-strip" id="typeStrip" aria-label="关系类型筛选"></div>
+          <form class="filter-grid" id="filterForm">
+            <div class="field search-field"><label for="searchInput">关系 ID / 任一用户 UID / 记录 ID</label><input id="searchInput" placeholder="如 100903、48502110 或 G-100903-01" autocomplete="off"></div>
+            <div class="field"><label for="regionSelect">运营大区</label><select id="regionSelect"><option value="all">全部大区</option><option value="ARAB">阿语区 (ARAB)</option><option value="TR">土耳其区 (TR)</option><option value="CIS">俄语区 (CIS)</option><option value="SASIA">印尼区 (SASIA)</option><option value="PHL">菲律宾区 (PHL)</option></select></div>
+            <div class="field"><label for="relationStatus">关系状态</label><select id="relationStatus"><option value="all">全部关系</option><option value="active">已建立 · 生效中</option><option value="ended">已解除 · 历史关系</option></select></div>
+            <div class="field date-field"><label for="startDate" id="dateLabel">事件日期</label><div class="date-fields"><input id="startDate" type="date" value="2026-08-01" aria-label="开始日期"><span>—</span><input id="endDate" type="date" value="2026-10-12" aria-label="结束日期"></div></div>
+            <div class="filter-actions"><button class="btn primary" type="submit">查询</button><button class="btn" type="reset">重置</button></div>
+          </form>
+          <p class="error-text" id="filterError" role="alert" hidden></p>
+          <div class="filter-meta"><span id="filterSummary"></span><span id="timeSemantics"></span></div>
+        </section>
+        <div class="context-bar" id="contextBar" hidden></div>
+        <div id="viewContent" aria-live="polite"></div>
+        <div class="state-demo"><span>评审状态：</span><button class="row-btn" data-demo="loading">加载中</button><button class="row-btn" data-demo="error">查询失败</button><button class="row-btn" data-demo="normal">恢复示例查询</button><span>全部数值为演示样本，不代表现网经营数据。</span></div>
+      </section>
+    </main>
+  </div>
+  <dialog class="dialog" id="detailDialog" aria-labelledby="dialogTitle"><div class="modal-head"><h2 id="dialogTitle"></h2><button class="modal-close" data-close aria-label="关闭弹窗">×</button></div><div class="modal-body" id="dialogBody"></div><div class="modal-foot" id="dialogFooter"></div></dialog>
+  <div class="toast" id="toast" role="status"></div>
+  <script>
+    'use strict';
+    const TYPES={cp:'CP',brother:'兄弟',bestie:'闺蜜',friend:'挚友'};
+    const REGIONS={ARAB:'阿语区',TR:'土耳其区',CIS:'俄语区',SASIA:'印尼区',PHL:'菲律宾区'};
+    const PAGES={
+      overview:['数据总览','亲密关系数据总览','四类关系共用同一套查询；CP单独突出戒指与专属礼物。','◫'],
+      relations:['关系查询','关系明细查询','统一查询四类关系；建立申请与解除记录按关系状态筛选。','♡'],
+      ledger:['亲密值详情','亲密值变动详情','互动、任务、普通/活动、幸运、BOND、CP、戒指及负向回退分来源查看。','≋'],
+      tasks:['日周任务','关系日周任务管理','执行查询与任务配置；每种关系最多4日＋4周，奖励自动到账。','✓'],
+      rules:['规则与审计','规则快照与查询审计','当前首期规则只读查看；不在查询后台代替用户处理申请或修改成长。','◇']
+    };
+    const AS_OF='2026-10-12 16:00:00';
+    const seeds=[
+      ['100824','cp','manifest','26796192','Lina','97239283','TR',72,'2026-08-01',''],
+      ['100791','cp','Sarah','48501923','Omar','48501977','ARAB',30,'2026-08-09',''],
+      ['100744','cp','Dima','39102011','Ira','39102028','CIS',18,'2026-08-14','2026-10-08'],
+      ['100612','cp','Raka','72011402','Mira','72011488','SASIA',52,'2026-08-16',''],
+      ['100605','cp','Juan','88001011','Ana','88001012','PHL',12,'2026-08-20','2026-09-28'],
+      ['100608','cp','Sami','48502010','Noor','48502011','ARAB',22,'2026-09-02','2026-10-10'],
+      ['100920','cp','Ali','48502810','Hana','48502811','ARAB',5,'2026-10-11',''],
+      ['100940','cp','Dima','39102011','Ira','39102028','CIS',2,'2026-10-11',''],
+      ['100903','bestie','Nisa','48502110','Aya','48502142','ARAB',24,'2026-08-03',''],
+      ['100904','bestie','Maya','88002110','Ella','88002142','PHL',14,'2026-08-12',''],
+      ['100905','bestie','Dewi','72012110','Ayu','72012142','SASIA',8,'2026-09-01','2026-10-09'],
+      ['100878','friend','Vlad','39102310','Timur','39102318','CIS',11,'2026-08-06',''],
+      ['100879','friend','Rina','72012310','Bima','72012318','SASIA',16,'2026-08-22',''],
+      ['100880','friend','Kim','88002310','Jay','88002318','PHL',null,'2026-09-10',''],
+      ['100831','brother','Ahmed','26796420','Khaled','26796433','TR',7,'2026-08-05',''],
+      ['100832','brother','manifest','26796192','Lin','97239311','TR',8,'2026-08-15',''],
+      ['100833','brother','Yusuf','48502420','Malik','48502433','ARAB',19,'2026-08-24','2026-10-09']
+    ];
+    const relations=seeds.map((s,i)=>({id:s[0],type:s[1],a:s[2],uidA:s[3],b:s[4],uidB:s[5],region:s[6],level:s[7],created:s[8]+' 09:00:00',ended:s[9]?s[9]+' 14:00:00':'',status:s[9]?'ended':'active',opening:1200+i*430,rule:'live_growth_v1',updated:AS_OF}));
+    const relationById=new Map(relations.map(r=>[r.id,r]));
+    const inEffect=(r,date)=>r.created.slice(0,10)<=date&&(!r.ended||r.ended.slice(0,10)>date);
+    const giftNames={ordinary:'玫瑰',event:'活动星光',lucky:'幸运礼盒',bond:'同行礼盒',cp:'心动花束',proposal:'求婚戒指（现网示例）',upgrade:'升级戒指（现网示例）',backpack:'背包玫瑰',free:'免费小心心'};
+    const giftBuckets={ordinary:'普通礼物（含活动）',event:'普通礼物（含活动）',lucky:'幸运礼物',bond:'BOND',cp:'CP专属礼物',proposal:'戒指',upgrade:'戒指',backpack:'普通礼物（含活动）',free:'普通礼物（含活动）'};
+    const growthSources={interaction:'基础互动',daily:'日任务奖励',weekly:'周任务奖励',ordinary:'普通/活动礼物',lucky:'幸运礼物',bond:'BOND关系礼物',cp:'CP专属礼物',ring:'CP戒指',decay:'现网衰退',refund:'礼物退款回退',taskRollback:'任务奖励回退'};
+    const gifts=[];
+    function gift(r,id,kind,date,cost,qty=1,status='success',batch=''){
+      const sources={backpack:'backpack',free:'free'};
+      let growth=0;
+      if(status!=='failed'&&status!=='processing'&&cost>0){
+        growth=kind==='bond'?350*qty:kind==='cp'?600*qty:kind==='lucky'?Math.floor(cost/1000):['proposal','upgrade'].includes(kind)?120:Math.floor(cost/100);
+      }
+      const refunded=status==='refunded';
+      return {id,rid:r.id,type:r.type,region:r.region,kind,name:giftNames[kind],sender:r.uidA,recipient:r.uidB,qty,cost,refund:refunded?cost:0,growth,reverse:refunded?growth:0,status,source:sources[kind]||'coins',time:date,refundTime:refunded?'2026-10-12 11:20:00':'',batch:batch||'B-'+id,request:kind==='proposal'?'I-'+r.id:'',taskTime:kind==='proposal'?r.created:date,rule:['proposal','upgrade'].includes(kind)?'live_ring_v1（加成示例）':'live_growth_v1'};
+    }
+    relations.forEach((r,i)=>{
+      ['2026-10-07','2026-10-12'].filter(d=>inEffect(r,d)).forEach((d,j)=>{
+        const tag=j?'B':'A';
+        gifts.push(gift(r,`G-${r.id}-${tag}01`,'ordinary',d+' 09:10:00',1000,1));
+        gifts.push(gift(r,`G-${r.id}-${tag}02`,'event',d+' 09:20:00',1000,2));
+        gifts.push(gift(r,`G-${r.id}-${tag}03`,'lucky',d+' 09:30:00',5000,5));
+        gifts.push(gift(r,`G-${r.id}-${tag}04`,'bond',d+' 10:00:00',18888,1,r.id==='100744'?'refunded':'success'));
+        gifts.push(gift(r,`G-${r.id}-${tag}05`,r.type==='cp'?'cp':'ordinary',d+' 10:15:00',r.type==='cp'?29999:0,1,r.type==='cp'?'success':'failed'));
+        gifts.push(gift(r,`G-${r.id}-${tag}06`,'ordinary',d+' 10:20:00',2000,2,'refunded'));
+        gifts.push(gift(r,`G-${r.id}-${tag}07`,'backpack',d+' 10:25:00',0));
+        gifts.push(gift(r,`G-${r.id}-${tag}08`,'bond',d+' 10:30:00',0,1,'processing'));
+        if(r.type==='cp')gifts.push(gift(r,`G-${r.id}-${tag}09`,'upgrade',d+' 10:40:00',9999));
+      });
+      if(r.type==='cp')gifts.push(gift(r,`G-${r.id}-P01`,'proposal',r.created,1999));
+    });
+    const multi=['100824','100832'].map((id,i)=>gift(relationById.get(id),'G-MULTI-'+(i+1),'bond','2026-10-12 13:00:00',18888,1,'success','B-MULTI-001'));
+    gifts.push(...multi);
+    gifts.push(gift(relationById.get('100903'),'G-REFUND-ONLY','bond','2026-10-08 12:00:00',18888,1,'refunded'));
+    const giftValid=g=>['success','refunded'].includes(g.status);
+    const giftNet=g=>giftValid(g)?g.cost-g.refund:0;
+    const giftCount=g=>g.status==='success'?g.qty:0;
+    const dailyEligible=g=>g.status==='success'&&g.cost>0&&g.source==='coins';
+    const weeklyEligible=g=>dailyEligible(g)&&(g.kind==='bond'||(g.type==='cp'&&['cp','proposal','upgrade'].includes(g.kind)));
+    const taskRules=[
+      {code:'REL_D_01',name:'亲密聊天',cycle:'daily',reward:10,condition:'双方各成功发送3条有效私聊消息；成功消息撤回仍计数'},
+      {code:'REL_D_02',name:'同房陪伴',cycle:'daily',reward:10,condition:'同一日有效同房累计10分钟；CP仅认CP房，兄弟/闺蜜/挚友不限房间类型，不要求主动互动'},
+      {code:'REL_D_03',name:'同麦陪伴',cycle:'daily',reward:10,condition:'同房同时在麦的有效重叠时长累计5分钟'},
+      {code:'REL_D_04',name:'送份礼物',cycle:'daily',reward:10,condition:'金币实付合格礼物1份；CP含两类戒指，背包/免费/失败不计'},
+      {code:'REL_W_01',name:'三日相伴',cycle:'weekly',reward:20,condition:'3个不同自然日完成同房或同麦日任务'},
+      {code:'REL_W_02',name:'常伴在麦',cycle:'weekly',reward:20,condition:'有效同麦60分钟，且分布在至少3个自然日'},
+      {code:'REL_W_03',name:'五日有互动',cycle:'weekly',reward:20,condition:'5个不同自然日各完成至少1项日任务'},
+      {code:'REL_W_04',name:'关系升温',cycle:'weekly',reward:20,condition:'CP：BOND/CP/两类戒指；亲友：BOND，金币实付至少1份'}
+    ];
+    const tasks=[];
+    relations.forEach((r,i)=>{
+      ['2026-10-07','2026-10-12'].filter(d=>inEffect(r,d)).forEach(d=>{
+        const week=d==='2026-10-07'?'2026-10-05':'2026-10-12';
+        taskRules.forEach((rule,k)=>{
+          const weekly=rule.cycle==='weekly',cycleId=weekly?week:d;
+          const qualified=gifts.filter(g=>g.rid===r.id&&(weekly?g.taskTime.slice(0,10)>=week&&g.taskTime.slice(0,10)<=(week==='2026-10-05'?'2026-10-11':'2026-10-18'):g.taskTime.slice(0,10)===d)&&(weekly?weeklyEligible(g):dailyEligible(g)));
+          let met=false,progress='',evidence='';
+          if(k===0){const a=i%3===0?2:3;met=a===3;progress=`我方${a}/3 · 对方3/3`;evidence='服务端发送成功消息ID去重；普通撤回保留计数';}
+          if(k===1){const minutes=i%4===0?8:10;met=minutes>=10;progress=`有效同房${minutes}/10分钟`;evidence=r.type==='cp'?'同一日CP房同房有效交集去重累计；不要求主动互动':'同一日任意房型同房有效交集去重累计；不要求主动互动';}
+          if(k===2){met=i%3!==0;progress=`同麦${met?5:3}/5分钟`;evidence='双方在同一房间同时在麦的重叠区间';}
+          if(k===3||k===7){met=qualified.length>0;progress=`${weekly?'适用关系礼物':'金币实付礼物'}${met?1:0}/1`;evidence=qualified[0]?.id||'无合格成功子单';}
+          if(k===4){const days=week==='2026-10-12'?1:i%2?3:2;met=days>=3;progress=`同房或同麦${days}/3天`;evidence='不同自然日按已达标日任务去重';}
+          if(k===5){const days=week==='2026-10-12'?1:i%3?3:2;const minutes=week==='2026-10-12'?5:60;met=days>=3&&minutes>=60;progress=`同麦${minutes}/60分钟 · ${days}/3天`;evidence='分钟与自然日必须同时达标';}
+          if(k===6){const days=week==='2026-10-12'?1:i%2?5:4;met=days>=5;progress=`任一日任务${days}/5天`;evidence='同日多任务只算1天，普通消息撤回不回退天数';}
+          let state=met?'credited':d==='2026-10-07'?'expired':'in_progress';
+          if(met&&r.id==='100791'&&k===0&&d==='2026-10-12')state='completed';
+          const id=`T-${r.id}-${cycleId}-${rule.code}`;
+          tasks.push({id,rid:r.id,type:r.type,region:r.region,code:rule.code,name:rule.name,cycle:rule.cycle,cycleId,progress,state,reward:rule.reward,credited:state==='credited'?rule.reward:0,time:(weekly?week:d)+(weekly?' 23:00:00':' 14:00:00'),settledTime:state==='credited'?d+' 14:30:00':'',evidence,rule:'task_v8.3',timezone:'UTC+3（示例）',unique:`${r.id}|${cycleId}|${rule.code}`});
+        });
+      });
+    });
+    tasks.push({id:'T-REFUND-ONLY',rid:'100903',type:'bestie',region:'ARAB',code:'REL_D_04',name:'送份礼物',cycle:'daily',cycleId:'2026-10-08',progress:'有效礼物0/1 · 原唯一订单已退款',state:'revoked',reward:10,credited:0,time:'2026-10-08 12:10:00',settledTime:'2026-10-08 12:10:00',revokedTime:'2026-10-12 11:20:00',evidence:'G-REFUND-ONLY',rule:'task_v8.3',timezone:'UTC+3（示例）',unique:'100903|2026-10-08|REL_D_04'});
+    const ledger=[];
+    gifts.filter(giftValid).forEach(g=>{
+      if(g.growth){ledger.push({id:'L-'+g.id,rid:g.rid,type:g.type,region:g.region,source:['proposal','upgrade'].includes(g.kind)?'ring':g.kind==='event'?'ordinary':g.kind,delta:g.growth,time:g.time,ref:g.id,cycle:'',rule:g.rule});}
+      if(g.reverse){ledger.push({id:'LR-'+g.id,rid:g.rid,type:g.type,region:g.region,source:'refund',delta:-g.reverse,time:g.refundTime,ref:g.id,cycle:'',rule:g.rule});}
+    });
+    relations.forEach((r,i)=>{
+      ledger.push({id:'L-I-'+r.id,rid:r.id,type:r.type,region:r.region,source:'interaction',delta:15,time:r.created,ref:'E-'+r.id,cycle:r.created.slice(0,10),rule:r.rule});
+      if(r.created<'2026-10-07'&&(!r.ended||r.ended>'2026-10-07'))ledger.push({id:'L-D-'+r.id,rid:r.id,type:r.type,region:r.region,source:'decay',delta:-5-i,time:'2026-10-07 00:00:00',ref:'DEC-'+r.id,cycle:'2026-10-07',rule:'live_decay_v1'});
+    });
+    tasks.forEach(t=>{
+      if(t.credited||t.state==='revoked')ledger.push({id:'L-'+t.id,rid:t.rid,type:t.type,region:t.region,source:t.cycle==='daily'?'daily':'weekly',delta:t.reward,time:t.settledTime,ref:t.id,cycle:t.cycleId,rule:t.rule});
+      if(t.state==='revoked')ledger.push({id:'LR-'+t.id,rid:t.rid,type:t.type,region:t.region,source:'taskRollback',delta:-t.reward,time:t.revokedTime,ref:t.id,cycle:t.cycleId,rule:t.rule});
+    });
+    // Calculate each posted balance from the full account sequence before filtering.
+    const ledgerBalances=new Map(relations.map(r=>[r.id,r.opening]));
+    ledger.forEach((l,index)=>{l.sequence=index;});
+    [...ledger].sort((a,b)=>a.time.localeCompare(b.time)||a.sequence-b.sequence).forEach(l=>{
+      l.balanceAfter=ledgerBalances.get(l.rid)+l.delta;
+      ledgerBalances.set(l.rid,l.balanceAfter);
+    });
+    relations.forEach(r=>{r.balance=ledgerBalances.get(r.id);});
+    const addHours=(time,hours)=>new Date(Date.parse(time.replace(' ','T')+'Z')+hours*3600000).toISOString().slice(0,19).replace('T',' ');
+    const requests=relations.map(r=>({id:'I-'+r.id,rid:r.id,type:r.type,region:r.region,a:r.a,b:r.b,uidA:r.uidA,uidB:r.uidB,kind:'establish',state:'accepted',time:addHours(r.created,-1),deadline:addHours(r.created,23),resultTime:r.created,readA:true,readB:true,cost:0,order:'',slot:r.type==='cp'?'双方CP独占位':'双方亲友位（示例）',version:2}));
+    relations.filter(r=>r.status==='ended').forEach((r,i)=>requests.push({id:'END-'+r.id,rid:r.id,type:r.type,region:r.region,a:r.a,b:r.b,uidA:r.uidA,uidB:r.uidB,kind:i%2?'forced':'agreement',state:'accepted',time:i%2?r.ended:addHours(r.ended,-2),deadline:i%2?'—':addHours(r.ended,22),resultTime:r.ended,readA:true,readB:false,cost:i%2?(r.type==='cp'?99999:59999):0,order:i%2?'PAY-END-'+r.id:'',slot:'已释放原关系占位',version:2}));
+    [
+      ['I-PENDING-01','cp','Leen','48509901','Amir','48509902','ARAB','pending','establish','',true,false],
+      ['I-PENDING-02','brother','Deniz','26799901','Can','26799902','TR','pending','establish','',false,false],
+      ['I-REJECT-01','bestie','Mona','48509801','Reem','48509802','ARAB','rejected','establish','',true,true],
+      ['I-EXPIRE-01','friend','Sora','88009901','Ren','88009902','PHL','expired','establish','',false,true],
+      ['END-PENDING','friend','Vlad','39102310','Timur','39102318','CIS','pending','agreement','100878',true,false],
+      ['END-REJECT','cp','Sarah','48501923','Omar','48501977','ARAB','rejected','agreement','100791',true,true],
+      ['END-EXPIRE','brother','Ahmed','26796420','Khaled','26796433','TR','expired','agreement','100831',false,true]
+    ].forEach(s=>requests.push({id:s[0],type:s[1],a:s[2],uidA:s[3],b:s[4],uidB:s[5],region:s[6],state:s[7],kind:s[8],rid:s[9],readA:s[10],readB:s[11],time:s[7]==='pending'?'2026-10-12 09:00:00':'2026-10-09 09:00:00',deadline:s[7]==='pending'?'2026-10-13 09:00:00':'2026-10-10 09:00:00',resultTime:s[7]==='pending'?'':'2026-10-10 09:00:00',cost:0,order:'',slot:s[7]==='pending'&&s[8]==='establish'?'双方已预留；关闭/已读不释放':'不新增占位',version:s[7]==='pending'?1:2}));
+    const audits=[{id:'AUD-001',time:'2026-10-12 08:30:00',actor:'客服示例账号',action:'查看旧关系',scope:'RID 100744 · 授权服务端历史查询',count:1,purpose:'客服核验（示例）'},{id:'AUD-002',time:'2026-10-12 08:35:00',actor:'运营示例账号',action:'查看关系',scope:'全部类型 · 查询视角',count:17,purpose:'产品评审（示例）'}];
+    // Prototype UI boot: all data above is generated demonstration data, not production results.
+    const $=s=>document.querySelector(s);
+    const $$=s=>[...document.querySelectorAll(s)];
+    const esc=v=>String(v??'—').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const fmt=n=>Number(n||0).toLocaleString('en-US');
+    const signed=n=>(n>0?'+':'')+fmt(n);
+    const sum=(arr,key)=>arr.reduce((n,x)=>n+Number(typeof key==='function'?key(x):x[key]||0),0);
+    const stateLabels={active:'生效中',ended:'已解除',success:'成功',refunded:'已退款',failed:'失败',processing:'支付查询中',pending:'待回应',accepted:'已接受',rejected:'已拒绝',expired:'已过期',in_progress:'进行中',completed:'达标 · 到账中',credited:'已到账',revoked:'已回退'};
+    const reqKind={establish:'建立关系',agreement:'协议解除',forced:'强制解除'};
+    const stateClass=s=>['active','success','credited','accepted'].includes(s)?'good':['pending','processing','completed','in_progress'].includes(s)?'warn':['failed','refunded','revoked','rejected'].includes(s)?'bad':'neutral';
+    const badge=(type)=>`<span class="type-badge ${esc(type)}">${esc(TYPES[type])}</span>`;
+    const status=(s,label)=>`<span class="status ${stateClass(s)}">${esc(label||stateLabels[s])}</span>`;
+    const amount=n=>`<span class="amount ${n<0?'negative':'positive'}">${signed(n)}</span>`;
+    const rLink=rid=>rid?`<span>${esc(rid)}</span>`:'<span class="tag">尚未建立</span>';
+    const pair=r=>`<span class="pair">${esc(r.a)} × ${esc(r.b)}</span><small>${esc(r.uidA)} / ${esc(r.uidB)}</small>`;
+    const item=(label,value)=>`<div class="detail-item"><span>${esc(label)}</span><strong>${esc(value)}</strong></div>`;
+    let page=Object.hasOwn(PAGES,new URLSearchParams(location.search).get('entry'))?new URLSearchParams(location.search).get('entry'):'overview',selectedType='all',contextRid='',pageIndex=1,pageSize=8,mode='normal',toastTimer,loadTimer,lastFocus;
+    let filters={search:'',region:'all',status:'all',start:'2026-08-01',end:'2026-10-12'};
+    let local={source:'all',kind:'all',giftStatus:'all',cycle:'all',taskState:'all',requestKind:'all',requestState:'all',read:'all',level:'all'};
+    const relationStatusOptions=[
+      ['all','全部关系 / 建立申请'],['active','已建立 · 生效中'],['ended','已解除 · 全部方式'],
+      ['establish_pending','建立申请 · 待回应'],['establish_rejected','建立申请 · 已拒绝'],['establish_expired','建立申请 · 已过期'],
+      ['agreement_pending','协议解除 · 待回应'],['agreement_rejected','协议解除 · 已拒绝'],['agreement_expired','协议解除 · 已超时'],
+      ['ended_agreement','已解除 · 协议解除'],['ended_forced','已解除 · 强制解除']
+    ];
+    const queryStatusLabels=Object.fromEntries(relationStatusOptions);
+    const requestStatusMap={
+      establish_pending:['establish','pending'],establish_rejected:['establish','rejected'],establish_expired:['establish','expired'],
+      agreement_pending:['agreement','pending'],agreement_rejected:['agreement','rejected'],agreement_expired:['agreement','expired'],
+      ended_agreement:['agreement','accepted'],ended_forced:['forced','accepted']
+    };
+    let currentRows=[];
+    let currentHeaders=[];
+    let currentCsv=[];
+    function scopeLabel(){return `${selectedType==='all'?'全部关系':TYPES[selectedType]} · ${filters.region==='all'?'全部大区':filters.region} · ${filters.status==='all'?'全部状态':queryStatusLabels[filters.status]||stateLabels[filters.status]||'尚未建立'} · ${filters.search||'未限定ID'}`;}
+    function addAudit(action,count,purpose='产品评审'){audits.push({id:'AUD-'+String(audits.length+1).padStart(3,'0'),time:'2026-10-12 16:00:'+String(audits.length%60).padStart(2,'0'),actor:'当前评审账号',action,scope:scopeLabel()+(contextRid?' · RID '+contextRid:''),count,purpose});}
+    function showToast(text){$('#toast').textContent=text;$('#toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').classList.remove('show'),2600);}
+    function dateOK(time){const d=(time||'').slice(0,10);return (!filters.start||d>=filters.start)&&(!filters.end||d<=filters.end);}
+    function baseMatch(r){return (selectedType==='all'||r.type===selectedType)&&(filters.region==='all'||r.region===filters.region)&&(filters.status==='all'||r.status===filters.status)&&(!contextRid||r.id===contextRid);}
+    function exactSearch(values){return !filters.search||values.some(v=>String(v||'').toLowerCase()===filters.search.toLowerCase());}
+    function relationMatch(r,useDate=true){return baseMatch(r)&&(!useDate||dateOK(r.created))&&exactSearch([r.id,r.uidA,r.uidB,r.a,r.b]);}
+    function recordMatch(x,useDate=true){const r=relationById.get(x.rid);return r&&baseMatch(r)&&(!useDate||dateOK(x.time))&&exactSearch([x.id,x.rid,r.uidA,r.uidB,x.ref,x.batch,x.evidence,x.cycleId]);}
+    function requestMatch(x){
+      const r=x.rid?relationById.get(x.rid):null,selection=requestStatusMap[filters.status];
+      const statusMatches=selection?x.kind===selection[0]&&x.state===selection[1]:filters.status==='all'||filters.status===(r?.status||'unestablished');
+      return (selectedType==='all'||x.type===selectedType)&&(filters.region==='all'||x.region===filters.region)&&statusMatches&&(!contextRid||x.rid===contextRid)&&dateOK(x.time)&&exactSearch([x.id,x.rid,x.uidA,x.uidB,x.order]);
+    }
+    function scopedRelations(useDate=true){return relations.filter(r=>relationMatch(r,useDate));}
+    function scopedRecords(arr){return arr.filter(x=>recordMatch(x));}
+    function periodCoins(arr){return sum(arr.filter(g=>giftValid(g)&&dateOK(g.time)),'cost')-sum(arr.filter(g=>g.refund&&dateOK(g.refundTime)),'refund');}
+    function cards(items){return `<div class="kpi-grid">${items.map(([label,value,note,cp])=>`<div class="panel kpi ${cp?'cp-emphasis':''}"><div class="kpi-label">${esc(label)}</div><div class="kpi-value">${esc(value)}</div><div class="kpi-note">${esc(note)}</div></div>`).join('')}</div>`;}
+    function table(headers,rows){return `<div class="table-wrap"><table class="data-table"><thead><tr>${headers.map(h=>`<th scope="col">${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.map(c=>`<tr>${c.map(x=>`<td>${x}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;}
+    function gridTable(title,headers,rows,csv,note=''){currentRows=rows;currentHeaders=headers;currentCsv=csv;const pages=Math.max(1,Math.ceil(rows.length/pageSize));pageIndex=Math.min(pageIndex,pages);const visible=rows.slice((pageIndex-1)*pageSize,pageIndex*pageSize);return `<section class="panel table-panel"><div class="panel-title"><div><h2>${esc(title)}</h2><small>${esc(note)}</small></div><span class="tag">${rows.length}条</span></div>${rows.length?table(headers,visible):'<div class="empty"><strong>没有匹配记录</strong>可以调整关系类型、ID、状态或日期；空结果不是查询失败。</div>'}<div class="pagination"><span>共${rows.length}条 · 第${pageIndex}/${pages}页</span><div class="pager-actions"><select id="pageSize" aria-label="每页条数"><option value="8" ${pageSize===8?'selected':''}>8条/页</option><option value="20" ${pageSize===20?'selected':''}>20条/页</option><option value="50" ${pageSize===50?'selected':''}>50条/页</option></select><button class="row-btn" data-page="prev" ${pageIndex===1?'disabled':''}>上一页</button><button class="row-btn" data-page="next" ${pageIndex===pages?'disabled':''}>下一页</button></div></div></section>`;}
+    function subSelect(key,label,options){return `<label for="sub-${key}">${esc(label)}</label><select id="sub-${key}" data-sub="${key}">${options.map(([v,t])=>`<option value="${esc(v)}" ${local[key]===v?'selected':''}>${esc(t)}</option>`).join('')}</select>`;}
+    function levelOptions(){return [['all','全部等级'],['1-9','Lv1–9'],['10-29','Lv10–29'],['30-69','Lv30–69'],['70-100','Lv70–100'],['missing','等级缺失']];}
+    function relationTable(rs,title='关系明细'){
+      const headers=['关系ID / 申请ID','类型','关系双方 / UID','大区','关系状态','现行等级','当前亲密值','建立 / 解除 / 申请时间','操作'];
+      const rows=rs.map(r=>{
+        const q=r.application,latest=!q&&requests.filter(x=>x.rid===r.id&&x.kind!=='establish').sort((a,b)=>b.time.localeCompare(a.time))[0];
+        const state=q?status(q.state,requestState(q)):status(r.status)+(latest?`<small>${esc(reqKind[latest.kind])} · ${esc(requestState(latest))}</small>`:'');
+        return [q?esc(q.id)+'<small>尚未建立关系</small>':rLink(r.id),badge(r.type),pair(r),esc(r.region),state,q?'—':r.level===null?'<span class="tag">待补字段</span>':'Lv'+r.level,q?'—':fmt(r.balance),q?esc(q.time)+`<small>${q.resultTime?'结果 '+esc(q.resultTime):'截止 '+esc(q.deadline)}</small>`:esc(r.created)+`<small>${r.ended?'解除 '+esc(r.ended):'未解除'}</small>`,q?'—':`<button class="row-btn" data-link="ledger" data-rid="${r.id}">亲密值详情</button>`];
+      });
+      const csv=rs.map(r=>[r.application?.id||r.id,TYPES[r.type],r.uidA+' / '+r.uidB,r.region,r.application?requestState(r.application):stateLabels[r.status],r.application?'—':r.level===null?'字段缺失':'Lv'+r.level,r.application?'—':r.balance,r.created+(r.ended?' / '+r.ended:''),'']);
+      return gridTable(title,headers,rows,csv,'按原关系ID统计；尚未建立的申请显示申请ID，不产生等级或亲密值账户。申请/解除结果可通过上方关系状态筛选。');
+    }
+    function overview(){
+      const rs=scopedRelations(false),gsAll=gifts.filter(g=>recordMatch(g,false)),gs=gsAll.filter(g=>dateOK(g.time)),ls=scopedRecords(ledger),qs=requests.filter(requestMatch);
+      const cp=rs.filter(r=>r.type==='cp'),cpGifts=gs.filter(g=>g.type==='cp'),cpAll=gsAll.filter(g=>g.type==='cp');
+      const summary=Object.entries(TYPES).map(([type,label])=>{const slice=rs.filter(r=>r.type===type);return `<div class="type-card ${type==='cp'?'cp':''}">${badge(type)}<strong>${slice.filter(r=>r.status==='active').length}</strong><p>历史已解除 ${slice.filter(r=>r.status==='ended').length} 对</p><button class="link-button" data-type-drill="${type}">查询${esc(label)} →</button></div>`;}).join('');
+      const growth=Object.entries(growthSources).map(([key,label])=>[label,sum(ls.filter(l=>l.source===key),'delta')]);
+      const max=Math.max(1,...growth.map(x=>Math.abs(x[1])));
+      return cards([['当前有效关系',fmt(rs.filter(r=>r.status==='active').length),'四类关系按关系ID去重'],['CP有效关系',fmt(cp.filter(r=>r.status==='active').length),'纳入统一关系统计',true],['期间净实付金币',fmt(periodCoins(gsAll)),'期间扣款 − 期间退款；子单求和'],['期间净成长',signed(sum(ls,'delta')),'基础成长＋任务−衰退−退款'],['期间任务净到账',signed(sum(ls.filter(l=>['daily','weekly','taskRollback'].includes(l.source)),'delta')),'按到账/回退发生日；共享一次'],['待回应申请',fmt(qs.filter(q=>q.state==='pending').length),'与消息已读分别统计']])+
+      `<div class="two-col"><section class="panel"><div class="panel-title"><h2>关系类型分布</h2><small>截至示例快照</small></div><div class="panel-body type-summary">${summary}</div></section><section class="panel"><div class="panel-title"><h2>CP重点数据</h2><button class="link-button" data-type-drill="cp">查看CP</button></div><div class="panel-body"><div class="cp-focus"><div><span>CP专属礼物 · 当前净件数</span><strong>${fmt(sum(cpGifts.filter(g=>g.kind==='cp'),giftCount))}</strong></div><div><span>戒指 · 当前净件数</span><strong>${fmt(sum(cpGifts.filter(g=>['proposal','upgrade'].includes(g.kind)),giftCount))}</strong></div><div><span>CP期间净实付金币</span><strong>${fmt(periodCoins(cpAll))}</strong></div></div><p class="detail-note">CP保留戒指与专属礼物；亲友共用其余查询。金币按扣款/退款发生日，净件数按所选送达订单的当前结果；成长单位正式接入时须统一，未统一则分类型聚合。</p></div></section></div>`+
+      `<section class="panel table-panel"><div class="panel-title"><h2>期间亲密值来源</h2><button class="link-button" data-jump="ledger">查看流水 →</button></div><div class="panel-body sources">${growth.map(([label,value])=>`<div class="source-row"><span>${esc(label)}</span><div class="bar"><span style="width:${Math.abs(value)/max*100}%;background:${value<0?'#c24152':'#10b981'}"></span></div>${amount(value)}</div>`).join('')}</div></section>`+relationTable(rs,'同一查询范围的关系明细');
+    }
+    function relationView(){
+      if(requestStatusMap[filters.status])return relationRequestsView();
+      let rs=scopedRelations();
+      if(filters.status==='all'){
+        const applications=requests.filter(q=>!q.rid&&q.kind==='establish'&&requestMatch(q)).map(q=>({...q,id:'',created:q.time,ended:'',application:q,level:null,balance:null}));
+        rs=rs.concat(applications);
+      }
+      if(local.level==='missing')rs=rs.filter(r=>!r.application&&r.level===null);
+      else if(local.level!=='all'){const [lo,hi]=local.level.split('-').map(Number);rs=rs.filter(r=>!r.application&&r.level!==null&&r.level>=lo&&r.level<=hi);}
+      rs.sort((a,b)=>b.created.localeCompare(a.created)||(a.id||a.application.id).localeCompare(b.id||b.application.id));
+      return `<div class="sub-filters">${subSelect('level','现行等级',levelOptions())}</div>`+relationTable(rs);
+    }
+    function ledgerView(){
+      let ls=scopedRecords(ledger);if(local.source!=='all')ls=ls.filter(l=>l.source===local.source);ls.sort((a,b)=>b.time.localeCompare(a.time)||b.sequence-a.sequence);
+      return `<div class="sub-filters">${subSelect('source','成长来源',[['all','全部来源'],...Object.entries(growthSources)])}</div>`+cards([['期间正向成长',fmt(sum(ls.filter(l=>l.delta>0),'delta')),'不含期初余额'],['期间衰退',signed(sum(ls.filter(l=>l.source==='decay'),'delta')),'读取现网衰退服务'],['礼物退款回退',signed(sum(ls.filter(l=>l.source==='refund'),'delta')),'原订单与原关系'],['任务奖励回退',signed(sum(ls.filter(l=>l.source==='taskRollback'),'delta')),'失去达标条件才回退'],['期间净变动',signed(sum(ls,'delta')),'按当前来源筛选'],['流水条数',fmt(ls.length),'按流水ID去重']])+gridTable('亲密值变动记录',['流水ID','关系ID / 类型','关系双方','发生时间','来源','成长变动','变动后的亲密值','来源记录 / 任务归属周期'],ls.map(l=>[esc(l.id),rLink(l.rid)+`<small>${TYPES[l.type]}</small>`,pair(relationById.get(l.rid)),esc(l.time),esc(growthSources[l.source]),amount(l.delta),fmt(l.balanceAfter),esc(l.ref)+`<small>${['daily','weekly','taskRollback'].includes(l.source)?'任务归属 '+esc(l.cycle):'非任务来源'}</small>`]),ls.map(l=>[l.id,l.rid+' / '+TYPES[l.type],relationById.get(l.rid).uidA+' / '+relationById.get(l.rid).uidB,l.time,growthSources[l.source],l.delta,l.balanceAfter,l.ref+' / '+(['daily','weekly','taskRollback'].includes(l.source)?l.cycle:'非任务来源')]),'来源记录为订单、任务或事件ID；任务归属周期指原任务的自然日/周起始日，退款回退仍属原周期。变动后亲密值按完整账本计算，不随筛选重算；正式值读取服务端入账快照。');
+    }
+
+    function taskInstancesView(){
+      let ts=scopedRecords(tasks);if(local.cycle!=='all')ts=ts.filter(t=>t.cycle===local.cycle);if(local.taskState!=='all')ts=ts.filter(t=>t.state===local.taskState);ts.sort((a,b)=>b.cycleId.localeCompare(a.cycleId)||a.rid.localeCompare(b.rid)||a.code.localeCompare(b.code));
+      return `<div class="sub-filters">${subSelect('cycle','任务周期',[['all','日＋周'],['daily','每日任务'],['weekly','每周任务']])}${subSelect('taskState','任务状态',[['all','全部状态'],...['in_progress','completed','credited','expired','revoked'].map(s=>[s,stateLabels[s]])])}</div>`+cards([['任务实例',fmt(ts.length),'按关系＋周期＋任务去重'],['已到账',fmt(ts.filter(t=>t.state==='credited').length),'共享奖励一次'],['达标待到账',fmt(ts.filter(t=>t.state==='completed').length),'超时先查询原实例'],['进行中',fmt(ts.filter(t=>t.state==='in_progress').length),'多条件均需满足'],['当前净到账',fmt(sum(ts,'credited')),'任务实例当前净额'],['已回退',fmt(ts.filter(t=>t.state==='revoked').length),'原订单及原周期追溯']])+gridTable('任务实例',['任务实例ID','关系ID / 类型','任务 / 编码','周期','真实进度','状态','奖励 / 净到账'],ts.map(t=>[esc(t.id),rLink(t.rid)+`<small>${TYPES[t.type]}</small>`,esc(t.name)+`<small>${esc(t.code)}</small>`,`${t.cycle==='daily'?'日':'周'} ${t.cycleId}<small>${esc(t.timezone)}</small>`,esc(t.progress),status(t.state),`+${t.reward} / ${t.credited}`]),ts.map(t=>[t.id,t.rid+' / '+TYPES[t.type],t.name+' / '+t.code,t.cycleId+' / '+t.cycle,t.progress,stateLabels[t.state],t.reward+' / '+t.credited]),'4日＋4周、40/日与80/周；完成动作与到账分开，普通消息撤回不扣计数。')+`<details class="panel task-rules"><summary>查看8项任务规则（当前PRD v8.3）</summary>${table(['周期','任务','达标条件','额外奖励'],taskRules.map(t=>[t.cycle==='daily'?'日':'周',esc(t.name),esc(t.condition),'+'+t.reward]))}</details>`;
+    }
+    function requestState(q){if(q.kind!=='establish')return q.state==='accepted'?'已解除':q.state==='rejected'?'已拒绝解除':q.state==='expired'?'已结束（未同意）':'待确认解除';return stateLabels[q.state];}
+    function relationRequestsView(){
+      let qs=requests.filter(requestMatch);
+      if(local.read==='unread')qs=qs.filter(q=>!q.readA||!q.readB);
+      if(local.read==='read')qs=qs.filter(q=>q.readA&&q.readB);
+      qs.sort((a,b)=>b.time.localeCompare(a.time)||a.id.localeCompare(b.id));
+      return `<div class="sub-filters">${subSelect('read','消息已读',[['all','不限'],['unread','任一方未读'],['read','双方已读']])}</div><div class="notice">当前按「${esc(queryStatusLabels[filters.status])}」查询申请/解除记录。业务结果与当前关系状态分开展示；拒绝或超时不会自动解除关系。后台只查询，不代替用户处理。</div>`+
+      gridTable('关系状态记录',['申请 / 解除ID','关系类型 / 记录','双方 / UID','大区','关系ID / 当前状态','申请 / 解除结果','双方消息状态','发起 / 结果时间','费用金币'],qs.map(q=>[esc(q.id),badge(q.type)+`<small>${esc(reqKind[q.kind])}</small>`,pair(q),esc(q.region),rLink(q.rid)+(q.rid?`<small>${esc(stateLabels[relationById.get(q.rid)?.status])}</small>`:''),status(q.state,requestState(q)),`发起方 ${q.readA?'已读':'未读'}<small>接收方 ${q.readB?'已读':'未读'}</small>`,esc(q.time)+`<small>${q.resultTime?'结果 '+esc(q.resultTime):'截止 '+esc(q.deadline)}</small>`,fmt(q.cost)]),qs.map(q=>[q.id,TYPES[q.type]+' / '+reqKind[q.kind],q.uidA+' / '+q.uidB,q.region,q.rid?(q.rid+' / '+stateLabels[relationById.get(q.rid)?.status]):'尚未建立',requestState(q),`发起方${q.readA?'已读':'未读'} / 接收方${q.readB?'已读':'未读'}`,q.time+' / '+(q.resultTime||q.deadline),q.cost]),'日期按申请/解除发起时间筛选；同一关系可以有多次申请记录。申请已发出不可撤回；已解除历史仅供服务端授权查询。');
+    }
+    function rulesView(){
+      const rules=[['范围与资格','CP、兄弟、闺蜜、挚友统一查询；全部不限制性别。关系成长/等级按现行服务，不启用后置100级迁移或五档权益。'],['关系与席位','CP独占1位；亲友共用3个免费位，可顺序购至5位。免费空位仍可购买第4/5席，默认99,999金币/席，解锁后不可撤回。'],['礼物与成长','普通/活动沿用实付÷100；幸运沿用floor(实付÷1,000)，不计中奖返奖。BOND 18,888/+350，CP基础礼物29,999/+600；固定加值不叠加普通比例。最终账户/取整映射以现网为准。'],['日周任务','每段关系4日＋4周，双方共享一次奖励，40/日、80/周，自动到账。有效同房同日累计10分钟即可，CP仅认CP房，亲友不限房型，不要求主动互动。成功有效消息普通撤回仍计数；CP两类合格实付戒指计日送礼/周升温。'],['求婚戒指归属','接受并正式建立CP后，绑定新关系和建立当天/当周；升级戒指按赠送成功周期。仅购买、失败、拒绝或过期不产生正式关系任务。戒指价格/加成示例不作为新配置。'],['退款与复建','读取钱包实际扣款/收礼子单。退款回退原成长，任务剩余行为仍达标则保留奖励，否则回退原实例；同对象复建仍新ID，旧退款不串新关系。'],['解除与留存','协议解除24小时响应；拒绝/超时结束后无冷却期。强制解除CP99,999、亲友59,999金币；客户端不展示旧礼物/纪念/流水，永久证书在个人荣誉保留；服务端按现有授权制度留存。'],['查询权限与接入','示例为客服审计视角，未接生产。正式接入需按角色/大区限制详情与导出、脱敏、服务端审计和留存期限；无修改成长、迁移执行或处理申请的写入按钮；任务配置可在本机演示草稿、发布与启停；正式配置权限、版本和审计待服务端接入。']];
+      const log=[...audits].reverse();
+      return `<div class="two-col"><section class="panel"><div class="panel-title"><h2>当前规则快照</h2><span class="tag">PRD v8.3</span></div><div class="panel-body rule-list">${rules.map(([t,p])=>`<div class="rule-item"><strong>${esc(t)}</strong><p>${esc(p)}</p></div>`).join('')}</div></section><section class="panel"><div class="panel-title"><h2>查询模型</h2></div><div class="panel-body rule-list"><div class="rule-item"><strong>统一主键</strong><p>relationship_id ＋ relationship_type；子单、流水、任务与解除记录均指向原关系。</p></div><div class="rule-item"><strong>相同双方，多段关系</strong><p>Dima × Ira旧CP 100744已解除，新CP 100940另行统计。按任一UID可同时查两段，按RID只查一段。</p></div><div class="rule-item"><strong>统计日期语义</strong><p>关系实例按建立日；关系状态中的申请/解除记录按发起日；亲密值详情按入账发生日，任务按周期起始日。总览存量截至固定示例快照，期间统计按事件日期。</p></div><div class="rule-item"><strong>原型审计</strong><p>查询、详情和导出记录在本页内存中；刷新浏览器即恢复示例，不能代替生产服务端审计。私聊正文、寄语及生日不在查询模型中展示。</p></div></div></section></div>`+gridTable('查询与导出审计',['审计ID','时间','操作人','操作','查询范围','条数','用途'],log.map(a=>[esc(a.id),esc(a.time),esc(a.actor),esc(a.action),esc(a.scope),fmt(a.count),esc(a.purpose)]),log.map(a=>[a.id,a.time,a.actor,a.action,a.scope,a.count,a.purpose]),'审计记录不会由角色选择或前端关闭代替服务端落库。');
+    }
+    function updateNav(){
+      $('#sideNav').innerHTML=Object.entries(PAGES).map(([id,[title,,,icon]])=>`<button class="side-item ${page===id?'active':''}" data-jump="${id}" aria-label="${title}" ${page===id?'aria-current="page"':''}><span class="nav-icon">${icon}</span><span>${title}</span></button>`).join('');
+      $('#pageTabs').innerHTML=Object.entries(PAGES).map(([id,[title]])=>`<button class="page-tab ${page===id?'active':''}" data-jump="${id}" ${page===id?'aria-current="page"':''}>${title}</button>`).join('');
+      $('#typeStrip').innerHTML=[['all','全部关系'],...Object.entries(TYPES)].map(([type,label])=>`<button type="button" class="type-chip ${selectedType===type?'active':''}" data-type="${type}" aria-pressed="${selectedType===type}">${label}</button>`).join('');
+      $('#pageTitle').textContent=PAGES[page][1];$('#pageSubtitle').textContent=PAGES[page][2];$('#crumbCurrent').textContent=PAGES[page][0];
+      const statusOptions=page==='relations'?relationStatusOptions:[['all','全部关系'],['active','已建立 · 生效中'],['ended','已解除 · 历史关系']];
+      $('#relationStatus').innerHTML=statusOptions.map(([value,label])=>`<option value="${value}" ${filters.status===value?'selected':''}>${label}</option>`).join('');
+      $('#dateLabel').textContent=({relations:requestStatusMap[filters.status]?'申请 / 解除发起日期':'关系建立 / 申请日期',ledger:'亲密值变动日期',tasks:'任务周期起始日期'})[page]||'事件日期';
+      $('#filterSummary').textContent=scopeLabel();
+      $('#timeSemantics').textContent=page==='overview'?`存量截至 ${AS_OF}；期间值按事件日 · UTC+3示例`:`按${$('#dateLabel').textContent}筛选 · UTC+3示例`;
+      const configMode=page==='tasks'&&taskMode==='config';
+      $('.filter-panel').hidden=configMode;$('.state-demo').hidden=configMode;
+      $('#refreshButton').hidden=configMode;$('#exportButton').hidden=configMode;
+      const r=relationById.get(contextRid);$('#contextBar').hidden=configMode||!r;
+      if(r)$('#contextBar').innerHTML=`<span>联查当前关系：<strong>${esc(TYPES[r.type])} · ${esc(r.a)} × ${esc(r.b)} · RID ${r.id}</strong></span><button class="link-button" data-clear-context>取消关系限定</button>`;
+      $('#exportButton').disabled=mode!=='normal';
+    }
+    function render(){updateNav();if(mode==='loading'){$('#viewContent').innerHTML='<section class="panel table-panel empty"><strong><span class="loading-line"></span>正在加载查询结果</strong>保留当前筛选条件；不把加载当作0条。</section>';return;}if(mode==='error'){$('#viewContent').innerHTML='<section class="panel table-panel empty"><strong>查询失败，当前结果未知</strong><p>筛选条件已保留；失败不代表没有关系或没有成长。</p><button class="btn primary" data-retry>重试查询</button></section>';return;}$('#viewContent').innerHTML=({overview,relations:relationView,ledger:ledgerView,tasks:taskView,rules:rulesView})[page]();}
+    function go(id){if(!PAGES[id])return;if(id!=='relations'&&requestStatusMap[filters.status])filters.status='all';page=id;pageIndex=1;mode='normal';clearTimeout(loadTimer);render();}
+    function link(id,rid){contextRid=rid;filters.search='';$('#searchInput').value='';go(id);closeDialog();}
+    function openDialog(title,body,footer='') {lastFocus=document.activeElement;$('#dialogTitle').textContent=title;$('#dialogBody').innerHTML=body;$('#dialogFooter').innerHTML=footer||'<button class="btn primary" data-close>关闭</button>';if(!$('#detailDialog').open)$('#detailDialog').showModal();}
+    function closeDialog(){$('#detailDialog').close();lastFocus?.focus?.();}
+
+    // Editable configuration model. Account, ledger and task-instance snapshots remain separate.
+    const CONFIG_REVIEW_DATE='2026-10-15';
+    const CONFIG_STORAGE_KEY='hoki.relationship.task-config.v2.2';
+    const EVENT_TEMPLATES={
+      REL_D_01:{cycle:'daily',name:'双方私聊',fields:[['messages','双方各发送的消息数',3,1,1000,'条']],note:'仅统计双方成功发送的有效消息；普通撤回仍计数。'},
+      REL_D_02:{cycle:'daily',name:'有效同房',fields:[['minutes','同日累计有效同房时长',10,1,1440,'分钟']],note:'CP仅认CP房；亲友不限房型，不要求主动互动。'},
+      REL_D_03:{cycle:'daily',name:'有效同麦',fields:[['minutes','同日累计有效同麦时长',5,1,1440,'分钟']],note:'双方在同一房间同时在麦，服务端计算重叠时长并去重。'},
+      REL_D_04:{cycle:'daily',name:'金币实付送礼',fields:[['gifts','成功送达当前对象的礼物数',1,1,10000,'份']],note:'普通／活动／幸运／BOND适用；CP含CP礼物及合格戒指。背包、免费、失败、全额券不计。'},
+      REL_W_01:{cycle:'weekly',name:'同房或同麦达标天数',fields:[['days','完成同房或同麦日任务的天数',3,1,7,'天']],note:'不同自然日去重，依赖当日生成的日任务版本。'},
+      REL_W_02:{cycle:'weekly',name:'同麦时长及天数',fields:[['minutes','一周有效同麦累计时长',60,1,10080,'分钟'],['days','分布的不同自然日',3,1,7,'天']],note:'累计分钟和自然日天数须同时满足。'},
+      REL_W_03:{cycle:'weekly',name:'任一日任务达标天数',fields:[['days','每天完成至少一项日任务的天数',5,1,7,'天']],note:'同日多个任务只算一天；普通消息撤回不回退计数。'},
+      REL_W_04:{cycle:'weekly',name:'关系礼物送达',fields:[['gifts','成功送达的合格关系礼物数',1,1,10000,'份']],note:'CP：BOND／CP专属礼物／合格求婚及升级戒指；亲友：BOND。按实际金币扣款和原子单计算。'}
+    };
+    const configClone=value=>JSON.parse(JSON.stringify(value));
+    const baselineTaskConfigs=taskRules.map((t,i)=>({code:t.code,name:t.name,cycle:t.cycle,template:t.code,params:Object.fromEntries(EVENT_TEMPLATES[t.code].fields.map(f=>[f[0],f[2]])),types:Object.keys(TYPES),reward:t.reward,enabled:true,sort:i%4+1}));
+    const newConfigState=()=>({schema:1,revision:0,drafts:[],scheduled:null,logs:[]});
+    function nextConfigDate(cycle){
+      const d=new Date(CONFIG_REVIEW_DATE+'T00:00:00Z');
+      d.setUTCDate(d.getUTCDate()+(cycle==='daily'?1:((8-d.getUTCDay())%7||7)));
+      return d.toISOString().slice(0,10);
+    }
+    function configCondition(c){
+      const p=c.params;
+      const condition={
+        REL_D_01:'双方各发送'+p.messages+'条有效私聊消息',
+        REL_D_02:'同日有效同房累计'+p.minutes+'分钟',
+        REL_D_03:'同日有效同麦累计'+p.minutes+'分钟',
+        REL_D_04:'金币实付礼物送达'+p.gifts+'份',
+        REL_W_01:p.days+'个不同自然日完成同房或同麦日任务',
+        REL_W_02:'一周有效同麦'+p.minutes+'分钟，分布在至少'+p.days+'个自然日',
+        REL_W_03:p.days+'个不同自然日各完成至少1项日任务',
+        REL_W_04:'金币实付合格关系礼物送达'+p.gifts+'份'
+      };
+      return condition[c.template]||'';
+    }
+    function configValidation(c){
+      if(!/^[A-Z][A-Z0-9_]{2,31}$/.test(c.code))return '任务编码需为3–32位大写字母、数字或下划线。';
+      if(!c.name?.trim()||c.name.length>30)return '请填写1–30字的任务名称。';
+      if(!EVENT_TEMPLATES[c.template]||EVENT_TEMPLATES[c.template].cycle!==c.cycle)return '请选择与日／周周期一致的事件模板。';
+      if(!Array.isArray(c.types)||!c.types.length||new Set(c.types).size!==c.types.length||c.types.some(t=>!TYPES[t]))return '至少选择一种适用关系。';
+      if(!Number.isInteger(c.reward)||c.reward<1||c.reward>(c.cycle==='daily'?40:80))return '奖励亲密值须为1–'+(c.cycle==='daily'?40:80)+'的整数。';
+      if(!Number.isInteger(c.sort)||c.sort<1||c.sort>99)return '展示顺序须为1–99的整数。';
+      if(typeof c.enabled!=='boolean')return '请选择启用状态。';
+      for(const [key,label,,min,max] of EVENT_TEMPLATES[c.template].fields){if(!Number.isInteger(c.params?.[key])||c.params[key]<min||c.params[key]>max)return label+'须为'+min+'–'+max+'的整数。';}
+      return '';
+    }
+    function configPlan(state){
+      const map=new Map((state.scheduled?.configs||baselineTaskConfigs).map(c=>[c.code,configClone(c)]));
+      state.drafts.forEach(c=>map.set(c.code,configClone(c)));
+      return [...map.values()];
+    }
+    function configPlanErrors(plan){
+      const errors=[];
+      if(new Set(plan.map(c=>c.code)).size!==plan.length)errors.push('任务编码重复。');
+      plan.forEach(c=>{const message=configValidation(c);if(message)errors.push(c.code+'：'+message);});
+      for(const type of Object.keys(TYPES))for(const cycle of ['daily','weekly']){
+        const enabled=plan.filter(c=>c.enabled&&c.cycle===cycle&&c.types.includes(type));
+        const label=TYPES[type]+' · '+(cycle==='daily'?'每日':'每周');
+        if(enabled.length>4)errors.push(label+'最多启用4项任务。');
+        if(enabled.reduce((n,c)=>n+c.reward,0)>(cycle==='daily'?40:80))errors.push(label+'奖励合计不能超过'+(cycle==='daily'?40:80)+'。');
+        if(new Set(enabled.map(c=>c.template)).size<enabled.length)errors.push(label+'不能同时启用相同事件模板的多项任务。');
+      }
+      return errors;
+    }
+    function draftConfigState(state,c,clock){
+      const error=configValidation(c);if(error)throw new Error(error);
+      const next=configClone(state),previous=configPlan(state).find(x=>x.code===c.code)||null;
+      next.drafts=next.drafts.filter(x=>x.code!==c.code);next.drafts.push(configClone(c));next.revision++;
+      next.logs.push({action:'保存草稿',time:clock,actor:'运营管理员（示例）',code:c.code,before:previous,after:configClone(c)});
+      return next;
+    }
+    function publishConfigState(state,clock){
+      if(!state.drafts.length)throw new Error('没有待发布的修改。');
+      const plan=configPlan(state),errors=configPlanErrors(plan);if(errors.length)throw new Error(errors.join('；'));
+      const next=configClone(state),version='TCFG-'+String(state.revision+1).padStart(3,'0');
+      next.scheduled={version,configs:configClone(plan),daily:nextConfigDate('daily'),weekly:nextConfigDate('weekly')};
+      next.logs.push({action:'发布下一周期',time:clock,actor:'运营管理员（示例）',code:version,before:configClone(state.scheduled?.configs||baselineTaskConfigs),after:configClone(plan)});
+      next.drafts=[];next.revision++;
+      return next;
+    }
+    // Task editor UI: saved data belongs to this browser prototype, never a production endpoint.
+    let taskMode=new URLSearchParams(location.search).get('taskMode')==='config'?'config':'instances';
+    let configCycleFilter='all',configTypeFilter='all',configStorageNotice='',configState=newConfigState(),editorCandidate=null;
+    try{
+      const saved=JSON.parse(localStorage.getItem(CONFIG_STORAGE_KEY)||'null');
+      if(saved&&saved.schema===1&&Number.isInteger(saved.revision)&&Array.isArray(saved.drafts)&&Array.isArray(saved.logs)&&Array.isArray(saved.scheduled?.configs||[])){
+        const all=[...saved.drafts,...(saved.scheduled?.configs||[])];
+        if(all.every(c=>!configValidation(c))&&!configPlanErrors(saved.scheduled?.configs||baselineTaskConfigs).length)configState=saved;
+        else configStorageNotice='保存的配置不完整，本次已加载初始示例。';
+      }
+    }catch{configStorageNotice='本地存储读取失败；保存前请恢复浏览器存储权限。';}
+    function commitConfigState(next){
+      try{
+        const disk=JSON.parse(localStorage.getItem(CONFIG_STORAGE_KEY)||'null');
+        if(disk&&disk.revision!==configState.revision)throw new Error('另一窗口已更新配置，请刷新后再编辑。');
+        localStorage.setItem(CONFIG_STORAGE_KEY,JSON.stringify(next));
+      }catch(e){
+        if(e.message.includes('另一窗口'))throw e;
+        throw new Error('本地保存失败，请检查浏览器存储权限后重试；原配置未改动。');
+      }
+      configState=next;
+    }
+    function taskModeNav(){return '<nav class="task-mode-tabs" aria-label="任务管理视图">'+[['instances','任务执行查询'],['config','任务配置']].map(([id,label])=>'<button class="btn '+(taskMode===id?'ghost':'')+'" data-task-mode="'+id+'" aria-pressed="'+(taskMode===id)+'">'+label+'</button>').join('')+'</nav>';}
+    function taskView(){return taskModeNav()+(taskMode==='config'?taskConfigView():taskInstancesView());}
+    function configScope(c){return c.types.length===4?'全部关系':c.types.map(t=>TYPES[t]).join('、');}
+    function configSummary(c){return c?c.name+' · '+(c.enabled?'启用':'停用')+' · +'+c.reward+' · '+configScope(c)+' · '+configCondition(c)+' · 顺序 '+c.sort:'无（新增任务）';}
+    function taskConfigView(){
+      const plan=configPlan(configState),draftCodes=new Set(configState.drafts.map(c=>c.code));
+      const rows=plan.filter(c=>(configCycleFilter==='all'||c.cycle===configCycleFilter)&&(configTypeFilter==='all'||c.types.includes(configTypeFilter))).sort((a,b)=>a.cycle.localeCompare(b.cycle)||a.sort-b.sort||a.code.localeCompare(b.code));
+      const errors=configPlanErrors(plan);
+      const headers=['任务名称 / 编码','周期','适用关系','达标条件','奖励亲密值','启用状态','版本状态','顺序','操作'];
+      const cells=rows.map(c=>{
+        const original=baselineTaskConfigs.find(b=>b.code===c.code),scheduled=configState.scheduled?.configs.find(b=>b.code===c.code),changed=draftCodes.has(c.code);
+        const version=changed?'未发布草稿':scheduled?'待生效 · '+configState.scheduled.version:'当前配置 · v1';
+        return [esc(c.name)+'<small>'+esc(c.code)+'</small>',c.cycle==='daily'?'每日':'每周',esc(configScope(c)),esc(configCondition(c))+'<small>'+esc(EVENT_TEMPLATES[c.template].note)+'</small>','+'+c.reward,status(c.enabled?'active':'ended',c.enabled?'启用':'停用'),'<span class="tag">'+esc(version)+'</span><small>'+(changed?'当前周期：'+esc(configSummary(original)):scheduled?'生效：'+nextConfigDate(c.cycle)+' 00:00':'当前周期生效')+'</small>',c.sort,'<div class="row-actions"><button class="row-btn" data-task-edit="'+esc(c.code)+'">编辑</button><button class="row-btn" data-task-toggle="'+esc(c.code)+'">'+(c.enabled?'停用':'启用')+'</button></div>'];
+      });
+      currentRows=cells;currentHeaders=headers;currentCsv=rows.map(c=>[c.name+' / '+c.code,c.cycle,configScope(c),configCondition(c),c.reward,c.enabled?'启用':'停用',draftCodes.has(c.code)?'未发布草稿':configState.scheduled?.version||'v1',c.sort,'']);
+      const totals=Object.entries(TYPES).map(([type,label])=>{
+        const items=plan.filter(c=>c.enabled&&c.types.includes(type)),daily=items.filter(c=>c.cycle==='daily'),weekly=items.filter(c=>c.cycle==='weekly');
+        return '<div><strong>'+label+'</strong><span>日 '+daily.length+'/4 项 · '+daily.reduce((n,c)=>n+c.reward,0)+'/40</span><span>周 '+weekly.length+'/4 项 · '+weekly.reduce((n,c)=>n+c.reward,0)+'/80</span></div>';
+      }).join('');
+      return '<section class="panel config-panel"><div class="panel-title"><div><h2>日周任务配置</h2><small>每段关系共享奖励，按适用关系分别校验任务数量和奖励上限。</small></div><div class="config-actions"><button class="btn" data-task-log>变更记录</button><button class="btn primary" data-task-add="daily">＋日任务</button><button class="btn primary" data-task-add="weekly">＋周任务</button></div></div><div class="panel-body"><div class="config-banner"><strong>草稿 '+configState.drafts.length+' 项'+(configState.scheduled?' · '+esc(configState.scheduled.version)+' 待生效':'')+'</strong><p>保存和启停先进入草稿，发布后日任务次日、周任务下周生效；历史任务与奖励保留原版本。</p><div class="config-actions"><button class="btn ghost" data-task-publish '+(!configState.drafts.length?'disabled':'')+'>发布下一周期</button><button class="link-button" data-task-reset>重置配置示例</button></div></div><p class="detail-note">本机交互演示 · 示例当前日期 '+CONFIG_REVIEW_DATE+'（UTC+3），日 '+nextConfigDate('daily')+' / 周 '+nextConfigDate('weekly')+' 00:00 生效；配置仅保存在当前浏览器。</p>'+(configStorageNotice?'<p class="error-text">'+esc(configStorageNotice)+'</p>':'')+'<div class="config-totals">'+totals+'</div><div class="sub-filters"><label for="configCycle">任务周期</label><select id="configCycle">'+[['all','全部周期'],['daily','每日'],['weekly','每周']].map(([v,l])=>'<option value="'+v+'" '+(v===configCycleFilter?'selected':'')+'>'+l+'</option>').join('')+'</select><label for="configType">适用关系</label><select id="configType">'+[['all','全部关系'],...Object.entries(TYPES)].map(([v,l])=>'<option value="'+v+'" '+(v===configTypeFilter?'selected':'')+'>'+l+'</option>').join('')+'</select></div>'+(errors.length?'<div class="notice" role="alert">发布校验：'+errors.map(esc).join('；')+'。可以继续编辑后再发布。</div>':'')+'</div><div class="config-table">'+(rows.length?table(headers,cells):'<div class="empty">没有匹配的任务配置</div>')+'</div></section>';
+    }
+    function openTaskEditor(code='',cycle='daily'){
+      const existing=configPlan(configState).find(c=>c.code===code);
+      const template=existing?.template||(cycle==='daily'?'REL_D_01':'REL_W_01');
+      let number=1;const codes=new Set(configPlan(configState).map(c=>c.code));while(codes.has('CUSTOM_'+(cycle==='daily'?'D':'W')+'_'+String(number).padStart(2,'0')))number++;
+      editorCandidate=configClone(existing||{code:'CUSTOM_'+(cycle==='daily'?'D':'W')+'_'+String(number).padStart(2,'0'),name:'',cycle,template,params:Object.fromEntries(EVENT_TEMPLATES[template].fields.map(f=>[f[0],f[2]])),types:Object.keys(TYPES),reward:cycle==='daily'?10:20,enabled:false,sort:5});
+      const c=editorCandidate;
+      openDialog(existing?'编辑任务配置':'新增'+(cycle==='daily'?'日':'周')+'任务','<form id="taskEditorForm" class="config-form" data-existing="'+esc(code)+'"><div class="field"><label for="editorCode">任务编码</label><input id="editorCode" maxlength="32" value="'+esc(c.code)+'" '+(existing?'readonly':'')+'></div><div class="field"><label for="editorCycle">任务周期</label><select id="editorCycle" '+(existing?'disabled':'')+'>'+[['daily','每日任务'],['weekly','每周任务']].map(([v,l])=>'<option value="'+v+'" '+(v===c.cycle?'selected':'')+'>'+l+'</option>').join('')+'</select><small>已有任务保留编码和周期；更换周期请新增任务。</small></div><div class="field"><label for="editorName">任务名称</label><input id="editorName" maxlength="30" value="'+esc(c.name)+'" placeholder="填写用户可见的任务名称"></div><div class="field"><label for="editorReward">奖励亲密值</label><input id="editorReward" type="number" min="1" max="'+(c.cycle==='daily'?40:80)+'" step="1" value="'+c.reward+'"></div><fieldset class="field-full config-types"><legend>适用关系</legend>'+Object.entries(TYPES).map(([v,l])=>'<label><input type="checkbox" name="editorTypes" value="'+v+'" '+(c.types.includes(v)?'checked':'')+'> '+l+'</label>').join('')+'</fieldset><div class="field field-full"><label for="editorTemplate">统计事件模板</label><select id="editorTemplate"></select></div><div id="editorTargets" class="field-full config-targets"></div><div class="field"><label for="editorSort">展示顺序</label><input id="editorSort" type="number" min="1" max="99" step="1" value="'+c.sort+'"></div><div class="field"><label for="editorEnabled">启用状态</label><select id="editorEnabled"><option value="true" '+(c.enabled?'selected':'')+'>启用</option><option value="false" '+(!c.enabled?'selected':'')+'>停用</option></select></div><div class="field field-full"><label for="editorEffective">发布后的生效周期</label><input id="editorEffective" readonly></div><p id="editorError" class="error-text field-full" role="alert" hidden></p><p class="detail-note field-full">先保存草稿，再统一发布。当前周期的配置、已生成任务、完成进度和已到账奖励不会被覆盖。</p></form>','<button class="btn" data-close>取消</button><button class="btn primary" type="submit" form="taskEditorForm">保存草稿</button>');
+      fillTaskTemplateOptions(c.template);renderEditorTargets();
+    }
+    function fillTaskTemplateOptions(value){
+      const cycle=$('#editorCycle').value;
+      $('#editorTemplate').innerHTML=Object.entries(EVENT_TEMPLATES).filter(([,t])=>t.cycle===cycle).map(([id,t])=>'<option value="'+id+'" '+(value===id?'selected':'')+'>'+esc(t.name)+'</option>').join('');
+      $('#editorReward').max=cycle==='daily'?40:80;
+      $('#editorEffective').value=nextConfigDate(cycle)+' 00:00（UTC+3示例）';
+    }
+    function renderEditorTargets(){
+      const id=$('#editorTemplate').value,template=EVENT_TEMPLATES[id];
+      $('#editorTargets').innerHTML=template.fields.map(([key,label,initial,min,max,unit])=>'<div class="field"><label for="target-'+key+'">'+esc(label)+'（'+unit+'）</label><input id="target-'+key+'" data-target="'+key+'" type="number" step="1" min="'+min+'" max="'+max+'" value="'+(editorCandidate.template===id?editorCandidate.params[key]:initial)+'"></div>').join('')+'<p class="detail-note">'+esc(template.note)+'</p>';
+    }
+    function saveTaskEditor(){
+      const error=$('#editorError');error.hidden=true;
+      try{
+        const code=$('#editorCode').value.trim();
+        if(!$('#taskEditorForm').dataset.existing&&configPlan(configState).some(c=>c.code===code))throw new Error('任务编码已存在，请更换。');
+        const candidate={code,name:$('#editorName').value.trim(),cycle:$('#editorCycle').value,template:$('#editorTemplate').value,types:$$('[name="editorTypes"]:checked').map(e=>e.value),params:Object.fromEntries($$('[data-target]').map(e=>[e.dataset.target,e.value===''?NaN:Number(e.value)])),reward:$('#editorReward').value===''?NaN:Number($('#editorReward').value),enabled:$('#editorEnabled').value==='true',sort:$('#editorSort').value===''?NaN:Number($('#editorSort').value)};
+        commitConfigState(draftConfigState(configState,candidate,new Date().toISOString()));
+        closeDialog();render();showToast('草稿已保存；当前周期保持原配置');
+      }catch(e){error.textContent=e.message;error.hidden=false;}
+    }
+    function toggleTaskDraft(code){
+      const c=configPlan(configState).find(c=>c.code===code);if(!c)return;
+      openDialog(c.enabled?'停用任务':'启用任务','<p>确定将「'+esc(c.name)+'」设为'+(c.enabled?'停用':'启用')+'？</p><p class="detail-note">保存到草稿，统一发布后从下一周期生效；当前任务和已到账奖励保留。</p>','<button class="btn" data-close>取消</button><button class="btn primary" data-task-confirm-toggle="'+esc(code)+'">确认保存草稿</button>');
+    }
+    function requestTaskPublish(){
+      const plan=configPlan(configState),errors=configPlanErrors(plan);
+      openDialog('发布任务配置',errors.length?'<div class="error-text" role="alert">'+errors.map(esc).join('<br>')+'</div><p class="detail-note">请先调整草稿，满足每种关系最多4日＋4周、40/日与80/周的约束。</p>':'<p>本次发布 '+configState.drafts.length+' 项修改。</p>'+table(['任务','周期','调整后配置'],configState.drafts.map(c=>[esc(c.name),c.cycle==='daily'?'日':'周',esc(configSummary(c))]))+'<p class="detail-note">日任务 '+nextConfigDate('daily')+'、周任务 '+nextConfigDate('weekly')+' 00:00（UTC+3示例）生效；当前周期及历史任务仍按原版本。已有待生效方案会被本次完整配置版本替换。</p>',errors.length?'<button class="btn primary" data-close>返回编辑</button>':'<button class="btn" data-close>取消</button><button class="btn primary" data-task-confirm-publish>确认发布</button>');
+    }
+    function showTaskConfigLog(){
+      openDialog('任务配置变更记录',configState.logs.length?'<div class="config-log">'+table(['时间','操作人','动作 / 版本','变更前','变更后'],[...configState.logs].reverse().map(l=>[esc(l.time),esc(l.actor),esc(l.action)+'<small>'+esc(l.code)+'</small>',esc(Array.isArray(l.before)?l.before.map(configSummary).join('；'):configSummary(l.before)),esc(Array.isArray(l.after)?l.after.map(configSummary).join('；'):configSummary(l.after))]))+'</div>':'<div class="empty">暂无任务配置变更记录</div>');
+    }
+    document.addEventListener('submit',e=>{if(e.target.id==='taskEditorForm'){e.preventDefault();saveTaskEditor();}});
+    document.addEventListener('change',e=>{
+      if(e.target.id==='editorCycle'){fillTaskTemplateOptions();renderEditorTargets();}
+      if(e.target.id==='editorTemplate')renderEditorTargets();
+      if(e.target.id==='configCycle'){configCycleFilter=e.target.value;render();}
+      if(e.target.id==='configType'){configTypeFilter=e.target.value;render();}
+    });
+    document.addEventListener('click',e=>{
+      const b=e.target.closest('button');if(!b)return;
+      try{
+        if(b.dataset.taskMode){taskMode=b.dataset.taskMode;pageIndex=1;mode='normal';clearTimeout(loadTimer);render();}
+        if(b.dataset.taskAdd)openTaskEditor('',b.dataset.taskAdd);
+        if(b.dataset.taskEdit)openTaskEditor(b.dataset.taskEdit);
+        if(b.dataset.taskToggle)toggleTaskDraft(b.dataset.taskToggle);
+        if(b.dataset.taskConfirmToggle){const c=configClone(configPlan(configState).find(c=>c.code===b.dataset.taskConfirmToggle));c.enabled=!c.enabled;commitConfigState(draftConfigState(configState,c,new Date().toISOString()));closeDialog();render();showToast('启停修改已存草稿；发布后下一周期生效');}
+        if(b.hasAttribute('data-task-publish'))requestTaskPublish();
+        if(b.hasAttribute('data-task-confirm-publish')){commitConfigState(publishConfigState(configState,new Date().toISOString()));closeDialog();render();showToast('配置已发布至下一周期（本机演示）');}
+        if(b.hasAttribute('data-task-log'))showTaskConfigLog();
+        if(b.hasAttribute('data-task-reset'))openDialog('重置配置示例','<p>清除当前浏览器内本原型的配置草稿、待生效版本和配置变更记录，恢复初始8项任务。</p><p class="detail-note">任务实例、账本示例和其他项目不受影响。</p>','<button class="btn" data-close>取消</button><button class="btn primary" data-task-confirm-reset>确认重置</button>');
+        if(b.hasAttribute('data-task-confirm-reset')){localStorage.removeItem(CONFIG_STORAGE_KEY);configState=newConfigState();configCycleFilter='all';configTypeFilter='all';configStorageNotice='';closeDialog();render();showToast('已恢复初始任务配置示例');}
+      }catch(error){showToast(error.message);}
+    });
+
+
+    function exportDialog(){if(!currentCsv.length){showToast('当前没有可导出的匹配记录');return;}openDialog('导出当前筛选结果',`<div class="detail-grid">${item('查询页面',PAGES[page][0])}${item('全部匹配条数',currentCsv.length)}${item('关系类型',selectedType==='all'?'全部关系':TYPES[selectedType])}</div><p class="detail-note">导出全部匹配记录，不限当前页。${page==='overview'?'总览导出下方关系明细；期间指标在页面查看。':''}示例CSV会包含原关系ID、当前筛选条件及查询日期语义；正式导出需服务端权限与审计。</p><label for="exportPurpose">导出用途（写入本页审计）</label><textarea id="exportPurpose" maxlength="120">产品评审</textarea><p id="exportError" class="error-text" role="alert" hidden>请填写导出用途。</p>`,'<button class="btn" data-close>取消</button><button class="btn primary" data-confirm-export>确认导出CSV</button>');}
+    function csvValue(v){let str=String(v??'');if(/^[=+@-]/.test(str))str="'"+str;return '"'+str.replace(/"/g,'""')+'"';}
+    function doExport(){const purpose=$('#exportPurpose').value.trim();if(!purpose){$('#exportError').hidden=false;return;}const data=[['Hoki 亲密关系后台 v2.2','全部为示例数据'],['页面',PAGES[page][0]],['筛选',scopeLabel()],['起止日期',filters.start+' / '+filters.end],['日期语义',$('#dateLabel').textContent],['联查关系ID',contextRid||'全部'],['匹配条数',currentCsv.length],['用途',purpose],[],currentHeaders,...currentCsv];const csv='\ufeff'+data.map(row=>row.map(csvValue).join(',')).join('\r\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const link=document.createElement('a');link.href=url;link.download=`Hoki-relationships-${page}-${selectedType}-v2.2.csv`;link.click();setTimeout(()=>URL.revokeObjectURL(url),2000);addAudit('导出'+PAGES[page][0],currentCsv.length,purpose);closeDialog();showToast(`已导出${currentCsv.length}条匹配示例记录`);}
+    function query(){const next={search:$('#searchInput').value.trim().replace(/^(RID|UID)\s*/i,''),region:$('#regionSelect').value,status:$('#relationStatus').value,start:$('#startDate').value,end:$('#endDate').value};if(next.start&&next.end&&next.start>next.end){$('#filterError').textContent='开始日期不能晚于结束日期；已保留上次有效查询结果。';$('#filterError').hidden=false;return;}$('#filterError').hidden=true;filters=next;pageIndex=1;mode='normal';render();addAudit('查询'+PAGES[page][0],currentRows.length);}
+    document.addEventListener('click',e=>{
+      const target=e.target.closest('button');if(!target)return;
+      if(target.dataset.jump){go(target.dataset.jump);return;}
+      if(target.dataset.type){selectedType=target.dataset.type;contextRid='';pageIndex=1;mode='normal';render();return;}
+      if(target.dataset.typeDrill){selectedType=target.dataset.typeDrill;contextRid='';local.level='all';go('relations');return;}
+      if(target.dataset.link){link(target.dataset.link,target.dataset.rid);return;}
+      if(target.hasAttribute('data-clear-context')){contextRid='';pageIndex=1;render();return;}
+      if(target.hasAttribute('data-close')){closeDialog();return;}
+      if(target.hasAttribute('data-confirm-export')){doExport();return;}
+      if(target.dataset.page){pageIndex+=target.dataset.page==='next'?1:-1;render();return;}
+      if(target.dataset.demo){clearTimeout(loadTimer);mode=target.dataset.demo;render();if(mode==='loading')loadTimer=setTimeout(()=>{mode='normal';render();},1200);return;}
+      if(target.hasAttribute('data-retry')){mode='normal';render();showToast('已恢复示例查询');}
+    });
+    document.addEventListener('change',e=>{if(e.target.dataset.sub){local[e.target.dataset.sub]=e.target.value;pageIndex=1;render();}if(e.target.id==='pageSize'){pageSize=Number(e.target.value);pageIndex=1;render();}});
+    $('#filterForm').addEventListener('submit',e=>{e.preventDefault();query();});
+    $('#filterForm').addEventListener('reset',()=>{selectedType='all';contextRid='';filters={search:'',region:'all',status:'all',start:'2026-08-01',end:'2026-10-12'};local={source:'all',kind:'all',giftStatus:'all',cycle:'all',taskState:'all',requestKind:'all',requestState:'all',read:'all',level:'all'};pageIndex=1;mode='normal';$('#filterError').hidden=true;render();});
+    $('#exportButton').addEventListener('click',exportDialog);$('#refreshButton').addEventListener('click',()=>{query();showToast('已按当前条件重新查询示例数据');});
+    $('#detailDialog').addEventListener('click',e=>{if(e.target===$('#detailDialog')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeDialog();}});
+    render();
+  </script>
+</body>
+</html>

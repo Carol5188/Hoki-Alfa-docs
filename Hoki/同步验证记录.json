@@ -1,0 +1,24 @@
+{
+  "checked_at": "2026-10-28T14:38:48+08:00",
+  "status": "PASS",
+  "checks": {
+    "manifest_files": 106,
+    "files": 115,
+    "markdown": 37,
+    "markdown_local_links": 139,
+    "html": 11,
+    "javascript_syntax_checks": 12,
+    "xlsx_archives": 5,
+    "html_local_references": 20,
+    "CP_version_lines": 3,
+    "slots_byte_identical": 1
+  },
+  "CP_latest_versions": {
+    "00-未拆分完整版": "v5.19",
+    "01-亲密关系1.0": "v8.3",
+    "02-CP等级2.0": "v6.0"
+  },
+  "scope": "File hashes, selected versions, current Markdown links/tables, HTML resources and inline JavaScript syntax; existing interaction evidence reused, no production integration or new deployment",
+  "issues": [],
+  "warnings": []
+}

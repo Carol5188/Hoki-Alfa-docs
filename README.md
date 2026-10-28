@@ -2,12 +2,15 @@
 
 本仓库按业务模块沉淀 Hoki 与 ALFA 的产品方案、业务背景和可评审原型。
 
-CP 当前原型：[v2.55 完整在线预览](https://gleeful-sprinkles-2a814f.netlify.app/)。图片、样式及房间页面素材已完整发布，可直接打开和分享，无需登录或密码。
+Hoki当前资料请从[Hoki/PROJECT_INDEX.md](Hoki/PROJECT_INDEX.md)进入（2026-10-28）。包含CP、公屏消息切换、幸运礼物、YouTube一起看、关系规则与Slots统一全解。
+
+原有[v2.55在线预览](https://gleeful-sprinkles-2a814f.netlify.app/)保留为历史线上演示；本轮仅同步GitHub资料，不更新其部署。
 
 ## 模块目录
 
 | 模块 | 入口 | 当前定位 |
 |---|---|---|
+| Hoki近期需求 | [Hoki/PROJECT_INDEX.md](Hoki/PROJECT_INDEX.md) | CP三条版本线、公屏、幸运礼物、YouTube、关系规则与Slots |
 | ACM/BD | [ACM-BD/](ACM-BD/) | 组织、权限、额度、看板、工资与报表 |
 | 公会 | [公会/PROJECT_INDEX.md](公会/PROJECT_INDEX.md) | 公会生命周期、成员、运营、结算、等级与活动 |
 | CP | [CP/PROJECT_INDEX.md](CP/PROJECT_INDEX.md) | CP 个人主页、关系详情、任务与亲密值记录原型 |

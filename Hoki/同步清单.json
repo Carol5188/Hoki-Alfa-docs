@@ -1,0 +1,1119 @@
+{
+  "snapshot_date": "2026-10-28",
+  "repository": "Carol5188/Hoki-Alfa-docs",
+  "destination": "Hoki/",
+  "scope": "latest selected documentation, HTML prototypes and required dependencies; no deployment",
+  "files": [
+    {
+      "path": "Hoki/CP/00-未拆分完整版/CP｜关系系统升级｜PRD｜v5.19｜结论精简评审版.md",
+      "role": "current",
+      "source_name": "CP｜关系系统升级｜PRD｜v5.19｜结论精简评审版.md",
+      "source_sha256": "46c0fc27f547de0a349929c5ac93bc1265626b67fc721aa1ce40b80dd3cae94a",
+      "published_sha256": "46c0fc27f547de0a349929c5ac93bc1265626b67fc721aa1ce40b80dd3cae94a",
+      "link_adapted": false,
+      "bytes": 117315
+    },
+    {
+      "path": "Hoki/CP/CP｜关系系统升级｜评审清单｜v1.3｜解除留存与兼容评审版.md",
+      "role": "current",
+      "source_name": "CP｜关系系统升级｜评审清单｜v1.3｜解除留存与兼容评审版.md",
+      "source_sha256": "a125fa93bdaee319328468d447c90be16aca10af9857b69370b308783097fbb0",
+      "published_sha256": "a125fa93bdaee319328468d447c90be16aca10af9857b69370b308783097fbb0",
+      "link_adapted": false,
+      "bytes": 24570
+    },
+    {
+      "path": "Hoki/CP/CP｜关系系统升级｜关键调整｜v1.2｜解除留存与兼容评审版.md",
+      "role": "current",
+      "source_name": "CP｜关系系统升级｜关键调整｜v1.2｜解除留存与兼容评审版.md",
+      "source_sha256": "7dab77d37ad8bd8768117d5d297419223c574ba9313536f50a8dae9d55bbc169",
+      "published_sha256": "7dab77d37ad8bd8768117d5d297419223c574ba9313536f50a8dae9d55bbc169",
+      "link_adapted": false,
+      "bytes": 7352
+    },
+    {
+      "path": "Hoki/CP/02-CP等级2.0/CP｜CP2.0升级｜PRD｜v6.0｜解除停用与复建恢复评审版.md",
+      "role": "current",
+      "source_name": "CP｜CP2.0升级｜PRD｜v6.0｜解除停用与复建恢复评审版.md",
+      "source_sha256": "ed17ebdb6aac7bce6b119793fbea7481f89ba916ce918ac277050adb5336d709",
+      "published_sha256": "046e3eaf762cc4b847f85bd60fa5c667ae1f6548c87c74d2347449765f1f2809",
+      "link_adapted": true,
+      "bytes": 96178
+    },
+    {
+      "path": "Hoki/CP/01-亲密关系1.0/CP｜关系系统升级｜PRD｜v8.3｜同房任务条件调整评审版.md",
+      "role": "current",
+      "source_name": "CP｜关系系统升级｜PRD｜v8.3｜同房任务条件调整评审版.md",
+      "source_sha256": "e6a8e3cb8441a3233fc8a217ee06b552407df2abbb9132ea604de4cdd80cc49b",
+      "published_sha256": "3d33f127754a303ac133fc62db79497ed61a086307091084fa96a31d95976009",
+      "link_adapted": true,
+      "bytes": 102374
+    },
+    {
+      "path": "Hoki/CP/outputs/CP｜个人主页与关系详情｜移动端原型｜v2.61｜主页关系消息入口评审版.html",
+      "role": "current",
+      "source_name": "CP｜个人主页与关系详情｜移动端原型｜v2.61｜主页关系消息入口评审版.html",
+      "source_sha256": "5fb6750ad724ec6c4db30a38308286e141c5366492e836dc6d9ab61dda4cc2e7",
+      "published_sha256": "5fb6750ad724ec6c4db30a38308286e141c5366492e836dc6d9ab61dda4cc2e7",
+      "link_adapted": false,
+      "bytes": 358783
+    },
+    {
+      "path": "Hoki/CP/outputs/CP｜相邻麦位与五档动效｜HTML原型｜v3.0｜可评审版.html",
+      "role": "current",
+      "source_name": "CP｜相邻麦位与五档动效｜HTML原型｜v3.0｜可评审版.html",
+      "source_sha256": "bfb549812eac95fe05a48ebd0d10270039d13c3687c1d9bd47cfce52c15130d7",
+      "published_sha256": "bfb549812eac95fe05a48ebd0d10270039d13c3687c1d9bd47cfce52c15130d7",
+      "link_adapted": false,
+      "bytes": 129261
+    },
+    {
+      "path": "Hoki/CP/outputs/CP｜CP2.0规则与权益｜H5规则页｜v1.0｜布局评审版.html",
+      "role": "current",
+      "source_name": "CP｜CP2.0规则与权益｜H5规则页｜v1.0｜布局评审版.html",
+      "source_sha256": "45becd85247013ebbffbb23880d94874fb2beccdcca1a541b99b1ab0123df133",
+      "published_sha256": "45becd85247013ebbffbb23880d94874fb2beccdcca1a541b99b1ab0123df133",
+      "link_adapted": false,
+      "bytes": 534544
+    },
+    {
+      "path": "Hoki/CP/outputs/Hoki｜关系说明页｜幸运礼物规则高亮｜v1.0｜可评审版.html",
+      "role": "current",
+      "source_name": "Hoki｜关系说明页｜幸运礼物规则高亮｜v1.0｜可评审版.html",
+      "source_sha256": "da834043eade30433327eee87b261bb20a0df0e53058cb9a2f70739671e39f5c",
+      "published_sha256": "da834043eade30433327eee87b261bb20a0df0e53058cb9a2f70739671e39f5c",
+      "link_adapted": false,
+      "bytes": 972523
+    },
+    {
+      "path": "Hoki/CP/outputs/Hoki｜其他亲密关系｜H5说明页｜v1.3｜可评审版.html",
+      "role": "current",
+      "source_name": "Hoki｜其他亲密关系｜H5说明页｜v1.3｜可评审版.html",
+      "source_sha256": "2890f2ad2988bfdb32a6f27d49c17e119d59140bf5060f2c667201c7ab36c0f6",
+      "published_sha256": "2890f2ad2988bfdb32a6f27d49c17e119d59140bf5060f2c667201c7ab36c0f6",
+      "link_adapted": false,
+      "bytes": 93263
+    },
+    {
+      "path": "Hoki/CP/outputs/Hoki｜其他亲密关系｜布局与交互说明｜v1.3｜可评审版.md",
+      "role": "current",
+      "source_name": "Hoki｜其他亲密关系｜布局与交互说明｜v1.3｜可评审版.md",
+      "source_sha256": "2a21aab55e23c990f3af35f2e747dd01a997df751e58278f2f548d3547ab7c91",
+      "published_sha256": "2a21aab55e23c990f3af35f2e747dd01a997df751e58278f2f548d3547ab7c91",
+      "link_adapted": false,
+      "bytes": 2220
+    },
+    {
+      "path": "Hoki/CP/outputs/multilingual-v2.0/CP｜亲密关系与消息｜多语言文案｜v2.0｜首期评审版.md",
+      "role": "current",
+      "source_name": "CP｜亲密关系与消息｜多语言文案｜v2.0｜首期评审版.md",
+      "source_sha256": "a810dd22263aad637453a0c5a9d38a08c0a4fc1ccbd19230a3d2eb33242c2453",
+      "published_sha256": "55df6b53c8cedcfcadf67dbf007b76f6e67db624289d2f27ecc71d0d177ffcf1",
+      "link_adapted": true,
+      "bytes": 150416
+    },
+    {
+      "path": "Hoki/CP/outputs/multilingual-v2.0/CP｜亲密关系与消息｜多语言文案｜v2.0｜首期评审版.xlsx",
+      "role": "current",
+      "source_name": "CP｜亲密关系与消息｜多语言文案｜v2.0｜首期评审版.xlsx",
+      "source_sha256": "55bb76b160507f189ae6dea021483a5d212ab43923a92a617fde1d2c010a3620",
+      "published_sha256": "55bb76b160507f189ae6dea021483a5d212ab43923a92a617fde1d2c010a3620",
+      "link_adapted": false,
+      "bytes": 67600
+    },
+    {
+      "path": "Hoki/CP/10-私聊邀请与确认/outputs/Hoki｜关系消息入口与申请处理｜HTML原型｜v2.2｜可评审版.html",
+      "role": "current",
+      "source_name": "Hoki｜关系消息入口与申请处理｜HTML原型｜v2.2｜可评审版.html",
+      "source_sha256": "e9c0cf6ce1d51d549ecb40b47bb2298c5d5ad81962fe86965688d965b8e4f7ab",
+      "published_sha256": "e9c0cf6ce1d51d549ecb40b47bb2298c5d5ad81962fe86965688d965b8e4f7ab",
+      "link_adapted": false,
+      "bytes": 582733
+    },
+    {
+      "path": "Hoki/CP/10-私聊邀请与确认/outputs/Hoki｜关系消息入口与申请处理｜交付说明｜v2.2｜可评审版.md",
+      "role": "current",
+      "source_name": "Hoki｜关系消息入口与申请处理｜交付说明｜v2.2｜可评审版.md",
+      "source_sha256": "b7ffd3b74e8f4ef23651862ec52f343dfd69678c16a54dde34ba64734caad5cb",
+      "published_sha256": "3094a541e28a9bc219b0ca38c4ccc58bd2927ec8293e3bc20ea4c02f56f2730c",
+      "link_adapted": true,
+      "bytes": 1647
+    },
+    {
+      "path": "Hoki/CP/02-关系配置与竞品/outputs/Hoki｜亲密关系管理后台｜HTML原型｜v2.2｜任务配置评审版.html",
+      "role": "current",
+      "source_name": "Hoki｜亲密关系管理后台｜HTML原型｜v2.2｜任务配置评审版.html",
+      "source_sha256": "b3878c4d5c09ae2a0408a381efc10b6f4559c39bf14de23a6cdddbb652647a8d",
+      "published_sha256": "b3878c4d5c09ae2a0408a381efc10b6f4559c39bf14de23a6cdddbb652647a8d",
+      "link_adapted": false,
+      "bytes": 89517
+    },
+    {
+      "path": "Hoki/CP/07-数据看板/outputs/CP｜数据看板｜HTML原型｜v1.1｜可评审版.html",
+      "role": "current",
+      "source_name": "CP｜数据看板｜HTML原型｜v1.1｜可评审版.html",
+      "source_sha256": "568cd1a17ab5eb5ec2e98aba3a2d02f96f37b864baf1a240d798964994bf80a0",
+      "published_sha256": "568cd1a17ab5eb5ec2e98aba3a2d02f96f37b864baf1a240d798964994bf80a0",
+      "link_adapted": false,
+      "bytes": 86237
+    },
+    {
+      "path": "Hoki/CP/07-数据看板/outputs/CP｜数据看板｜指标口径与接入需求｜v1.1｜可评审版.md",
+      "role": "current",
+      "source_name": "CP｜数据看板｜指标口径与接入需求｜v1.1｜可评审版.md",
+      "source_sha256": "747a71af29a7753559ca6acab89c1abba7dff35258a1de85952e852d00868c88",
+      "published_sha256": "406b5cb6d3ded00f4c1df04e6051d6cbdb7184d674d45120b810a549dbfe30c5",
+      "link_adapted": true,
+      "bytes": 21161
+    },
+    {
+      "path": "Hoki/CP/work/cp2-prd-v6.0/验证记录.md",
+      "role": "validation",
+      "source_name": "验证记录.md",
+      "source_sha256": "3740dcfffb68f492925e79f89646a743a71a68ff9e6cca1c7aa4f882141c8b6f",
+      "published_sha256": "f18afa621c65dc67e7c0de771665568a89174c87a53ef7a601dadd99c8aa08cf",
+      "link_adapted": true,
+      "bytes": 5242
+    },
+    {
+      "path": "Hoki/CP/work/cp-adjacent-v3.0/验证与使用说明.md",
+      "role": "validation",
+      "source_name": "验证与使用说明.md",
+      "source_sha256": "8f6137fb63e4bfb00d0ccc0817c4be98f5447765c2fea7a41f970db6a7693187",
+      "published_sha256": "8f6137fb63e4bfb00d0ccc0817c4be98f5447765c2fea7a41f970db6a7693187",
+      "link_adapted": false,
+      "bytes": 3331
+    },
+    {
+      "path": "Hoki/CP/work/cp-rules-v1.0/布局与验证说明.md",
+      "role": "validation",
+      "source_name": "布局与验证说明.md",
+      "source_sha256": "c6325a84eb7fc5f3d8eb05836f644c97bdb4db2b3c0ef3c2b8b073770262fcde",
+      "published_sha256": "a9b665ec4963dfd7073c48f29edf84575b246aa4c5ce9dd8d6e87fe28a00d7d2",
+      "link_adapted": true,
+      "bytes": 8863
+    },
+    {
+      "path": "Hoki/CP/work/relationship-rules-review-20261027/验证与核查记录.md",
+      "role": "validation",
+      "source_name": "验证与核查记录.md",
+      "source_sha256": "28283a7762f97bf884b038f3149670758c11ed270d477cbe4ada614cf76cc985",
+      "published_sha256": "28283a7762f97bf884b038f3149670758c11ed270d477cbe4ada614cf76cc985",
+      "link_adapted": false,
+      "bytes": 4320
+    },
+    {
+      "path": "Hoki/CP/work/relationship-admin-v2.2/验证记录.md",
+      "role": "validation",
+      "source_name": "验证记录.md",
+      "source_sha256": "24a9f0f849a31823880cddaea9335d4656694ac401ace54ea878a5890d603d41",
+      "published_sha256": "24a9f0f849a31823880cddaea9335d4656694ac401ace54ea878a5890d603d41",
+      "link_adapted": false,
+      "bytes": 3747
+    },
+    {
+      "path": "Hoki/CP/work/friends-guide-v1.3/验证记录.md",
+      "role": "validation",
+      "source_name": "验证记录.md",
+      "source_sha256": "7a50223841b7270ddca66df90bc858f64175663907cedbfc9f5a2697ad51ad00",
+      "published_sha256": "7a50223841b7270ddca66df90bc858f64175663907cedbfc9f5a2697ad51ad00",
+      "link_adapted": false,
+      "bytes": 1068
+    },
+    {
+      "path": "Hoki/CP/work/profile-messages-v2.61/验证记录.md",
+      "role": "validation",
+      "source_name": "验证记录.md",
+      "source_sha256": "b5177a2c37f80f9d71c54506221914a96942b663ebab1eda6453622164f23f17",
+      "published_sha256": "b5177a2c37f80f9d71c54506221914a96942b663ebab1eda6453622164f23f17",
+      "link_adapted": false,
+      "bytes": 2334
+    },
+    {
+      "path": "Hoki/CP/outputs/assets/agency-lion-emblem.png",
+      "role": "html-asset",
+      "source_name": "agency-lion-emblem.png",
+      "source_sha256": "56e7f167c6a33c3179344048bf426b35dcf0006abbe959115cfa38a32178ca6d",
+      "published_sha256": "56e7f167c6a33c3179344048bf426b35dcf0006abbe959115cfa38a32178ca6d",
+      "link_adapted": false,
+      "bytes": 113039
+    },
+    {
+      "path": "Hoki/CP/outputs/assets/agency-mazen-avatar.png",
+      "role": "html-asset",
+      "source_name": "agency-mazen-avatar.png",
+      "source_sha256": "740824b556ef316a68916a1afb4494d12b30d63b25fb571fc415a08b73d6dbac",
+      "published_sha256": "740824b556ef316a68916a1afb4494d12b30d63b25fb571fc415a08b73d6dbac",
+      "link_adapted": false,
+      "bytes": 24939
+    },
+    {
+      "path": "Hoki/CP/outputs/assets/agency-owner-avatar.png",
+      "role": "html-asset",
+      "source_name": "agency-owner-avatar.png",
+      "source_sha256": "d87116a249ac2f0b16b64c01f6545b82f411ac46f4412ad0586b749393902b14",
+      "published_sha256": "d87116a249ac2f0b16b64c01f6545b82f411ac46f4412ad0586b749393902b14",
+      "link_adapted": false,
+      "bytes": 9917
+    },
+    {
+      "path": "Hoki/CP/outputs/assets/agency-trophy-blue.png",
+      "role": "html-asset",
+      "source_name": "agency-trophy-blue.png",
+      "source_sha256": "03ae98c3d849d884648743849b5cff762bf6d6f69b2fa96771977ee93605dac6",
+      "published_sha256": "03ae98c3d849d884648743849b5cff762bf6d6f69b2fa96771977ee93605dac6",
+      "link_adapted": false,
+      "bytes": 67407
+    },
+    {
+      "path": "Hoki/CP/outputs/assets/agency-trophy-plinth.png",
+      "role": "html-asset",
+      "source_name": "agency-trophy-plinth.png",
+      "source_sha256": "072718a004cad98b7dccda12cbffd8786a0c63ba9aa4b7c3c1bf096c986f3611",
+      "published_sha256": "072718a004cad98b7dccda12cbffd8786a0c63ba9aa4b7c3c1bf096c986f3611",
+      "link_adapted": false,
+      "bytes": 30201
+    },
+    {
+      "path": "Hoki/CP/outputs/assets/agency-trophy-red.png",
+      "role": "html-asset",
+      "source_name": "agency-trophy-red.png",
+      "source_sha256": "28a56dedb096474b5374dfeb4f7e5ac402f5d526e3cbd39db91efffea031f671",
+      "published_sha256": "28a56dedb096474b5374dfeb4f7e5ac402f5d526e3cbd39db91efffea031f671",
+      "link_adapted": false,
+      "bytes": 64326
+    },
+    {
+      "path": "Hoki/CP/outputs/assets/avatar-lin.png",
+      "role": "html-asset",
+      "source_name": "avatar-lin.png",
+      "source_sha256": "7d1b5ea11cd5feecc19cfb89cb305e43aa89ec906e49b503bddc2badd81e4358",
+      "published_sha256": "7d1b5ea11cd5feecc19cfb89cb305e43aa89ec906e49b503bddc2badd81e4358",
+      "link_adapted": false,
+      "bytes": 5286
+    },
+    {
+      "path": "Hoki/CP/outputs/assets/avatar-mira.png",
+      "role": "html-asset",
+      "source_name": "avatar-mira.png",
+      "source_sha256": "b4167d9483e1d0f161ca51d8a6787da826d7f3d33b59c83fdbebe3ec788ff1f5",
+      "published_sha256": "b4167d9483e1d0f161ca51d8a6787da826d7f3d33b59c83fdbebe3ec788ff1f5",
+      "link_adapted": false,
+      "bytes": 5374
+    },
+    {
+      "path": "Hoki/CP/outputs/assets/cp-super-love-hero-v2.png",
+      "role": "html-asset",
+      "source_name": "cp-super-love-hero-v2.png",
+      "source_sha256": "e7d770c0ee5913b6f5ff1823c18499c76086e3f4beac72348d13725ed762a526",
+      "published_sha256": "e7d770c0ee5913b6f5ff1823c18499c76086e3f4beac72348d13725ed762a526",
+      "link_adapted": false,
+      "bytes": 632419
+    },
+    {
+      "path": "Hoki/CP/outputs/assets/gift-bond.png",
+      "role": "html-asset",
+      "source_name": "gift-bond.png",
+      "source_sha256": "e91620956a45126731b09d786309577f3cc589b12defe48f3c5cadd6fdd16027",
+      "published_sha256": "e91620956a45126731b09d786309577f3cc589b12defe48f3c5cadd6fdd16027",
+      "link_adapted": false,
+      "bytes": 51527
+    },
+    {
+      "path": "Hoki/CP/outputs/assets/gift-cp-01.png",
+      "role": "html-asset",
+      "source_name": "gift-cp-01.png",
+      "source_sha256": "0c6270f4332e1482af826ea1526e0728228575483373cdb629611e9560085639",
+      "published_sha256": "0c6270f4332e1482af826ea1526e0728228575483373cdb629611e9560085639",
+      "link_adapted": false,
+      "bytes": 62324
+    },
+    {
+      "path": "Hoki/CP/outputs/assets/gift-cp-02.png",
+      "role": "html-asset",
+      "source_name": "gift-cp-02.png",
+      "source_sha256": "3270d1131e9d0d2dd31d7283483722836c450a1e586c7eeaa4a18befff26e8a9",
+      "published_sha256": "3270d1131e9d0d2dd31d7283483722836c450a1e586c7eeaa4a18befff26e8a9",
+      "link_adapted": false,
+      "bytes": 54602
+    },
+    {
+      "path": "Hoki/CP/outputs/assets/gift-cp-03.png",
+      "role": "html-asset",
+      "source_name": "gift-cp-03.png",
+      "source_sha256": "78290f68ff18c7057069ec1f8084b4bc1e6b4a1b0df3586108886014d7b0715b",
+      "published_sha256": "78290f68ff18c7057069ec1f8084b4bc1e6b4a1b0df3586108886014d7b0715b",
+      "link_adapted": false,
+      "bytes": 59912
+    },
+    {
+      "path": "Hoki/CP/outputs/assets/lucide.min.js",
+      "role": "html-asset",
+      "source_name": "lucide.min.js",
+      "source_sha256": "ab85225ecc1daa2033607856f03dd2dabcbc08e2d260a5b97e17c690aa929766",
+      "published_sha256": "ab85225ecc1daa2033607856f03dd2dabcbc08e2d260a5b97e17c690aa929766",
+      "link_adapted": false,
+      "bytes": 397450
+    },
+    {
+      "path": "Hoki/CP/outputs/assets/profile-hero.png",
+      "role": "html-asset",
+      "source_name": "profile-hero.png",
+      "source_sha256": "01759b2ef203baca03c656f9fc0793402fe7123a51ef4433dc96f6530df39552",
+      "published_sha256": "01759b2ef203baca03c656f9fc0793402fe7123a51ef4433dc96f6530df39552",
+      "link_adapted": false,
+      "bytes": 212388
+    },
+    {
+      "path": "Hoki/CP/outputs/assets/recommend-home.jpg",
+      "role": "html-asset",
+      "source_name": "recommend-home.jpg",
+      "source_sha256": "e6509548475b0ee5c9581b1cd8ec98777fd954b9daed8552417edcb109878ab3",
+      "published_sha256": "e6509548475b0ee5c9581b1cd8ec98777fd954b9daed8552417edcb109878ab3",
+      "link_adapted": false,
+      "bytes": 352267
+    },
+    {
+      "path": "Hoki/CP/outputs/assets/room-app-v2.jpg",
+      "role": "html-asset",
+      "source_name": "room-app-v2.jpg",
+      "source_sha256": "9c7fdd81401a0c757716271a62c17608fd39e689d4c23ed1436283aab4f56a03",
+      "published_sha256": "9c7fdd81401a0c757716271a62c17608fd39e689d4c23ed1436283aab4f56a03",
+      "link_adapted": false,
+      "bytes": 265882
+    },
+    {
+      "path": "Hoki/CP/outputs/assets/room-exit-drawer.png",
+      "role": "html-asset",
+      "source_name": "room-exit-drawer.png",
+      "source_sha256": "bd0b026b02049779816d0cf07b448b00e9ac4f348459b551f7761ad5fe068ab7",
+      "published_sha256": "bd0b026b02049779816d0cf07b448b00e9ac4f348459b551f7761ad5fe068ab7",
+      "link_adapted": false,
+      "bytes": 771900
+    },
+    {
+      "path": "Hoki/老虎机开源资料整理/Slots｜概率玩法源码与验证全解｜v1.1｜综合评审版.md",
+      "role": "current",
+      "source_name": "Slots｜概率玩法源码与验证全解｜v1.1｜综合评审版.md",
+      "source_sha256": "d3c6c2357031107c549f223292ca0de21fbc5306c581f222bc3ddc759d5454e3",
+      "published_sha256": "d3c6c2357031107c549f223292ca0de21fbc5306c581f222bc3ddc759d5454e3",
+      "link_adapted": false,
+      "bytes": 391845
+    },
+    {
+      "path": "Hoki/老虎机开源资料整理/evidence/verify_math.py",
+      "role": "current",
+      "source_name": "verify_math.py",
+      "source_sha256": "ea3c812d7aa12639ae71e36e8a9413b342437fc4422601213bc3b1b0eb3dd554",
+      "published_sha256": "ea3c812d7aa12639ae71e36e8a9413b342437fc4422601213bc3b1b0eb3dd554",
+      "link_adapted": false,
+      "bytes": 9325
+    },
+    {
+      "path": "Hoki/老虎机开源资料整理/evidence/数学复算结果.json",
+      "role": "current",
+      "source_name": "数学复算结果.json",
+      "source_sha256": "7c3619afa5c479fa7736e0dc46247b165ea297e1776cee4160ebb54d495e74f1",
+      "published_sha256": "7c3619afa5c479fa7736e0dc46247b165ea297e1776cee4160ebb54d495e74f1",
+      "link_adapted": false,
+      "bytes": 5114
+    },
+    {
+      "path": "Hoki/老虎机开源资料整理/evidence/统一版QA结果.json",
+      "role": "current",
+      "source_name": "统一版QA结果.json",
+      "source_sha256": "178f3ef83b62caf836efb04486713e74d357b2bb05cdc13ae8740277f2595efb",
+      "published_sha256": "178f3ef83b62caf836efb04486713e74d357b2bb05cdc13ae8740277f2595efb",
+      "link_adapted": false,
+      "bytes": 846
+    },
+    {
+      "path": "Hoki/老虎机开源资料整理/evidence/github/source_manifest.json",
+      "role": "current",
+      "source_name": "source_manifest.json",
+      "source_sha256": "75e6c923b022faafebf721e9143f78dac75c13a81b6ec5ea37d0890f9753d101",
+      "published_sha256": "75e6c923b022faafebf721e9143f78dac75c13a81b6ec5ea37d0890f9753d101",
+      "link_adapted": false,
+      "bytes": 12316
+    },
+    {
+      "path": "Hoki/公屏消息切换/Hoki｜公屏消息切换｜竞品对齐方案｜v3.0｜可评审版.md",
+      "role": "current",
+      "source_name": "Hoki｜公屏消息切换｜竞品对齐方案｜v3.0｜可评审版.md",
+      "source_sha256": "2e977aa0ad7b94fe601d42be19baca5051dbcee1e81367a39760fe61b71ac708",
+      "published_sha256": "bb853bf9aec58944f96cee811ff76c9c99d72fe99caa522a4ed08f6a0a5e43fc",
+      "link_adapted": true,
+      "bytes": 11591
+    },
+    {
+      "path": "Hoki/公屏消息切换/Hoki｜公屏消息切换｜QA与交付记录｜v3.0.md",
+      "role": "current",
+      "source_name": "Hoki｜公屏消息切换｜QA与交付记录｜v3.0.md",
+      "source_sha256": "2df8719a84197e7c70f5bc2d5713dea1b86aeb4c7a6c6c392fd7cab6a6bc22e3",
+      "published_sha256": "2df8719a84197e7c70f5bc2d5713dea1b86aeb4c7a6c6c392fd7cab6a6bc22e3",
+      "link_adapted": false,
+      "bytes": 2476
+    },
+    {
+      "path": "Hoki/Hoki｜房间公屏消息分Tab｜产品方案｜v1.0｜可评审版.md",
+      "role": "current",
+      "source_name": "Hoki｜房间公屏消息分Tab｜产品方案｜v1.0｜可评审版.md",
+      "source_sha256": "571b4e87996034cb406285c99e3da156d9a7f9705b82f9331cce453583750dad",
+      "published_sha256": "571b4e87996034cb406285c99e3da156d9a7f9705b82f9331cce453583750dad",
+      "link_adapted": false,
+      "bytes": 19458
+    },
+    {
+      "path": "Hoki/Hoki｜房间公屏消息分Tab｜交互示意｜v1.0｜可评审版.html",
+      "role": "current",
+      "source_name": "Hoki｜房间公屏消息分Tab｜交互示意｜v1.0｜可评审版.html",
+      "source_sha256": "3e51fd6e35fc62ead46b70bf65d43b9a155af0846a0b24c2fd37447b81dd0a79",
+      "published_sha256": "3e51fd6e35fc62ead46b70bf65d43b9a155af0846a0b24c2fd37447b81dd0a79",
+      "link_adapted": false,
+      "bytes": 21229
+    },
+    {
+      "path": "Hoki/Hoki｜房间公屏消息分Tab｜QA与交付记录｜v1.0.md",
+      "role": "current",
+      "source_name": "Hoki｜房间公屏消息分Tab｜QA与交付记录｜v1.0.md",
+      "source_sha256": "55f213f8f49dfacc76f4f6f22195e19977694d4942d0361dc0e83fe065665ddf",
+      "published_sha256": "55f213f8f49dfacc76f4f6f22195e19977694d4942d0361dc0e83fe065665ddf",
+      "link_adapted": false,
+      "bytes": 3348
+    },
+    {
+      "path": "Hoki/YouTube一起看/语聊房｜YouTube一起看｜产品方案｜v2.0｜可评审版.md",
+      "role": "current",
+      "source_name": "语聊房｜YouTube一起看｜产品方案｜v2.0｜可评审版.md",
+      "source_sha256": "9cdf636e5fcee3a71abb19de1e8c17cf27eed90f4b3359b5346ac777a0601015",
+      "published_sha256": "9cdf636e5fcee3a71abb19de1e8c17cf27eed90f4b3359b5346ac777a0601015",
+      "link_adapted": false,
+      "bytes": 19043
+    },
+    {
+      "path": "Hoki/YouTube一起看/语聊房｜YouTube一起看｜综合原型｜v2.0｜current.html",
+      "role": "current",
+      "source_name": "语聊房｜YouTube一起看｜综合原型｜v2.0｜current.html",
+      "source_sha256": "250a7bcd1337a2fb8f1e49b81bed76b4410d38fd8109bf792f1a48580bc494c2",
+      "published_sha256": "250a7bcd1337a2fb8f1e49b81bed76b4410d38fd8109bf792f1a48580bc494c2",
+      "link_adapted": false,
+      "bytes": 74110
+    },
+    {
+      "path": "Hoki/YouTube一起看/语聊房｜YouTube一起看｜文案表｜v2.0｜可评审版.md",
+      "role": "current",
+      "source_name": "语聊房｜YouTube一起看｜文案表｜v2.0｜可评审版.md",
+      "source_sha256": "8c3b6e48abb96e5e0b6eafd6f7ffe935a4e607fa4e5d73bfd40de17821c86a03",
+      "published_sha256": "8c3b6e48abb96e5e0b6eafd6f7ffe935a4e607fa4e5d73bfd40de17821c86a03",
+      "link_adapted": false,
+      "bytes": 11017
+    },
+    {
+      "path": "Hoki/YouTube一起看/语聊房｜YouTube一起看｜QA与交付记录｜v2.0.md",
+      "role": "current",
+      "source_name": "语聊房｜YouTube一起看｜QA与交付记录｜v2.0.md",
+      "source_sha256": "b3adc293a2c33c29dff7423d96e7371ce4b6ff321b1eb675913783488c36a698",
+      "published_sha256": "b3adc293a2c33c29dff7423d96e7371ce4b6ff321b1eb675913783488c36a698",
+      "link_adapted": false,
+      "bytes": 5399
+    },
+    {
+      "path": "Hoki/幸运礼物效果优化/幸运礼物效果优化｜PRD｜v3.0｜综合评审版.md",
+      "role": "current",
+      "source_name": "幸运礼物效果优化｜PRD｜v3.0｜综合评审版.md",
+      "source_sha256": "c0ff6ef1b31450ea62792c8cf0b452ff4dec843afc9be74dd8a7d9091c7381e6",
+      "published_sha256": "cb0350384b82e626c51520493864b2be257abdf3b626f8c92d23e81f8ae409b8",
+      "link_adapted": true,
+      "bytes": 33745
+    },
+    {
+      "path": "Hoki/幸运礼物效果优化/幸运礼物效果优化｜综合交互原型｜v3.0｜current.html",
+      "role": "current",
+      "source_name": "幸运礼物效果优化｜综合交互原型｜v3.0｜current.html",
+      "source_sha256": "2d23556e5a66923f21e9ac337a4685ae2ddb4a97c4090a9aa5851bb74ca0329e",
+      "published_sha256": "2d23556e5a66923f21e9ac337a4685ae2ddb4a97c4090a9aa5851bb74ca0329e",
+      "link_adapted": false,
+      "bytes": 147361
+    },
+    {
+      "path": "Hoki/幸运礼物效果优化/幸运礼物效果优化｜综合原型QA与交付记录｜v3.0.md",
+      "role": "current",
+      "source_name": "幸运礼物效果优化｜综合原型QA与交付记录｜v3.0.md",
+      "source_sha256": "feb4fd73f99a1c62af6afa60e70c0be2e238c82275dd017033496afa91383b3d",
+      "published_sha256": "feb4fd73f99a1c62af6afa60e70c0be2e238c82275dd017033496afa91383b3d",
+      "link_adapted": false,
+      "bytes": 7052
+    },
+    {
+      "path": "Hoki/幸运礼物附加奖励调研/中东语聊｜幸运礼物附加奖励｜调研汇总｜v1.1｜可评审版.md",
+      "role": "current",
+      "source_name": "中东语聊｜幸运礼物附加奖励｜调研汇总｜v1.1｜可评审版.md",
+      "source_sha256": "3ccf9f729a76aef9ae877d7deb01f8cc032f26f04e112eb94ed73de952b9b2c2",
+      "published_sha256": "3ccf9f729a76aef9ae877d7deb01f8cc032f26f04e112eb94ed73de952b9b2c2",
+      "link_adapted": false,
+      "bytes": 19906
+    },
+    {
+      "path": "Hoki/幸运礼物附加奖励调研/中东语聊｜幸运礼物附加奖励｜来源与核验记录｜v1.1.md",
+      "role": "current",
+      "source_name": "中东语聊｜幸运礼物附加奖励｜来源与核验记录｜v1.1.md",
+      "source_sha256": "4e0c8a4a9daa4c5dab485f91209249470de4148d3fbd18571ef0e4700f7d547e",
+      "published_sha256": "4e0c8a4a9daa4c5dab485f91209249470de4148d3fbd18571ef0e4700f7d547e",
+      "link_adapted": false,
+      "bytes": 15218
+    },
+    {
+      "path": "Hoki/幸运礼物附加奖励调研/evidence/Hawa｜Jackpot｜镜像核验会话摘录｜2026-10-15.md",
+      "role": "current",
+      "source_name": "Hawa｜Jackpot｜镜像核验会话摘录｜2026-10-15.md",
+      "source_sha256": "88e1249ac5ee7b1aa40a2af448983ea8fcf400085339e617d8f0762bbe3698db",
+      "published_sha256": "88e1249ac5ee7b1aa40a2af448983ea8fcf400085339e617d8f0762bbe3698db",
+      "link_adapted": false,
+      "bytes": 2986
+    },
+    {
+      "path": "Hoki/关系规则H5评审/Hoki｜关系规则H5｜英文问题清单｜v1.0｜可评审版.md",
+      "role": "current",
+      "source_name": "Hoki｜关系规则H5｜英文问题清单｜v1.0｜可评审版.md",
+      "source_sha256": "3730ec582b8e992730cd427467720ad59c24f73ab51f8c601d786bb7e4cbffe2",
+      "published_sha256": "3730ec582b8e992730cd427467720ad59c24f73ab51f8c601d786bb7e4cbffe2",
+      "link_adapted": false,
+      "bytes": 7493
+    },
+    {
+      "path": "Hoki/CP/05-设计物料需求/outputs/CP｜关系系统升级｜设计物料需求｜v1.10｜解除留存与兼容评审版.xlsx",
+      "role": "config-reference",
+      "source_name": "CP｜关系系统升级｜设计物料需求｜v1.10｜解除留存与兼容评审版.xlsx",
+      "source_sha256": "1c3ac83c4d195178c52254b7ed18356eb4dc56a39fe5cbd8746f50b2223ffe8e",
+      "published_sha256": "1c3ac83c4d195178c52254b7ed18356eb4dc56a39fe5cbd8746f50b2223ffe8e",
+      "link_adapted": false,
+      "bytes": 68995
+    },
+    {
+      "path": "Hoki/CP/02-关系配置与竞品/outputs/cp-level-standard-20260903/等级配置｜CP等级与礼物标准｜v3.7｜可评审版.xlsx",
+      "role": "config-reference",
+      "source_name": "等级配置｜CP等级与礼物标准｜v3.7｜可评审版.xlsx",
+      "source_sha256": "4af95bf910c43596f30e4bb99e842fcd7d00a6e3be8be08696723ad2f21462e2",
+      "published_sha256": "4af95bf910c43596f30e4bb99e842fcd7d00a6e3be8be08696723ad2f21462e2",
+      "link_adapted": false,
+      "bytes": 156949
+    },
+    {
+      "path": "Hoki/CP/06-四类等级配置/outputs/game-level-summary-20260902/等级配置｜四类等级汇总｜current.xlsx",
+      "role": "config-reference",
+      "source_name": "等级配置｜四类等级汇总｜current.xlsx",
+      "source_sha256": "f2550ed8634cb6ce7e37b9a176a06aa061c737c8b4da885085856e87682a97ee",
+      "published_sha256": "f2550ed8634cb6ce7e37b9a176a06aa061c737c8b4da885085856e87682a97ee",
+      "link_adapted": false,
+      "bytes": 17680
+    },
+    {
+      "path": "Hoki/CP/配置参考/CP｜100级成长与5档物料方案｜v3.9｜综合评审版.xlsx",
+      "role": "config-reference",
+      "source_name": "CP｜100级成长与5档物料方案｜v3.9｜综合评审版.xlsx",
+      "source_sha256": "f73ed0c4324c1ea6628d39bb3afaec03300d601d63412a4de4bef0ddf812f093",
+      "published_sha256": "f73ed0c4324c1ea6628d39bb3afaec03300d601d63412a4de4bef0ddf812f093",
+      "link_adapted": false,
+      "bytes": 71653
+    },
+    {
+      "path": "Hoki/CP/work/cp2-heart-link-v1.1/录屏飘心对照.png",
+      "role": "document-asset",
+      "source_name": "录屏飘心对照.png",
+      "source_sha256": "eb03f2f624dd67c5a0b0d96f36a2b040e9ac4f46b90e4f1e6315ca79723c4898",
+      "published_sha256": "eb03f2f624dd67c5a0b0d96f36a2b040e9ac4f46b90e4f1e6315ca79723c4898",
+      "link_adapted": false,
+      "bytes": 460364
+    },
+    {
+      "path": "Hoki/CP/work/cp-rules-v1.0/附件双头像局部参考.png",
+      "role": "document-asset",
+      "source_name": "附件双头像局部参考.png",
+      "source_sha256": "f3b60876fcfac9183e42b87fc2c5f0064a1f11bddbc81918f1e5eb6f7dee87a7",
+      "published_sha256": "f3b60876fcfac9183e42b87fc2c5f0064a1f11bddbc81918f1e5eb6f7dee87a7",
+      "link_adapted": false,
+      "bytes": 105418
+    },
+    {
+      "path": "Hoki/参考素材/已粘贴的文本.txt",
+      "role": "document-asset",
+      "source_name": "已粘贴的文本.txt",
+      "source_sha256": "27bc3d4ccf5d099911943a84a1440495aa440fa5cc4df1736b5066c43bfc860b",
+      "published_sha256": "27bc3d4ccf5d099911943a84a1440495aa440fa5cc4df1736b5066c43bfc860b",
+      "link_adapted": false,
+      "bytes": 23403
+    },
+    {
+      "path": "Hoki/CP/work/task-prd-v7.2/任务按钮跳转要求.png",
+      "role": "document-asset",
+      "source_name": "任务按钮跳转要求.png",
+      "source_sha256": "de7a347a431907217c0812f29faf61387fd5cc712dfa78652e6b053471b5bf1f",
+      "published_sha256": "de7a347a431907217c0812f29faf61387fd5cc712dfa78652e6b053471b5bf1f",
+      "link_adapted": false,
+      "bytes": 693880
+    },
+    {
+      "path": "Hoki/CP/outputs/Hoki｜其他亲密关系｜页面布局｜v1.3｜可评审版.png",
+      "role": "document-asset",
+      "source_name": "Hoki｜其他亲密关系｜页面布局｜v1.3｜可评审版.png",
+      "source_sha256": "e2af2ec5524852a18ec8af61c8ffa2cf2bc14ab41083daa4be98d34aa28185a6",
+      "published_sha256": "e2af2ec5524852a18ec8af61c8ffa2cf2bc14ab41083daa4be98d34aa28185a6",
+      "link_adapted": false,
+      "bytes": 633710
+    },
+    {
+      "path": "Hoki/CP/outputs/Hoki｜其他亲密关系｜页面长图｜v1.3｜可评审版.jpg",
+      "role": "document-asset",
+      "source_name": "Hoki｜其他亲密关系｜页面长图｜v1.3｜可评审版.jpg",
+      "source_sha256": "1ade6cbd6a941a86499ed2444f22341c53ce258335ba0114c36dec8077ecef49",
+      "published_sha256": "1ade6cbd6a941a86499ed2444f22341c53ce258335ba0114c36dec8077ecef49",
+      "link_adapted": false,
+      "bytes": 117295
+    },
+    {
+      "path": "Hoki/CP/10-私聊邀请与确认/outputs/qa-messages-v2.2/入口与申请处理效果.jpg",
+      "role": "document-asset",
+      "source_name": "入口与申请处理效果.jpg",
+      "source_sha256": "9ccbb6357a0131546b94b943d531fa7599af4316bf365ef4c0eeaa715038f7c1",
+      "published_sha256": "9ccbb6357a0131546b94b943d531fa7599af4316bf365ef4c0eeaa715038f7c1",
+      "link_adapted": false,
+      "bytes": 139727
+    },
+    {
+      "path": "Hoki/CP/10-私聊邀请与确认/outputs/qa-messages-v2.2/validation.json",
+      "role": "document-asset",
+      "source_name": "validation.json",
+      "source_sha256": "01859d62a1811b0427f9005198c4f18cbdd082c50c14063254cc239ffcefd26f",
+      "published_sha256": "01859d62a1811b0427f9005198c4f18cbdd082c50c14063254cc239ffcefd26f",
+      "link_adapted": false,
+      "bytes": 2208
+    },
+    {
+      "path": "Hoki/CP/work/cp2-prd-v6.0/来源哈希.json",
+      "role": "document-asset",
+      "source_name": "来源哈希.json",
+      "source_sha256": "ccaf01bbbaa11161847bdf87cbd07d774a788384fa460d6f9f806a5195d56ed6",
+      "published_sha256": "ccaf01bbbaa11161847bdf87cbd07d774a788384fa460d6f9f806a5195d56ed6",
+      "link_adapted": false,
+      "bytes": 788
+    },
+    {
+      "path": "Hoki/CP/work/cp2-prd-v6.0/结构核验结果.json",
+      "role": "document-asset",
+      "source_name": "结构核验结果.json",
+      "source_sha256": "e91720915a68abc574d0bd18692e72bb900995c2479d82b4d798012a4eea08e3",
+      "published_sha256": "e91720915a68abc574d0bd18692e72bb900995c2479d82b4d798012a4eea08e3",
+      "link_adapted": false,
+      "bytes": 2825
+    },
+    {
+      "path": "Hoki/CP/outputs/CP｜CP2.0规则与权益｜页面长图｜v1.0｜布局评审版.png",
+      "role": "document-asset",
+      "source_name": "CP｜CP2.0规则与权益｜页面长图｜v1.0｜布局评审版.png",
+      "source_sha256": "2bf7c29c683eb18de814bdcf245413acacc36ad75265134ffb5e1d4d974a9e82",
+      "published_sha256": "2bf7c29c683eb18de814bdcf245413acacc36ad75265134ffb5e1d4d974a9e82",
+      "link_adapted": false,
+      "bytes": 283145
+    },
+    {
+      "path": "Hoki/CP/outputs/CP｜CP2.0规则与权益｜样式对照｜v1.0｜布局评审版.png",
+      "role": "document-asset",
+      "source_name": "CP｜CP2.0规则与权益｜样式对照｜v1.0｜布局评审版.png",
+      "source_sha256": "db4598a2579957d0ce15491a94e49591fb00aef4054dfb0c259f40fcc0e70708",
+      "published_sha256": "db4598a2579957d0ce15491a94e49591fb00aef4054dfb0c259f40fcc0e70708",
+      "link_adapted": false,
+      "bytes": 485494
+    },
+    {
+      "path": "Hoki/CP/work/cp-rules-v1.0/浏览器验证结果.json",
+      "role": "document-asset",
+      "source_name": "浏览器验证结果.json",
+      "source_sha256": "b0b8d7d10c15c1d2b307a678da25fc0bce8194b5d2ecae4ae46c8133ff7c6a2f",
+      "published_sha256": "b0b8d7d10c15c1d2b307a678da25fc0bce8194b5d2ecae4ae46c8133ff7c6a2f",
+      "link_adapted": false,
+      "bytes": 3899
+    },
+    {
+      "path": "Hoki/CP/work/cp-rules-v1.0/静态核验结果.json",
+      "role": "document-asset",
+      "source_name": "静态核验结果.json",
+      "source_sha256": "c6bc9dda0aa4a4d8bedb8c290eae9a8f5695800752ffb134a7ab5aa16f1ab186",
+      "published_sha256": "c6bc9dda0aa4a4d8bedb8c290eae9a8f5695800752ffb134a7ab5aa16f1ab186",
+      "link_adapted": false,
+      "bytes": 1062
+    },
+    {
+      "path": "Hoki/公屏消息切换/evidence/08-竞品公屏-复刻基准与按钮细节.png",
+      "role": "document-asset",
+      "source_name": "08-竞品公屏-复刻基准与按钮细节.png",
+      "source_sha256": "28f232e3fd53aefd130fb633bc19276c1c9d01ee53f9d5bbd5412d6fd64e1116",
+      "published_sha256": "28f232e3fd53aefd130fb633bc19276c1c9d01ee53f9d5bbd5412d6fd64e1116",
+      "link_adapted": false,
+      "bytes": 1001352
+    },
+    {
+      "path": "Hoki/公屏消息切换/evidence/07-用户纠正-按竞品替换现有缩放.png",
+      "role": "document-asset",
+      "source_name": "07-用户纠正-按竞品替换现有缩放.png",
+      "source_sha256": "a2599119a7d928a02a8e55b1061c7c998151f12494f075c5d05a353325e29c0b",
+      "published_sha256": "a2599119a7d928a02a8e55b1061c7c998151f12494f075c5d05a353325e29c0b",
+      "link_adapted": false,
+      "bytes": 148426
+    },
+    {
+      "path": "Hoki/evidence/竞品关键画面.jpg",
+      "role": "document-asset",
+      "source_name": "竞品关键画面.jpg",
+      "source_sha256": "0817693d45bfb486a549f8981aafac0b9b41b83ca319bfbec12f99f56dbd0f49",
+      "published_sha256": "0817693d45bfb486a549f8981aafac0b9b41b83ca319bfbec12f99f56dbd0f49",
+      "link_adapted": false,
+      "bytes": 525030
+    },
+    {
+      "path": "Hoki/YouTube一起看/evidence/v2.0/01-房主与管理员共同控制.jpg",
+      "role": "document-asset",
+      "source_name": "01-房主与管理员共同控制.jpg",
+      "source_sha256": "bf3279d0a4ba1356829a3b4d61db0f02ca879e533f3061a7f959428c8035a532",
+      "published_sha256": "bf3279d0a4ba1356829a3b4d61db0f02ca879e533f3061a7f959428c8035a532",
+      "link_adapted": false,
+      "bytes": 163359
+    },
+    {
+      "path": "Hoki/YouTube一起看/evidence/v2.0/02-后台白名单与财富门槛.jpg",
+      "role": "document-asset",
+      "source_name": "02-后台白名单与财富门槛.jpg",
+      "source_sha256": "f2c0748424c4cf2afbcd034f59d44ceada3b05c645041a8ed5f5dd4559465c8f",
+      "published_sha256": "f2c0748424c4cf2afbcd034f59d44ceada3b05c645041a8ed5f5dd4559465c8f",
+      "link_adapted": false,
+      "bytes": 142737
+    },
+    {
+      "path": "Hoki/YouTube一起看/evidence/v2.0/03-白名单内单独配置门槛.jpg",
+      "role": "document-asset",
+      "source_name": "03-白名单内单独配置门槛.jpg",
+      "source_sha256": "114fcffef4fc3fd8849dc814c90f4c3a05a81b9ef0b6f94b98b1733a34670f20",
+      "published_sha256": "114fcffef4fc3fd8849dc814c90f4c3a05a81b9ef0b6f94b98b1733a34670f20",
+      "link_adapted": false,
+      "bytes": 130726
+    },
+    {
+      "path": "Hoki/幸运礼物效果优化/evidence/22-功能详情方案-2026-10-19.png",
+      "role": "document-asset",
+      "source_name": "22-功能详情方案-2026-10-19.png",
+      "source_sha256": "e654b9f9475d21d782b0eea4c99443c37c99039625df50db97ffe702ad3aa639",
+      "published_sha256": "e654b9f9475d21d782b0eea4c99443c37c99039625df50db97ffe702ad3aa639",
+      "link_adapted": false,
+      "bytes": 7061410
+    },
+    {
+      "path": "Hoki/幸运礼物效果优化/evidence/30-v3.0-综合交互预览.png",
+      "role": "document-asset",
+      "source_name": "30-v3.0-综合交互预览.png",
+      "source_sha256": "c4d61e07728e39e58515ffc07e758509233a0ba36d6b96af436b112fb783153c",
+      "published_sha256": "c4d61e07728e39e58515ffc07e758509233a0ba36d6b96af436b112fb783153c",
+      "link_adapted": false,
+      "bytes": 140186
+    },
+    {
+      "path": "Hoki/幸运礼物效果优化/evidence/31-v3.0-房间交互预览.png",
+      "role": "document-asset",
+      "source_name": "31-v3.0-房间交互预览.png",
+      "source_sha256": "21e863ae72378965624af7d300e9332cf8b2640fe1cb6e3d8fa26d2256ca7808",
+      "published_sha256": "21e863ae72378965624af7d300e9332cf8b2640fe1cb6e3d8fa26d2256ca7808",
+      "link_adapted": false,
+      "bytes": 261646
+    },
+    {
+      "path": "Hoki/幸运礼物效果优化/evidence/23-v3.0-首笔确认.png",
+      "role": "document-asset",
+      "source_name": "23-v3.0-首笔确认.png",
+      "source_sha256": "c59b9caf050129fa7aec7bb9710dd117c98058d167cf35102a7b2223948998c4",
+      "published_sha256": "c59b9caf050129fa7aec7bb9710dd117c98058d167cf35102a7b2223948998c4",
+      "link_adapted": false,
+      "bytes": 127691
+    },
+    {
+      "path": "Hoki/幸运礼物效果优化/evidence/25-v3.0-设置入口.png",
+      "role": "document-asset",
+      "source_name": "25-v3.0-设置入口.png",
+      "source_sha256": "d4b2b4335281c792b863a27d8c2863d86ceebd32bd00d7ddf3735262542f6f8d",
+      "published_sha256": "d4b2b4335281c792b863a27d8c2863d86ceebd32bd00d7ddf3735262542f6f8d",
+      "link_adapted": false,
+      "bytes": 125276
+    },
+    {
+      "path": "Hoki/幸运礼物效果优化/evidence/26-v3.0-后台独立开关与五档.png",
+      "role": "document-asset",
+      "source_name": "26-v3.0-后台独立开关与五档.png",
+      "source_sha256": "6f652f0adaf269f6ff83b1fe6a6f73dd765aaa6ffe65cbef63e946a450bd9203",
+      "published_sha256": "6f652f0adaf269f6ff83b1fe6a6f73dd765aaa6ffe65cbef63e946a450bd9203",
+      "link_adapted": false,
+      "bytes": 109109
+    },
+    {
+      "path": "Hoki/幸运礼物效果优化/evidence/27-v3.0-倍率模板.png",
+      "role": "document-asset",
+      "source_name": "27-v3.0-倍率模板.png",
+      "source_sha256": "8eef5828195973daa999dff7c0e168513185014970b04eb8e6e1eb6fded8e670",
+      "published_sha256": "8eef5828195973daa999dff7c0e168513185014970b04eb8e6e1eb6fded8e670",
+      "link_adapted": false,
+      "bytes": 142099
+    },
+    {
+      "path": "Hoki/幸运礼物效果优化/evidence/28-v3.0-390px与RTL.png",
+      "role": "document-asset",
+      "source_name": "28-v3.0-390px与RTL.png",
+      "source_sha256": "e26603376a150e101853b3e72f90f794e54a756dd849e3c7840871b2435b8277",
+      "published_sha256": "e26603376a150e101853b3e72f90f794e54a756dd849e3c7840871b2435b8277",
+      "link_adapted": false,
+      "bytes": 109574
+    },
+    {
+      "path": "Hoki/幸运礼物效果优化/evidence/29-v3.0-窄屏后台.png",
+      "role": "document-asset",
+      "source_name": "29-v3.0-窄屏后台.png",
+      "source_sha256": "8cf139018b4b249b211e9ba3f85f5e5cf99d19414031d7e7fcb9cf4919f87e09",
+      "published_sha256": "8cf139018b4b249b211e9ba3f85f5e5cf99d19414031d7e7fcb9cf4919f87e09",
+      "link_adapted": false,
+      "bytes": 104469
+    },
+    {
+      "path": "Hoki/幸运礼物附加奖励调研/evidence/Hoki｜幸运礼物每日宝箱｜用户提供规则截图｜2026-10-15.png",
+      "role": "document-asset",
+      "source_name": "Hoki｜幸运礼物每日宝箱｜用户提供规则截图｜2026-10-15.png",
+      "source_sha256": "01e009501ce7d60a2cd9a5d4a4e9a9a6be6c6375ef8fa860fa99bc3fcd40ea87",
+      "published_sha256": "01e009501ce7d60a2cd9a5d4a4e9a9a6be6c6375ef8fa860fa99bc3fcd40ea87",
+      "link_adapted": false,
+      "bytes": 1023741
+    },
+    {
+      "path": "Hoki/关系规则H5评审/evidence/02-en-390-requirements.jpg",
+      "role": "document-asset",
+      "source_name": "02-en-390-requirements.jpg",
+      "source_sha256": "924dbe1e4be9459f035979a36fe7a22cca056ca9afb505c84f7449e391fb4c73",
+      "published_sha256": "924dbe1e4be9459f035979a36fe7a22cca056ca9afb505c84f7449e391fb4c73",
+      "link_adapted": false,
+      "bytes": 40876
+    },
+    {
+      "path": "Hoki/关系规则H5评审/evidence/step-invite-DXtM4kX_.webp",
+      "role": "document-asset",
+      "source_name": "step-invite-DXtM4kX_.webp",
+      "source_sha256": "b65794bc92015120c0af138d24c6a2bbc8f58a63bd20c84c02179c53d2c63ff8",
+      "published_sha256": "b65794bc92015120c0af138d24c6a2bbc8f58a63bd20c84c02179c53d2c63ff8",
+      "link_adapted": false,
+      "bytes": 17318
+    },
+    {
+      "path": "Hoki/关系规则H5评审/evidence/step-accept-BhCtlDyP.webp",
+      "role": "document-asset",
+      "source_name": "step-accept-BhCtlDyP.webp",
+      "source_sha256": "3eef653cd415503b2f32c60be37d740723fd2a6302bd93ce430eadf4eb2e7ac2",
+      "published_sha256": "3eef653cd415503b2f32c60be37d740723fd2a6302bd93ce430eadf4eb2e7ac2",
+      "link_adapted": false,
+      "bytes": 47928
+    },
+    {
+      "path": "Hoki/关系规则H5评审/evidence/07-英文版重点问题标注.png",
+      "role": "document-asset",
+      "source_name": "07-英文版重点问题标注.png",
+      "source_sha256": "400d943970d0167e1d62e36c878e1d455f0265ba8d1a7eca48ccfe6aef199729",
+      "published_sha256": "400d943970d0167e1d62e36c878e1d455f0265ba8d1a7eca48ccfe6aef199729",
+      "link_adapted": false,
+      "bytes": 254897
+    },
+    {
+      "path": "Hoki/关系规则H5评审/evidence/01-en-390-top.jpg",
+      "role": "document-asset",
+      "source_name": "01-en-390-top.jpg",
+      "source_sha256": "fde6c5ad3eb7f7efd8c93bdbdf6a563bd7c302ef4a9b43c929eb841a90ab35b3",
+      "published_sha256": "fde6c5ad3eb7f7efd8c93bdbdf6a563bd7c302ef4a9b43c929eb841a90ab35b3",
+      "link_adapted": false,
+      "bytes": 60172
+    },
+    {
+      "path": "Hoki/关系规则H5评审/evidence/03-en-320-requirements.jpg",
+      "role": "document-asset",
+      "source_name": "03-en-320-requirements.jpg",
+      "source_sha256": "fbc7a35bc79a26799f9e505a8080aa21bd347fc3de94c0c94ad6a8c05f109d0d",
+      "published_sha256": "fbc7a35bc79a26799f9e505a8080aa21bd347fc3de94c0c94ad6a8c05f109d0d",
+      "link_adapted": false,
+      "bytes": 28685
+    },
+    {
+      "path": "Hoki/关系规则H5评审/evidence/05-en-390-slots.jpg",
+      "role": "document-asset",
+      "source_name": "05-en-390-slots.jpg",
+      "source_sha256": "5828ce74ad9e2d92f95cabd381bfbcf3a8c9e1e32f30c224b34cdf222dbd6ba9",
+      "published_sha256": "5828ce74ad9e2d92f95cabd381bfbcf3a8c9e1e32f30c224b34cdf222dbd6ba9",
+      "link_adapted": false,
+      "bytes": 46131
+    },
+    {
+      "path": "Hoki/关系规则H5评审/evidence/06-en-390-growth-mic.jpg",
+      "role": "document-asset",
+      "source_name": "06-en-390-growth-mic.jpg",
+      "source_sha256": "c9d41f2fc50977c8014e7b00c3ec9f70663671559680353808cd2eb7c3c88a2f",
+      "published_sha256": "c9d41f2fc50977c8014e7b00c3ec9f70663671559680353808cd2eb7c3c88a2f",
+      "link_adapted": false,
+      "bytes": 52910
+    }
+  ],
+  "excluded_local_references": [
+    {
+      "document": "Hoki/CP/02-CP等级2.0/CP｜CP2.0升级｜PRD｜v6.0｜解除停用与复建恢复评审版.md",
+      "label": "录屏A：ScreenRecording_09-07-2026 14-46-46_1 (1).MP4",
+      "source_reference": "ScreenRecording_09-07-2026 14-46-46_1 (1).MP4"
+    },
+    {
+      "document": "Hoki/CP/02-CP等级2.0/CP｜CP2.0升级｜PRD｜v6.0｜解除停用与复建恢复评审版.md",
+      "label": "录屏B：钉钉录屏_2026-10-20 180820.mp4",
+      "source_reference": "钉钉录屏_2026-10-20 180820.mp4"
+    },
+    {
+      "document": "Hoki/CP/02-CP等级2.0/CP｜CP2.0升级｜PRD｜v6.0｜解除停用与复建恢复评审版.md",
+      "label": "录屏观察与距离判断",
+      "source_reference": "录屏观察与距离判断.md"
+    },
+    {
+      "document": "Hoki/CP/02-CP等级2.0/CP｜CP2.0升级｜PRD｜v6.0｜解除停用与复建恢复评审版.md",
+      "label": "新录屏C",
+      "source_reference": "钉钉录屏_2026-10-22 142854.mp4"
+    },
+    {
+      "document": "Hoki/CP/02-CP等级2.0/CP｜CP2.0升级｜PRD｜v6.0｜解除停用与复建恢复评审版.md",
+      "label": "CP2.0 PRD v5.0",
+      "source_reference": "CP｜CP2.0升级｜PRD｜v5.0｜装扮保留与规则页评审版.md"
+    },
+    {
+      "document": "Hoki/CP/02-CP等级2.0/CP｜CP2.0升级｜PRD｜v6.0｜解除停用与复建恢复评审版.md",
+      "label": "2026-10-28方案评估",
+      "source_reference": "CP｜解除后奖励停用与复建恢复｜方案评估｜v1.0｜待研发核验.md"
+    },
+    {
+      "document": "Hoki/CP/02-CP等级2.0/CP｜CP2.0升级｜PRD｜v6.0｜解除停用与复建恢复评审版.md",
+      "label": "CP2.0 PRD v4.0",
+      "source_reference": "CP｜CP2.0升级｜PRD｜v4.0｜CP关系展示开关评审版.md"
+    },
+    {
+      "document": "Hoki/CP/02-CP等级2.0/CP｜CP2.0升级｜PRD｜v6.0｜解除停用与复建恢复评审版.md",
+      "label": "CP2.0 PRD v3.0",
+      "source_reference": "CP｜CP2.0升级｜PRD｜v3.0｜相邻麦位与五档动效评审版.md"
+    },
+    {
+      "document": "Hoki/CP/02-CP等级2.0/CP｜CP2.0升级｜PRD｜v6.0｜解除停用与复建恢复评审版.md",
+      "label": "本轮展示开关验证记录",
+      "source_reference": "验证记录.md"
+    },
+    {
+      "document": "Hoki/CP/02-CP等级2.0/CP｜CP2.0升级｜PRD｜v6.0｜解除停用与复建恢复评审版.md",
+      "label": "CP2.0 PRD v2.0",
+      "source_reference": "CP｜CP2.0升级｜PRD｜v2.0｜相邻麦位与五档动效评审版.md"
+    },
+    {
+      "document": "Hoki/CP/02-CP等级2.0/CP｜CP2.0升级｜PRD｜v6.0｜解除停用与复建恢复评审版.md",
+      "label": "v1.1",
+      "source_reference": "CP｜CP2.0升级｜PRD｜v1.1｜麦位连线评审版.md"
+    },
+    {
+      "document": "Hoki/CP/02-CP等级2.0/CP｜CP2.0升级｜PRD｜v6.0｜解除停用与复建恢复评审版.md",
+      "label": "v1.0",
+      "source_reference": "CP｜CP2.0升级｜PRD｜v1.0｜可评审版.md"
+    },
+    {
+      "document": "Hoki/CP/01-亲密关系1.0/CP｜关系系统升级｜PRD｜v8.3｜同房任务条件调整评审版.md",
+      "label": "首期PRD v8.2",
+      "source_reference": "CP｜关系系统升级｜PRD｜v8.2｜亲密关系取消性别限制评审版.md"
+    },
+    {
+      "document": "Hoki/CP/01-亲密关系1.0/CP｜关系系统升级｜PRD｜v8.3｜同房任务条件调整评审版.md",
+      "label": "验证记录",
+      "source_reference": "验证记录.md"
+    },
+    {
+      "document": "Hoki/CP/01-亲密关系1.0/CP｜关系系统升级｜PRD｜v8.3｜同房任务条件调整评审版.md",
+      "label": "验证记录",
+      "source_reference": "验证记录.md"
+    },
+    {
+      "document": "Hoki/CP/01-亲密关系1.0/CP｜关系系统升级｜PRD｜v8.3｜同房任务条件调整评审版.md",
+      "label": "来源与验证记录",
+      "source_reference": "验证记录.md"
+    },
+    {
+      "document": "Hoki/CP/01-亲密关系1.0/CP｜关系系统升级｜PRD｜v8.3｜同房任务条件调整评审版.md",
+      "label": "记录",
+      "source_reference": "来源与裁决记录.md"
+    },
+    {
+      "document": "Hoki/CP/01-亲密关系1.0/CP｜关系系统升级｜PRD｜v8.3｜同房任务条件调整评审版.md",
+      "label": "验证记录",
+      "source_reference": "验证记录.md"
+    },
+    {
+      "document": "Hoki/CP/01-亲密关系1.0/CP｜关系系统升级｜PRD｜v8.3｜同房任务条件调整评审版.md",
+      "label": "个人主页与关系详情 v2.57",
+      "source_reference": "CP｜个人主页与关系详情｜移动端原型｜v2.57｜纪念详情简化评审版.html"
+    },
+    {
+      "document": "Hoki/CP/01-亲密关系1.0/CP｜关系系统升级｜PRD｜v8.3｜同房任务条件调整评审版.md",
+      "label": "私聊邀请 HTML v1.0",
+      "source_reference": "Hoki｜CP与亲友私聊邀请｜HTML原型｜v1.0｜可评审版.html"
+    },
+    {
+      "document": "Hoki/CP/01-亲密关系1.0/CP｜关系系统升级｜PRD｜v8.3｜同房任务条件调整评审版.md",
+      "label": "CP现状玩法基线 v1.0",
+      "source_reference": "CP｜现状玩法基线｜v1.0｜可评审版.md"
+    },
+    {
+      "document": "Hoki/CP/01-亲密关系1.0/CP｜关系系统升级｜PRD｜v8.3｜同房任务条件调整评审版.md",
+      "label": "PRD v7.0验证记录",
+      "source_reference": "验证记录.md"
+    },
+    {
+      "document": "Hoki/CP/outputs/multilingual-v2.0/CP｜亲密关系与消息｜多语言文案｜v2.0｜首期评审版.md",
+      "label": "PRD v8.2",
+      "source_reference": "CP｜关系系统升级｜PRD｜v8.2｜亲密关系取消性别限制评审版.md"
+    },
+    {
+      "document": "Hoki/CP/10-私聊邀请与确认/outputs/Hoki｜关系消息入口与申请处理｜交付说明｜v2.2｜可评审版.md",
+      "label": "PRD v7.1",
+      "source_reference": "CP｜关系系统升级｜PRD｜v7.1｜首期增量评审版.md"
+    },
+    {
+      "document": "Hoki/CP/07-数据看板/outputs/CP｜数据看板｜指标口径与接入需求｜v1.1｜可评审版.md",
+      "label": "PRD v5.14",
+      "source_reference": "CP｜关系系统升级｜PRD｜v5.14｜综合评审版.md"
+    },
+    {
+      "document": "Hoki/CP/07-数据看板/outputs/CP｜数据看板｜指标口径与接入需求｜v1.1｜可评审版.md",
+      "label": "个人主页原型 v2.55",
+      "source_reference": "CP｜个人主页与关系详情｜移动端原型｜v2.55｜CP等级双入口评审版.html"
+    },
+    {
+      "document": "Hoki/CP/07-数据看板/outputs/CP｜数据看板｜指标口径与接入需求｜v1.1｜可评审版.md",
+      "label": "CP 管理后台样式参考",
+      "source_reference": "CP｜关系系统升级｜CP管理后台｜v1.0｜current.html"
+    },
+    {
+      "document": "Hoki/CP/work/cp-rules-v1.0/布局与验证说明.md",
+      "label": "PRD v5.0",
+      "source_reference": "CP｜CP2.0升级｜PRD｜v5.0｜装扮保留与规则页评审版.md"
+    },
+    {
+      "document": "Hoki/公屏消息切换/Hoki｜公屏消息切换｜竞品对齐方案｜v3.0｜可评审版.md",
+      "label": "切屏录屏",
+      "source_reference": "01-切屏-参考录屏.mp4"
+    },
+    {
+      "document": "Hoki/公屏消息切换/Hoki｜公屏消息切换｜竞品对齐方案｜v3.0｜可评审版.md",
+      "label": "聊天房录屏",
+      "source_reference": "02-切屏2.0-参考录屏.mp4"
+    },
+    {
+      "document": "Hoki/幸运礼物效果优化/幸运礼物效果优化｜PRD｜v3.0｜综合评审版.md",
+      "label": "模块索引",
+      "source_reference": "PROJECT_INDEX.md"
+    }
+  ]
+}
