@@ -483,7 +483,7 @@
     },
     {
       "path": "Hoki/YouTube一起看/语聊房｜YouTube一起看｜产品方案｜v2.0｜可评审版.md",
-      "role": "current",
+      "role": "historical-v2.0",
       "source_name": "语聊房｜YouTube一起看｜产品方案｜v2.0｜可评审版.md",
       "source_sha256": "9cdf636e5fcee3a71abb19de1e8c17cf27eed90f4b3359b5346ac777a0601015",
       "published_sha256": "9cdf636e5fcee3a71abb19de1e8c17cf27eed90f4b3359b5346ac777a0601015",
@@ -492,7 +492,7 @@
     },
     {
       "path": "Hoki/YouTube一起看/语聊房｜YouTube一起看｜综合原型｜v2.0｜current.html",
-      "role": "current",
+      "role": "historical-v2.0",
       "source_name": "语聊房｜YouTube一起看｜综合原型｜v2.0｜current.html",
       "source_sha256": "250a7bcd1337a2fb8f1e49b81bed76b4410d38fd8109bf792f1a48580bc494c2",
       "published_sha256": "250a7bcd1337a2fb8f1e49b81bed76b4410d38fd8109bf792f1a48580bc494c2",
@@ -501,7 +501,7 @@
     },
     {
       "path": "Hoki/YouTube一起看/语聊房｜YouTube一起看｜文案表｜v2.0｜可评审版.md",
-      "role": "current",
+      "role": "historical-v2.0",
       "source_name": "语聊房｜YouTube一起看｜文案表｜v2.0｜可评审版.md",
       "source_sha256": "8c3b6e48abb96e5e0b6eafd6f7ffe935a4e607fa4e5d73bfd40de17821c86a03",
       "published_sha256": "8c3b6e48abb96e5e0b6eafd6f7ffe935a4e607fa4e5d73bfd40de17821c86a03",
@@ -510,7 +510,7 @@
     },
     {
       "path": "Hoki/YouTube一起看/语聊房｜YouTube一起看｜QA与交付记录｜v2.0.md",
-      "role": "current",
+      "role": "historical-v2.0",
       "source_name": "语聊房｜YouTube一起看｜QA与交付记录｜v2.0.md",
       "source_sha256": "b3adc293a2c33c29dff7423d96e7371ce4b6ff321b1eb675913783488c36a698",
       "published_sha256": "b3adc293a2c33c29dff7423d96e7371ce4b6ff321b1eb675913783488c36a698",
@@ -771,7 +771,7 @@
     },
     {
       "path": "Hoki/YouTube一起看/evidence/v2.0/01-房主与管理员共同控制.jpg",
-      "role": "document-asset",
+      "role": "historical-v2.0",
       "source_name": "01-房主与管理员共同控制.jpg",
       "source_sha256": "bf3279d0a4ba1356829a3b4d61db0f02ca879e533f3061a7f959428c8035a532",
       "published_sha256": "bf3279d0a4ba1356829a3b4d61db0f02ca879e533f3061a7f959428c8035a532",
@@ -780,7 +780,7 @@
     },
     {
       "path": "Hoki/YouTube一起看/evidence/v2.0/02-后台白名单与财富门槛.jpg",
-      "role": "document-asset",
+      "role": "historical-v2.0",
       "source_name": "02-后台白名单与财富门槛.jpg",
       "source_sha256": "f2c0748424c4cf2afbcd034f59d44ceada3b05c645041a8ed5f5dd4559465c8f",
       "published_sha256": "f2c0748424c4cf2afbcd034f59d44ceada3b05c645041a8ed5f5dd4559465c8f",
@@ -789,7 +789,7 @@
     },
     {
       "path": "Hoki/YouTube一起看/evidence/v2.0/03-白名单内单独配置门槛.jpg",
-      "role": "document-asset",
+      "role": "historical-v2.0",
       "source_name": "03-白名单内单独配置门槛.jpg",
       "source_sha256": "114fcffef4fc3fd8849dc814c90f4c3a05a81b9ef0b6f94b98b1733a34670f20",
       "published_sha256": "114fcffef4fc3fd8849dc814c90f4c3a05a81b9ef0b6f94b98b1733a34670f20",
@@ -957,6 +957,132 @@
       "published_sha256": "c9d41f2fc50977c8014e7b00c3ec9f70663671559680353808cd2eb7c3c88a2f",
       "link_adapted": false,
       "bytes": 52910
+    },
+    {
+      "path": "Hoki/YouTube一起看/语聊房｜YouTube一起看｜后台原型｜v3.1｜current.html",
+      "role": "current",
+      "source_name": "语聊房｜YouTube一起看｜后台原型｜v3.1｜current.html",
+      "source_sha256": "ccb108bed155c2a5ac01d27f798b28a7ebf21fce5efa4481d63c928800f03196",
+      "published_sha256": "ccb108bed155c2a5ac01d27f798b28a7ebf21fce5efa4481d63c928800f03196",
+      "link_adapted": false,
+      "bytes": 92482
+    },
+    {
+      "path": "Hoki/YouTube一起看/语聊房｜YouTube一起看｜综合原型｜v3.1｜current.html",
+      "role": "current",
+      "source_name": "语聊房｜YouTube一起看｜综合原型｜v3.1｜current.html",
+      "source_sha256": "ec56a5f8841abded6d35eab3b0b1add1fb193a02ed237abf5c11802c727511ad",
+      "published_sha256": "ec56a5f8841abded6d35eab3b0b1add1fb193a02ed237abf5c11802c727511ad",
+      "link_adapted": false,
+      "bytes": 92544
+    },
+    {
+      "path": "Hoki/YouTube一起看/语聊房｜YouTube一起看｜产品方案｜v3.1｜可评审版.md",
+      "role": "current",
+      "source_name": "语聊房｜YouTube一起看｜产品方案｜v3.1｜可评审版.md",
+      "source_sha256": "d9bfe1e4795c420f924cfc6ff310907bff03b34d904322cf9898fb4f3be5ced9",
+      "published_sha256": "d9bfe1e4795c420f924cfc6ff310907bff03b34d904322cf9898fb4f3be5ced9",
+      "link_adapted": false,
+      "bytes": 20853
+    },
+    {
+      "path": "Hoki/YouTube一起看/语聊房｜YouTube一起看｜文案表｜v3.1｜可评审版.md",
+      "role": "current",
+      "source_name": "语聊房｜YouTube一起看｜文案表｜v3.1｜可评审版.md",
+      "source_sha256": "bc3135aa8abec56088ce687c259833436377a6fe9491d465c7344896f60ce811",
+      "published_sha256": "bc3135aa8abec56088ce687c259833436377a6fe9491d465c7344896f60ce811",
+      "link_adapted": false,
+      "bytes": 13087
+    },
+    {
+      "path": "Hoki/YouTube一起看/语聊房｜YouTube一起看｜QA与交付记录｜v3.1.md",
+      "role": "current",
+      "source_name": "语聊房｜YouTube一起看｜QA与交付记录｜v3.1.md",
+      "source_sha256": "4e2f657f2ad2222bbbe42c9cb718d9de0d1f6ed73c3daadd03b60242007bc22d",
+      "published_sha256": "4e2f657f2ad2222bbbe42c9cb718d9de0d1f6ed73c3daadd03b60242007bc22d",
+      "link_adapted": false,
+      "bytes": 2351
+    },
+    {
+      "path": "Hoki/YouTube一起看/语聊房｜YouTube一起看｜QA与交付记录｜v3.0.md",
+      "role": "prior-validation-for-v3.1",
+      "source_name": "语聊房｜YouTube一起看｜QA与交付记录｜v3.0.md",
+      "source_sha256": "ae641e779fd5dbe76f61dd819e07b8c157a9639a216d5515a3d41b7fa163c7de",
+      "published_sha256": "ae641e779fd5dbe76f61dd819e07b8c157a9639a216d5515a3d41b7fa163c7de",
+      "link_adapted": false,
+      "bytes": 5254
+    },
+    {
+      "path": "Hoki/YouTube一起看/work/verification-v3.1.json",
+      "role": "current",
+      "source_name": "verification-v3.1.json",
+      "source_sha256": "d757b81aa1afe26192e768b18b65a2065923213228b044cf769d31892389e4a3",
+      "published_sha256": "d757b81aa1afe26192e768b18b65a2065923213228b044cf769d31892389e4a3",
+      "link_adapted": false,
+      "bytes": 763
+    },
+    {
+      "path": "Hoki/YouTube一起看/work/verification-v3.0.json",
+      "role": "prior-validation-for-v3.1",
+      "source_name": "verification-v3.0.json",
+      "source_sha256": "a72a74ef8a27253390d0005e5153f08ea95898e741cd163310504346f5708d0f",
+      "published_sha256": "a72a74ef8a27253390d0005e5153f08ea95898e741cd163310504346f5708d0f",
+      "link_adapted": false,
+      "bytes": 1019
+    },
+    {
+      "path": "Hoki/YouTube一起看/evidence/v3.0/01-现有后台样式与白名单列表.jpg",
+      "role": "prior-validation-for-v3.1",
+      "source_name": "01-现有后台样式与白名单列表.jpg",
+      "source_sha256": "6a91e25ed9c8db711b4ed6cbe9ec22edba3c4b805278d9b18e2fef0f9f5a4699",
+      "published_sha256": "6a91e25ed9c8db711b4ed6cbe9ec22edba3c4b805278d9b18e2fef0f9f5a4699",
+      "link_adapted": false,
+      "bytes": 72657
+    },
+    {
+      "path": "Hoki/YouTube一起看/evidence/v3.0/02-添加白名单无门槛.jpg",
+      "role": "prior-validation-for-v3.1",
+      "source_name": "02-添加白名单无门槛.jpg",
+      "source_sha256": "ba3df453e41cbdeeafe3b652156b81ca81b556af6507cdcf85806caab531c9fd",
+      "published_sha256": "ba3df453e41cbdeeafe3b652156b81ca81b556af6507cdcf85806caab531c9fd",
+      "link_adapted": false,
+      "bytes": 32219
+    },
+    {
+      "path": "Hoki/YouTube一起看/evidence/v3.0/03-普通移除确认弹窗.jpg",
+      "role": "prior-validation-for-v3.1",
+      "source_name": "03-普通移除确认弹窗.jpg",
+      "source_sha256": "d4f4ac89a936eed7526a4e9a7b80dfdea8e861aa2e3e3150da5bb1e095c880d4",
+      "published_sha256": "d4f4ac89a936eed7526a4e9a7b80dfdea8e861aa2e3e3150da5bb1e095c880d4",
+      "link_adapted": false,
+      "bytes": 55813
+    },
+    {
+      "path": "Hoki/YouTube一起看/evidence/v3.0/04-白名单或财富达标准入.jpg",
+      "role": "prior-validation-for-v3.1",
+      "source_name": "04-白名单或财富达标准入.jpg",
+      "source_sha256": "c71cd1ae463d3bfa7b6b6a4ff884de886d796fa310342900655bae8a25ff0799",
+      "published_sha256": "c71cd1ae463d3bfa7b6b6a4ff884de886d796fa310342900655bae8a25ff0799",
+      "link_adapted": false,
+      "bytes": 68348
+    },
+    {
+      "path": "Hoki/YouTube一起看/evidence/v3.1/01-房间管理入口与白名单.jpg",
+      "role": "current",
+      "source_name": "01-房间管理入口与白名单.jpg",
+      "source_sha256": "6dd67875f9ba9255e4d6a1edeb882d84ae45e60279829a663491a99e3d6133eb",
+      "published_sha256": "6dd67875f9ba9255e4d6a1edeb882d84ae45e60279829a663491a99e3d6133eb",
+      "link_adapted": false,
+      "bytes": 76901
+    },
+    {
+      "path": "Hoki/YouTube一起看/evidence/v3.1/02-功能配置Tab.jpg",
+      "role": "current",
+      "source_name": "02-功能配置Tab.jpg",
+      "source_sha256": "84cd0367009f8361c3416274a629323e3afa89371db9f7690bf0eed1e42be169",
+      "published_sha256": "84cd0367009f8361c3416274a629323e3afa89371db9f7690bf0eed1e42be169",
+      "link_adapted": false,
+      "bytes": 72188
     }
   ],
   "excluded_local_references": [
@@ -1115,5 +1241,7 @@
       "label": "模块索引",
       "source_reference": "PROJECT_INDEX.md"
     }
-  ]
+  ],
+  "updated_at": "2026-10-28T17:34:39+08:00",
+  "closeout_update": "YouTube current advanced to v3.1 during sync; v3.1 docs and both HTMLs added, prior v2.0 retained as historical. CP version lines unchanged."
 }

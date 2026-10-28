@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-28 Asia/Shanghai",
+  "html": [
+    {
+      "file": "语聊房｜YouTube一起看｜后台原型｜v3.0｜current.html",
+      "javascript": [
+        {
+          "ok": true,
+          "output": ""
+        }
+      ],
+      "missing_refs": [],
+      "no_account_threshold": true,
+      "or_eligibility": true
+    },
+    {
+      "file": "语聊房｜YouTube一起看｜综合原型｜v3.0｜current.html",
+      "javascript": [
+        {
+          "ok": true,
+          "output": ""
+        }
+      ],
+      "missing_refs": [],
+      "no_account_threshold": true,
+      "or_eligibility": true
+    }
+  ],
+  "copy_key_count": 77,
+  "duplicate_copy_keys": [],
+  "missing_index_or_qa_links": [],
+  "evidence": [
+    "03-普通移除确认弹窗.jpg",
+    "01-现有后台样式与白名单列表.jpg",
+    "04-白名单或财富达标准入.jpg",
+    "02-添加白名单无门槛.jpg"
+  ],
+  "unicode_replacement_files": [],
+  "scope": "静态检查；浏览器演示结果见QA。未接真实服务。"
+}

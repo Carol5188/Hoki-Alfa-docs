@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-28 Asia/Shanghai",
+  "html": [
+    {
+      "file": "语聊房｜YouTube一起看｜综合原型｜v3.1｜current.html",
+      "js_passed": true,
+      "js_errors": "",
+      "missing_links": [],
+      "removed_separate_record_page": true,
+      "nav_name": true,
+      "two_page_definitions": true
+    },
+    {
+      "file": "语聊房｜YouTube一起看｜后台原型｜v3.1｜current.html",
+      "js_passed": true,
+      "js_errors": "",
+      "missing_links": [],
+      "removed_separate_record_page": true,
+      "nav_name": true,
+      "two_page_definitions": true
+    }
+  ],
+  "missing_index_qa_links": [],
+  "duplicate_copy_keys": [],
+  "screenshots": [
+    "01-房间管理入口与白名单.jpg",
+    "02-功能配置Tab.jpg"
+  ]
+}
